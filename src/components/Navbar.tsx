@@ -42,16 +42,23 @@ export const Navbar = () => {
   };
 
   return (
-    <motion.nav 
+    <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm" 
+        scrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
+      {/* Skip-to-Content für Accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:text-sm focus:font-medium"
+      >
+        Zum Inhalt springen
+      </a>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center">

@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ArrowRight, Clock, Tag, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
-import * as React from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { articles, categories } from "@/data/articles";
 
 const Blog = () => {
-  const [activeCategory, setActiveCategory] = React.useState("Alle");
+  const [activeCategory, setActiveCategory] = useState("Alle");
   const filtered = activeCategory === "Alle" ? articles : articles.filter((a) => a.category === activeCategory);
   const featured = filtered.find((a) => a.featured);
   const rest = filtered.filter((a) => !a.featured);

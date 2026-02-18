@@ -35,7 +35,7 @@ const NotFound = () => {
       <title>404 - Seite nicht gefunden | Pirro Consulting</title>
       <meta name="robots" content="noindex, nofollow" />
     </Helmet>
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden bg-foreground text-background">
+    <section id="main-content" className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden bg-foreground text-background">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div

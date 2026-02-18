@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Impressum = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main id="main-content" className="min-h-screen bg-background">
       <Helmet>
         <title>Impressum | Pirro Consulting</title>
         <meta name="robots" content="noindex, follow" />

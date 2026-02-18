@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const Datenschutz = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main id="main-content" className="min-h-screen bg-background">
       <Helmet>
         <title>Datenschutzerklärung | Pirro Consulting</title>
         <meta name="robots" content="noindex, follow" />

@@ -7,11 +7,21 @@ interface PageTransitionProps {
 }
 
 export const PageTransition = ({ children }: PageTransitionProps) => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    if (hash) {
+      // Hash-Link: zur Section scrollen nach kurzem Delay (DOM muss gerendert sein)
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash.replace("#", ""));
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return (
     <motion.div
