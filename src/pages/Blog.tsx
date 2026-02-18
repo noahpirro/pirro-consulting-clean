@@ -6,71 +6,8 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { ArrowRight, Clock, Tag, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import * as React from "react";
-
-const articles = [
-  {
-    slug: "automatisierung-einstieg",
-    title: "5 Prozesse, die jedes Unternehmen sofort automatisieren sollte",
-    excerpt:
-      "Du verlierst jede Woche Stunden mit repetitiven Aufgaben. Hier sind die 5 Bereiche, die sich am schnellsten automatisieren lassen – mit sofortigem ROI.",
-    category: "Automatisierung",
-    readTime: "5 Min.",
-    date: "12. Feb 2026",
-    featured: true,
-  },
-  {
-    slug: "crm-richtig-nutzen",
-    title: "CRM richtig nutzen: Warum 80% der Unternehmen es falsch machen",
-    excerpt:
-      "Ein CRM ist nur so gut wie seine Nutzung. Die häufigsten Fehler und wie du sie vermeidest, um deine Pipeline wirklich zu managen.",
-    category: "CRM",
-    readTime: "7 Min.",
-    date: "5. Feb 2026",
-    featured: false,
-  },
-  {
-    slug: "ki-im-unternehmen",
-    title: "KI im Unternehmen: Hype vs. Realität für den Mittelstand",
-    excerpt:
-      "Was KI heute wirklich für kleine und mittlere Unternehmen leisten kann – und wo die Grenzen liegen. Ein ehrlicher Überblick.",
-    category: "KI",
-    readTime: "6 Min.",
-    date: "28. Jan 2026",
-    featured: false,
-  },
-  {
-    slug: "onboarding-automatisieren",
-    title: "Kunden-Onboarding automatisieren: Der komplette Guide",
-    excerpt:
-      "Vom ersten Kontakt bis zum zufriedenen Kunden – so baust du einen Onboarding-Prozess, der skaliert und begeistert.",
-    category: "Prozesse",
-    readTime: "8 Min.",
-    date: "20. Jan 2026",
-    featured: false,
-  },
-  {
-    slug: "tools-vergleich-2026",
-    title: "Die besten Automatisierungs-Tools 2026 im Vergleich",
-    excerpt:
-      "Make vs. Zapier vs. n8n – welches Tool passt zu deinem Unternehmen? Unser ehrlicher Vergleich mit Preis-Leistungs-Bewertung.",
-    category: "Tools",
-    readTime: "10 Min.",
-    date: "10. Jan 2026",
-    featured: false,
-  },
-  {
-    slug: "digitalisierung-fehler",
-    title: "7 teure Fehler bei der Digitalisierung – und wie du sie vermeidest",
-    excerpt:
-      "Die meisten Digitalisierungsprojekte scheitern nicht an der Technik, sondern an der Strategie. Lerne aus den Fehlern anderer.",
-    category: "Strategie",
-    readTime: "6 Min.",
-    date: "3. Jan 2026",
-    featured: false,
-  },
-];
-
-const categories = ["Alle", "Automatisierung", "CRM", "KI", "Prozesse", "Tools", "Strategie"];
+import { toast } from "sonner";
+import { articles, categories } from "@/data/articles";
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = React.useState("Alle");
@@ -299,13 +236,29 @@ const Blog = () => {
             <p className="text-background/70 mb-8">
               Erhalte die neuesten Tipps zu Automatisierung und Digitalisierung direkt in dein Postfach. Kein Spam, nur Mehrwert.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <form
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const email = new FormData(form).get("email") as string;
+                if (email) {
+                  toast.success("Danke für deine Anmeldung!", {
+                    description: "Du erhältst bald unsere neuesten Insights.",
+                  });
+                  form.reset();
+                }
+              }}
+            >
               <input
                 type="email"
+                name="email"
+                required
                 placeholder="deine@email.de"
                 className="flex-1 h-12 px-4 rounded-lg bg-background/10 border border-background/20 text-background placeholder:text-background/40 focus:outline-none focus:border-background/40 transition-colors"
               />
               <motion.button
+                type="submit"
                 className="h-12 px-6 bg-highlight text-white rounded-lg font-medium hover:bg-highlight/90 transition-colors flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
@@ -313,7 +266,7 @@ const Blog = () => {
                 Abonnieren
                 <ArrowRight className="w-4 h-4" />
               </motion.button>
-            </div>
+            </form>
             <p className="text-xs text-background/40 mt-4">
               Jederzeit abbestellbar. Deine Daten sind sicher.
             </p>
