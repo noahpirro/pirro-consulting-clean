@@ -103,8 +103,8 @@ export const DigitalTeam = () => {
 
                 {/* Status Indicator */}
                 <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
-                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-xs text-green-600 font-medium">Aktiv</span>
+                  <span className="w-2 h-2 bg-highlight rounded-full animate-pulse" />
+                  <span className="text-xs text-highlight font-medium">Aktiv</span>
                 </div>
 
                 {/* Icon */}

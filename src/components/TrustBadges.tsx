@@ -47,7 +47,7 @@ export const TrustBadges = () => {
         <AnimatedSection>
           <div className="flex flex-col items-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 mb-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               <p className="text-sm text-muted-foreground font-medium">
                 Vertrauen & Sicherheit
               </p>

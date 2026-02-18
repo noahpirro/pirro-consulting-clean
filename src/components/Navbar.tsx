@@ -76,6 +76,7 @@ export const Navbar = () => {
             >
               <button
                 aria-expanded={isServicesOpen}
+                aria-label="Leistungen Menü öffnen"
                 className={`flex items-center gap-1 transition-colors font-medium ${
                 scrolled
                   ? "text-muted-foreground hover:text-foreground"
@@ -279,6 +280,8 @@ export const Navbar = () => {
                 <div>
                   <button
                     className="flex items-center justify-between w-full text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                    aria-expanded={isServicesOpen}
+                    aria-label="Leistungen Menü öffnen"
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
                   >
                     Leistungen
