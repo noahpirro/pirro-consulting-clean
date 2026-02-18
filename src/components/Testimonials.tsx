@@ -47,7 +47,7 @@ const StarRating = ({ rating }: { rating: number }) => (
     {[...Array(5)].map((_, i) => (
       <Star
         key={i}
-        className={`w-4 h-4 ${i < rating ? "fill-amber-400 text-amber-400" : "text-gray-300"}`}
+        className={`w-4 h-4 ${i < rating ? "fill-highlight text-highlight" : "text-muted-foreground/30"}`}
       />
     ))}
   </div>
@@ -109,17 +109,17 @@ export const Testimonials = () => {
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
           <motion.div
-            className="inline-flex items-center gap-3 px-6 py-3 bg-amber-50 dark:bg-amber-950/30 rounded-full mb-8 border border-amber-200 dark:border-amber-800"
+            className="inline-flex items-center gap-3 px-6 py-3 bg-highlight/10 rounded-full mb-8 border border-highlight/20"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                <Star key={i} className="w-5 h-5 fill-highlight text-highlight" />
               ))}
             </div>
-            <span className="font-semibold text-amber-700 dark:text-amber-300">
+            <span className="font-semibold text-highlight">
               {averageRating} von 5 Sternen
             </span>
           </motion.div>
@@ -176,8 +176,8 @@ export const Testimonials = () => {
                 </blockquote>
 
                 {/* Result Badge */}
-                <div className="inline-flex items-center px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/30 rounded-full mb-8 border border-emerald-200 dark:border-emerald-800">
-                  <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                <div className="inline-flex items-center px-3 py-1.5 bg-primary/10 rounded-full mb-8 border border-primary/20">
+                  <span className="text-sm font-medium text-primary">
                     &#10003; {t.result}
                   </span>
                 </div>

@@ -127,7 +127,7 @@ export const Hero = () => {
           className="inline-flex items-center gap-2 bg-background/10 border border-background/20 px-4 py-2 rounded-full mb-8"
           variants={itemVariants}
         >
-          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+          <span className="w-2 h-2 bg-highlight rounded-full animate-pulse" />
           <span className="text-sm text-background/80">Jetzt freie Kapazitäten sichern</span>
         </motion.div>
 

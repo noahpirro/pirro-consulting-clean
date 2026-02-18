@@ -62,12 +62,12 @@ export const SocialProofPopup = () => {
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
           <div
-            className="bg-white dark:bg-card border border-border rounded-xl shadow-2xl p-4 cursor-pointer hover:shadow-3xl transition-shadow"
+            className="bg-card border border-border rounded-xl shadow-2xl p-4 cursor-pointer hover:shadow-3xl transition-shadow"
             onClick={() => setVisible(false)}
           >
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
-                <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <CheckCircle className="w-5 h-5 text-primary" />
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-medium text-foreground leading-snug">

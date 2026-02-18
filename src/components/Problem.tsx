@@ -93,9 +93,9 @@ export const Problem = () => {
                 </p>
 
                 {/* Cost Badge */}
-                <div className="relative z-10 inline-flex items-center gap-2 bg-red-50 border border-red-200 px-3 py-2 rounded-lg">
-                  <span className="text-red-600 font-bold text-sm">{point.cost}</span>
-                  <span className="text-red-500/70 text-xs">{point.costLabel}</span>
+                <div className="relative z-10 inline-flex items-center gap-2 bg-destructive/10 border border-destructive/20 px-3 py-2 rounded-lg">
+                  <span className="text-destructive font-bold text-sm">{point.cost}</span>
+                  <span className="text-destructive/70 text-xs">{point.costLabel}</span>
                 </div>
 
                 {/* Hover Gradient */}

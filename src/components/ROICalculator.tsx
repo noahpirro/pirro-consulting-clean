@@ -90,6 +90,7 @@ function RangeSlider({
           min={min}
           max={max}
           value={value}
+          aria-label={label}
           onChange={(e) => onChange(Number(e.target.value))}
           className="roi-slider relative z-10 w-full appearance-none bg-transparent cursor-pointer"
         />
@@ -336,15 +337,15 @@ export const ROICalculator = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-background/50 text-sm">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full" />
+              <span className="w-2 h-2 bg-highlight rounded-full" />
               100% kostenlos
             </span>
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full" />
+              <span className="w-2 h-2 bg-highlight rounded-full" />
               Unverbindlich
             </span>
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full" />
+              <span className="w-2 h-2 bg-highlight rounded-full" />
               Ergebnisse in 30 Minuten
             </span>
           </div>

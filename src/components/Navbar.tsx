@@ -221,7 +221,7 @@ export const Navbar = () => {
               className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                 scrolled
                   ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                  : "bg-white text-gray-900 hover:bg-white/90"
+                  : "bg-background text-foreground hover:bg-background/90"
               }`}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}

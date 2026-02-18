@@ -2,26 +2,21 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cookie, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-
-const STORAGE_KEY = "cookie-consent";
-
-type ConsentValue = "all" | "necessary";
+import { useCookieConsent } from "@/hooks/use-cookie-consent";
 
 export const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { hasConsent, updateConsent } = useCookieConsent();
 
   useEffect(() => {
-    const consent = localStorage.getItem(STORAGE_KEY);
-    if (!consent) {
-      // Small delay so the banner doesn't flash on initial page load
+    if (!hasConsent) {
       const timer = setTimeout(() => setIsVisible(true), 800);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [hasConsent]);
 
-  const handleConsent = (value: ConsentValue) => {
-    localStorage.setItem(STORAGE_KEY, value);
+  const handleConsent = (value: "all" | "necessary") => {
+    updateConsent(value);
     setIsVisible(false);
   };
 
@@ -67,32 +62,25 @@ export const CookieConsent = () => {
 
                 {/* Buttons */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-                  <motion.div
+                  <motion.button
+                    onClick={() => handleConsent("necessary")}
+                    className="px-4 py-2 rounded-md border border-background/20 bg-transparent text-background/70 hover:bg-background/10 hover:text-background text-sm font-medium transition-colors"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <Button
-                      variant="outline"
-                      onClick={() => handleConsent("necessary")}
-                      className="w-full sm:w-auto border-background/20 bg-transparent text-background/70 hover:bg-background/10 hover:text-background"
-                    >
-                      Nur notwendige
-                    </Button>
-                  </motion.div>
-                  <motion.div
+                    Nur notwendige
+                  </motion.button>
+                  <motion.button
+                    onClick={() => handleConsent("all")}
+                    className="px-4 py-2 rounded-md bg-background text-foreground hover:bg-background/90 text-sm font-medium transition-colors inline-flex items-center justify-center gap-1.5"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <Button
-                      onClick={() => handleConsent("all")}
-                      className="w-full sm:w-auto bg-background text-foreground hover:bg-background/90 font-medium"
-                    >
-                      <Cookie className="w-4 h-4 mr-1.5" />
-                      Alle akzeptieren
-                    </Button>
-                  </motion.div>
+                    <Cookie className="w-4 h-4" />
+                    Alle akzeptieren
+                  </motion.button>
                 </div>
               </div>
             </div>

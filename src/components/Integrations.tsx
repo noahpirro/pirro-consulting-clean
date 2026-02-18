@@ -2,18 +2,18 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 // Import local logos
-import makeLogo from "@/assets/logos/make.ico";
-import n8nLogo from "@/assets/logos/n8n.ico";
+import makeLogo from "@/assets/logos/make.webp";
+import n8nLogo from "@/assets/logos/n8n.webp";
 import clickupLogo from "@/assets/logos/clickup.webp";
-import calendlyLogo from "@/assets/logos/calendly.ico";
+import calendlyLogo from "@/assets/logos/calendly.webp";
 import airtableLogo from "@/assets/logos/airtable.webp";
 import gmailLogo from "@/assets/logos/gmail.webp";
-import outlookLogo from "@/assets/logos/outlook.ico";
-import datevLogo from "@/assets/logos/datev.ico";
-import lexofficeLogo from "@/assets/logos/lexoffice.ico";
-import easybillLogo from "@/assets/logos/easybill.ico";
-import placetelLogo from "@/assets/logos/placetel.ico";
-import closeLogo from "@/assets/logos/close.ico";
+import outlookLogo from "@/assets/logos/outlook.webp";
+import datevLogo from "@/assets/logos/datev.webp";
+import lexofficeLogo from "@/assets/logos/lexoffice.webp";
+import easybillLogo from "@/assets/logos/easybill.webp";
+import placetelLogo from "@/assets/logos/placetel.webp";
+import closeLogo from "@/assets/logos/close.webp";
 import brevoLogo from "@/assets/logos/brevo.svg";
 import slackLogo from "@/assets/logos/slack-icon.svg";
 import gdriveLogo from "@/assets/logos/gdrive.webp";
@@ -258,7 +258,7 @@ export const Integrations = () => {
             <div className="relative">
               {/* Subtle glow */}
               <motion.div 
-                className="absolute inset-0 bg-blue-500/10 rounded-full blur-3xl scale-[2.5]"
+                className="absolute inset-0 bg-highlight/10 rounded-full blur-3xl scale-[2.5]"
                 animate={{ scale: [2.5, 2.8, 2.5], opacity: [0.1, 0.15, 0.1] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -405,7 +405,7 @@ export const Integrations = () => {
               >
                 <div className="flex items-center gap-2">
                   <motion.div 
-                    className="w-1.5 h-1.5 rounded-full bg-emerald-500"
+                    className="w-1.5 h-1.5 rounded-full bg-highlight"
                     animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 }}
                   />
