@@ -40,9 +40,9 @@ const Impressum = () => {
               <br />
               Pirro Consulting
               <br />
-              [Straße]
+              Trippstadter Str. 110
               <br />
-              [PLZ Ort]
+              67663 Kaiserslautern
             </p>
 
             {/* Kontakt */}
@@ -50,9 +50,7 @@ const Impressum = () => {
               Kontakt
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Telefon: [Telefonnummer]
-              <br />
-              E-Mail: [E-Mail]
+              E-Mail: info@pirroconsulting.de
             </p>
 
             {/* Umsatzsteuer-ID */}
@@ -63,7 +61,7 @@ const Impressum = () => {
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a
               Umsatzsteuergesetz:
               <br />
-              USt-IdNr.: [falls vorhanden]
+              USt-IdNr.: DE353674802
             </p>
 
             {/* Verantwortlich für den Inhalt */}
@@ -73,9 +71,9 @@ const Impressum = () => {
             <p className="text-muted-foreground leading-relaxed mb-6">
               Noah Pirro
               <br />
-              [Straße]
+              Trippstadter Str. 110
               <br />
-              [PLZ Ort]
+              67663 Kaiserslautern
             </p>
 
             {/* Haftungsausschluss */}

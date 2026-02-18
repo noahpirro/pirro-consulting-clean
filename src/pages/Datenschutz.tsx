@@ -45,13 +45,11 @@ const Datenschutz = () => {
               <br />
               Pirro Consulting
               <br />
-              [Straße]
+              Trippstadter Str. 110
               <br />
-              [PLZ Ort]
+              67663 Kaiserslautern
               <br />
-              Telefon: [Telefonnummer]
-              <br />
-              E-Mail: [E-Mail]
+              E-Mail: info@pirroconsulting.de
             </p>
 
             {/* 2. Erhebung und Speicherung personenbezogener Daten */}
@@ -192,7 +190,7 @@ const Datenschutz = () => {
               Daten einzulegen, soweit dafür Gründe vorliegen, die sich aus
               Ihrer besonderen Situation ergeben. Möchten Sie von Ihrem
               Widerspruchsrecht Gebrauch machen, genügt eine E-Mail an
-              [E-Mail].
+              info@pirroconsulting.de.
             </p>
 
             {/* 7. SSL-Verschlüsselung */}
