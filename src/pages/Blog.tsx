@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ArrowRight, Clock, Tag, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
+import * as React from "react";
 
 const articles = [
   {
@@ -72,8 +73,10 @@ const articles = [
 const categories = ["Alle", "Automatisierung", "CRM", "KI", "Prozesse", "Tools", "Strategie"];
 
 const Blog = () => {
-  const featured = articles.find((a) => a.featured);
-  const rest = articles.filter((a) => !a.featured);
+  const [activeCategory, setActiveCategory] = React.useState("Alle");
+  const filtered = activeCategory === "Alle" ? articles : articles.filter((a) => a.category === activeCategory);
+  const featured = filtered.find((a) => a.featured);
+  const rest = filtered.filter((a) => !a.featured);
 
   return (
     <main id="main-content" className="min-h-screen bg-background">
@@ -153,8 +156,9 @@ const Blog = () => {
             {categories.map((cat) => (
               <button
                 key={cat}
+                onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                  cat === "Alle"
+                  cat === activeCategory
                     ? "bg-foreground text-background"
                     : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
                 }`}

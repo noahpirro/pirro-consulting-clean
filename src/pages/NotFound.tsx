@@ -1,9 +1,7 @@
 import { useLocation, Link } from "react-router-dom";
-import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { ArrowLeft, SearchX } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,13 +28,6 @@ const itemVariants = {
 
 const NotFound = () => {
   const location = useLocation();
-
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
-  }, [location.pathname]);
 
   return (
     <>
@@ -157,14 +148,12 @@ const NotFound = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <Link to="/">
-              <Button
-                size="lg"
-                className="h-14 px-8 text-base font-medium bg-background text-foreground hover:bg-background/90 transition-all group"
-              >
-                <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
-                Zurück zur Startseite
-              </Button>
+            <Link
+              to="/"
+              className="inline-flex items-center h-14 px-8 text-base font-medium bg-background text-foreground hover:bg-background/90 rounded-md transition-all group"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+              Zurück zur Startseite
             </Link>
           </motion.div>
         </motion.div>

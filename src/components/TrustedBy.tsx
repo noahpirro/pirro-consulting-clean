@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 
 // Client logos
-import healthInnovationHub from "@/assets/clients/health-innovation-hub.png";
+import healthInnovationHub from "@/assets/clients/health-innovation-hub.webp";
 import schneehoehen from "@/assets/clients/schneehoehen.svg";
 import alpenguide from "@/assets/clients/alpenguide.svg";
-import omlor from "@/assets/clients/omlor.png";
+import omlor from "@/assets/clients/omlor.webp";
 import cantinaMexicana from "@/assets/clients/cantina-mexicana.webp";
 import autoDoerr from "@/assets/clients/auto-doerr.svg";
 import cocktailsAtHome from "@/assets/clients/cocktails-at-home.webp";
-import sandAusVelsen from "@/assets/clients/sand-aus-velsen.png";
+import sandAusVelsen from "@/assets/clients/sand-aus-velsen.webp";
 import aoLogo from "@/assets/clients/ao-logo.webp";
 import bfdLogo from "@/assets/clients/bfd-logo.webp";
 

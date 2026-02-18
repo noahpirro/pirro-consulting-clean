@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ArrowRight, Users, Target, Zap, CheckCircle, UserCheck, MessageSquare, Crown, Clock, Heart, TrendingUp, Award, BadgePercent } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { AnimatedSection } from "@/components/AnimatedSection";
 
 const benefits = [
@@ -366,6 +367,29 @@ const Recruiting = () => {
               </a>
             </motion.div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Weitere Leistungen */}
+      <section className="py-20 bg-secondary">
+        <div className="container mx-auto px-4">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold">Weitere Leistungen</h2>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <Link to="/marketing" className="group">
+              <motion.div className="p-6 bg-card border border-border rounded-2xl h-full" whileHover={{ y: -4 }}>
+                <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors">Marketing & Neukundengewinnung</h3>
+                <p className="text-sm text-muted-foreground">Datengetriebene Kampagnen und automatisierte Lead-Generierung für nachhaltiges Wachstum.</p>
+              </motion.div>
+            </Link>
+            <Link to="/webdesign" className="group">
+              <motion.div className="p-6 bg-card border border-border rounded-2xl h-full" whileHover={{ y: -4 }}>
+                <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors">Webdesign & Entwicklung</h3>
+                <p className="text-sm text-muted-foreground">Conversion-optimierte Websites und Landing Pages, die Besucher zu Kunden machen.</p>
+              </motion.div>
+            </Link>
+          </div>
         </div>
       </section>
 

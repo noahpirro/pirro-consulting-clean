@@ -154,7 +154,7 @@ export const Integrations = () => {
   const [hoveredToolIndex, setHoveredToolIndex] = useState<number | null>(null);
 
   return (
-    <section className="pt-24 pb-24 bg-gray-950 relative overflow-hidden">
+    <section className="pt-24 pb-24 bg-foreground relative overflow-hidden">
       {/* Grid Background */}
       <div 
         className="absolute inset-0 opacity-15"
@@ -178,7 +178,7 @@ export const Integrations = () => {
           viewport={{ once: true }}
         >
           <motion.span 
-            className="inline-block px-8 py-4 bg-gray-800 text-gray-200 rounded-full text-lg font-semibold mb-12 border border-gray-700 shadow-xl"
+            className="inline-block px-8 py-4 bg-background/10 text-background/80 rounded-full text-lg font-semibold mb-12 border border-background/20 shadow-xl"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -186,9 +186,9 @@ export const Integrations = () => {
             100+ Integrationen
           </motion.span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 text-center">
-            Für jedes Problem das <span className="text-amber-400">richtige</span> Tool
+            Für jedes Problem das <span className="text-highlight">richtige</span> Tool
           </h2>
-          <p className="text-gray-500 max-w-3xl mx-auto text-lg">
+          <p className="text-background/50 max-w-3xl mx-auto text-lg">
             Für jedes Problem wählen wir die passenden Tools aus und verbinden sie zu einem maßgeschneiderten Workflow. So entsteht eine individuelle Lösung, die Prozesse vereinfacht, Zeit spart und Ihr Unternehmen spürbar entlastet.
           </p>
         </motion.div>
@@ -311,16 +311,16 @@ export const Integrations = () => {
               </motion.div>
               
               {/* Center circle */}
-              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-gray-800/80 backdrop-blur-sm border border-gray-600/50 flex items-center justify-center shadow-2xl">
+              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-background/10 backdrop-blur-sm border border-background/30 flex items-center justify-center shadow-2xl">
                 <div className="text-center">
                   <motion.div 
-                    className="text-base md:text-lg font-bold text-gray-200 uppercase tracking-widest"
+                    className="text-base md:text-lg font-bold text-background/80 uppercase tracking-widest"
                     animate={{ opacity: [0.8, 1, 0.8] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
                     Automation
                   </motion.div>
-                  <div className="text-[10px] text-gray-500 mt-1 font-medium tracking-widest uppercase">Zentrale</div>
+                  <div className="text-[10px] text-background/50 mt-1 font-medium tracking-widest uppercase">Zentrale</div>
                 </div>
               </div>
             </div>
@@ -362,7 +362,7 @@ export const Integrations = () => {
                   transition={{ type: "spring", stiffness: 400 }}
                 >
                   {/* Icon container */}
-                  <div className={`${sizeClasses[tool.size as keyof typeof sizeClasses]} rounded-xl bg-gray-800/90 backdrop-blur-sm border border-gray-700/60 flex items-center justify-center shadow-lg group-hover:border-amber-500/50 group-hover:bg-gray-700/90 transition-all duration-300`}>
+                  <div className={`${sizeClasses[tool.size as keyof typeof sizeClasses]} rounded-xl bg-background/10 backdrop-blur-sm border border-background/15 flex items-center justify-center shadow-lg group-hover:border-highlight/50 group-hover:bg-background/20 transition-all duration-300`}>
                     <img
                       src={tool.logo}
                       alt={tool.name}
@@ -379,7 +379,7 @@ export const Integrations = () => {
                   
                   {/* Tooltip */}
                   <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    <span className="text-xs text-gray-300 whitespace-nowrap bg-gray-900 px-3 py-1.5 rounded-lg shadow-lg border border-gray-700">
+                    <span className="text-xs text-background/70 whitespace-nowrap bg-foreground px-3 py-1.5 rounded-lg shadow-lg border border-background/20">
                       {tool.name}
                     </span>
                   </div>
@@ -399,7 +399,7 @@ export const Integrations = () => {
               transition={{ delay: 0.5 + index * 0.15, duration: 0.5 }}
             >
               <motion.div 
-                className="px-4 py-2 bg-gray-800/90 backdrop-blur-sm border border-gray-700/50 rounded-lg shadow-lg"
+                className="px-4 py-2 bg-background/10 backdrop-blur-sm border border-background/15 rounded-lg shadow-lg"
                 animate={{ y: [0, -2, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: label.delay }}
               >
@@ -409,7 +409,7 @@ export const Integrations = () => {
                     animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 }}
                   />
-                  <span className="text-sm text-gray-300">{label.text}</span>
+                  <span className="text-sm text-background/70">{label.text}</span>
                 </div>
               </motion.div>
             </motion.div>

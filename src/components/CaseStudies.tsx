@@ -62,7 +62,7 @@ export const CaseStudies = () => {
   return (
     <section className="py-20 md:py-28 relative overflow-hidden" id="case-studies">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-700 via-slate-600 to-slate-700" />
+      <div className="absolute inset-0 bg-gradient-to-br from-foreground/80 via-foreground/70 to-foreground/80" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}

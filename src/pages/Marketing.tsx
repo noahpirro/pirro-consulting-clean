@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ArrowRight, BarChart3, Megaphone, Target, TrendingUp, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { AnimatedSection } from "@/components/AnimatedSection";
 
 const benefits = [
@@ -219,6 +220,29 @@ const Marketing = () => {
               </a>
             </motion.div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Weitere Leistungen */}
+      <section className="py-20 bg-secondary">
+        <div className="container mx-auto px-4">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold">Weitere Leistungen</h2>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <Link to="/recruiting" className="group">
+              <motion.div className="p-6 bg-card border border-border rounded-2xl h-full" whileHover={{ y: -4 }}>
+                <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors">Recruiting & Mitarbeitergewinnung</h3>
+                <p className="text-sm text-muted-foreground">Social Recruiting und Active Sourcing – qualifizierte Bewerber in kürzester Zeit.</p>
+              </motion.div>
+            </Link>
+            <Link to="/webdesign" className="group">
+              <motion.div className="p-6 bg-card border border-border rounded-2xl h-full" whileHover={{ y: -4 }}>
+                <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors">Webdesign & Entwicklung</h3>
+                <p className="text-sm text-muted-foreground">Conversion-optimierte Websites und Landing Pages, die Besucher zu Kunden machen.</p>
+              </motion.div>
+            </Link>
+          </div>
         </div>
       </section>
 

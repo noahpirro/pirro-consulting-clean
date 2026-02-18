@@ -12,10 +12,12 @@ import { LoadingScreen } from "./components/LoadingScreen";
 import { SocialProofPopup } from "./components/SocialProofPopup";
 import { CursorEffect } from "./components/CursorEffect";
 import { AnimatedRoutes } from "./components/AnimatedRoutes";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
 const App = () => (
+  <ErrorBoundary>
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -34,6 +36,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
+  </ErrorBoundary>
 );
 
 export default App;

@@ -142,7 +142,7 @@ export const About = () => {
             <AnimatedSection delay={0.35}>
               <div className="flex items-center gap-4 pt-4">
                 <a
-                  href="https://linkedin.com/in/noahpirro"
+                  href="https://www.linkedin.com/in/noahpirro"
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
