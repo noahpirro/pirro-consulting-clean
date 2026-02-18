@@ -1,6 +1,6 @@
+import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Target, Zap, CheckCircle, UserCheck, MessageSquare, Crown, Clock, Heart, TrendingUp, Award, BadgePercent } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -83,9 +83,42 @@ const stats = [
 
 const Recruiting = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main id="main-content" className="min-h-screen bg-background">
+      <Helmet>
+        <title>Recruiting & Mitarbeitergewinnung | Pirro Consulting</title>
+        <meta name="description" content="Social Recruiting, Active Sourcing und automatisierte Bewerbungsprozesse für Unternehmer. Qualifizierte Bewerber in wenigen Wochen." />
+        <link rel="canonical" href="https://pirro-consulting.de/recruiting" />
+        <meta property="og:title" content="Recruiting & Mitarbeitergewinnung | Pirro Consulting" />
+        <meta property="og:description" content="Social Recruiting, Active Sourcing und automatisierte Bewerbungsprozesse für Unternehmer. Qualifizierte Bewerber in wenigen Wochen." />
+        <meta property="og:url" content="https://pirro-consulting.de/recruiting" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Recruiting & Mitarbeitergewinnung",
+          "description": "Social Recruiting, Active Sourcing und automatisierte Bewerbungsprozesse für Unternehmer.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Pirro Consulting",
+            "url": "https://pirro-consulting.de"
+          },
+          "serviceType": "Social Media Recruiting",
+          "areaServed": { "@type": "Country", "name": "Deutschland" }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pirro-consulting.de" },
+            { "@type": "ListItem", "position": 2, "name": "Recruiting & Mitarbeitergewinnung", "item": "https://pirro-consulting.de/recruiting" }
+          ]
+        })}</script>
+      </Helmet>
       <Navbar />
-      
+
       {/* Hero */}
       <section className="min-h-screen flex items-center pt-20 px-4">
         <div className="container mx-auto max-w-4xl">
@@ -129,10 +162,15 @@ const Recruiting = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button size="lg" className="h-14 px-8 text-base font-medium group">
+              <a
+                href="https://calendly.com/pirroconsulting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group"
+              >
                 Kostenloses Erstgespräch sichern
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>
@@ -285,10 +323,15 @@ const Recruiting = () => {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Button size="lg" className="h-14 px-8 text-base font-medium group">
+                <a
+                  href="https://calendly.com/pirroconsulting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group"
+                >
                   Kostenloses Erstgespräch vereinbaren
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                </a>
               </motion.div>
               <p className="text-sm text-muted-foreground mt-4">
                 Kostenlos und unverbindlich – um festzustellen, ob Sie sich mit unseren Werten und Strategien identifizieren können.
@@ -312,10 +355,15 @@ const Recruiting = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button size="lg" variant="secondary" className="h-14 px-8 group">
+              <a
+                href="https://calendly.com/pirroconsulting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center h-14 px-8 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md font-medium group"
+              >
                 Jetzt Gespräch vereinbaren
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              </a>
             </motion.div>
           </AnimatedSection>
         </div>

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronDown, Phone, MessageCircle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 
 const serviceLinks = [
   { label: "Recruiting", href: "/recruiting" },
@@ -15,6 +14,7 @@ const navLinks = [
   { label: "Leistungen", href: "#services", isDropdown: true },
   { label: "Ablauf", href: "#process" },
   { label: "Über mich", href: "#about" },
+  { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -56,8 +56,10 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center">
             <motion.img 
-              src={logo} 
-              alt="Pirro Consulting" 
+              src={logo}
+              alt="Pirro Consulting"
+              width={120}
+              height={32}
               className={`h-8 w-auto transition-all duration-300 ${!scrolled ? "brightness-0 invert" : ""}`}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -72,9 +74,11 @@ export const Navbar = () => {
               onMouseEnter={() => setIsServicesOpen(true)}
               onMouseLeave={() => setIsServicesOpen(false)}
             >
-              <button className={`flex items-center gap-1 transition-colors font-medium ${
-                scrolled 
-                  ? "text-muted-foreground hover:text-foreground" 
+              <button
+                aria-expanded={isServicesOpen}
+                className={`flex items-center gap-1 transition-colors font-medium ${
+                scrolled
+                  ? "text-muted-foreground hover:text-foreground"
                   : "text-white/80 hover:text-white"
               }`}>
                 Leistungen
@@ -120,18 +124,28 @@ export const Navbar = () => {
                 <button
                   onClick={() => scrollToSection("about")}
                   className={`transition-colors font-medium ${
-                    scrolled 
-                      ? "text-muted-foreground hover:text-foreground" 
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
                       : "text-white/80 hover:text-white"
                   }`}
                 >
                   Über mich
                 </button>
+                <Link
+                  to="/blog"
+                  className={`transition-colors font-medium ${
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  Blog
+                </Link>
                 <button
                   onClick={() => scrollToSection("faq")}
                   className={`transition-colors font-medium ${
-                    scrolled 
-                      ? "text-muted-foreground hover:text-foreground" 
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
                       : "text-white/80 hover:text-white"
                   }`}
                 >
@@ -143,18 +157,28 @@ export const Navbar = () => {
                 <Link
                   to="/#about"
                   className={`transition-colors font-medium ${
-                    scrolled 
-                      ? "text-muted-foreground hover:text-foreground" 
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
                       : "text-white/80 hover:text-white"
                   }`}
                 >
                   Über mich
                 </Link>
                 <Link
+                  to="/blog"
+                  className={`transition-colors font-medium ${
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  Blog
+                </Link>
+                <Link
                   to="/#faq"
                   className={`transition-colors font-medium ${
-                    scrolled 
-                      ? "text-muted-foreground hover:text-foreground" 
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
                       : "text-white/80 hover:text-white"
                   }`}
                 >
@@ -164,21 +188,47 @@ export const Navbar = () => {
             )}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <motion.div
+          {/* Desktop Contact & CTA */}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href="https://wa.me/4915XXX"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
+                scrolled
+                  ? "text-muted-foreground hover:text-foreground"
+                  : "text-white/80 hover:text-white"
+              }`}
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span className="hidden lg:inline">WhatsApp</span>
+            </a>
+            <a
+              href="tel:+4915XXX"
+              className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
+                scrolled
+                  ? "text-muted-foreground hover:text-foreground"
+                  : "text-white/80 hover:text-white"
+              }`}
+            >
+              <Phone className="w-4 h-4" />
+              <span className="hidden lg:inline">Anrufen</span>
+            </a>
+            <motion.a
+              href="https://calendly.com/pirroconsulting"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+                scrolled
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                  : "bg-white text-gray-900 hover:bg-white/90"
+              }`}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <Button className={`transition-all duration-300 ${
-                scrolled 
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                  : "bg-white text-gray-900 hover:bg-white/90"
-              }`}>
-                Potenzialanalyse sichern
-              </Button>
-            </motion.div>
+              Potenzialanalyse sichern
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -271,6 +321,13 @@ export const Navbar = () => {
                     >
                       Über mich
                     </button>
+                    <Link
+                      to="/blog"
+                      className="text-left text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Blog
+                    </Link>
                     <button
                       onClick={() => scrollToSection("faq")}
                       className="text-left text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
@@ -288,6 +345,13 @@ export const Navbar = () => {
                       Über mich
                     </Link>
                     <Link
+                      to="/blog"
+                      className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Blog
+                    </Link>
+                    <Link
                       to="/#faq"
                       className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
                       onClick={() => setIsOpen(false)}
@@ -297,9 +361,32 @@ export const Navbar = () => {
                   </>
                 )}
 
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 mt-4 w-full">
+                <div className="flex items-center gap-4 mt-4">
+                  <a
+                    href="https://wa.me/4915XXX"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors py-2"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    WhatsApp
+                  </a>
+                  <a
+                    href="tel:+4915XXX"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors py-2"
+                  >
+                    <Phone className="w-5 h-5" />
+                    Anrufen
+                  </a>
+                </div>
+                <a
+                  href="https://calendly.com/pirroconsulting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-2 px-4 py-2 rounded-md text-sm font-medium"
+                >
                   Potenzialanalyse sichern
-                </Button>
+                </a>
               </div>
             </motion.div>
           )}

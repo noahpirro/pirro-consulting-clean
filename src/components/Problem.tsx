@@ -1,5 +1,6 @@
 import { Clock, FolderSearch, Hourglass, AlertTriangle } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { AnimatedSection } from "./AnimatedSection";
 
 const painPoints = [
@@ -8,31 +9,44 @@ const painPoints = [
     number: "01",
     title: "Du arbeitest im Unternehmen statt am Unternehmen",
     description: "Dein Kalender ist voll, trotzdem hast du das Gefühl, nie fertig zu werden. Statt strategisch zu denken, springst du von Aufgabe zu Aufgabe.",
+    cost: "~15 Std./Woche",
+    costLabel: "für operative Aufgaben verschwendet",
   },
   {
     icon: FolderSearch,
     number: "02",
     title: "Informationen sind überall – nur nicht da, wo du sie brauchst",
     description: "Kundendaten in E-Mails, Aufgaben in verschiedenen Tools, wichtige Infos im Chat-Verlauf verschollen. Dein Team fragt ständig nach.",
+    cost: "€2.500+/Monat",
+    costLabel: "an Produktivitätsverlust",
   },
   {
     icon: Hourglass,
     number: "03",
     title: "Routine-Aufgaben fressen deine wertvollste Ressource",
     description: "Angebote schreiben, Rechnungen erstellen, Kunden-Onboarding, Follow-ups – alles manuell. Stunden pro Woche gehen verloren.",
+    cost: "€30.000+/Jahr",
+    costLabel: "an Opportunitätskosten",
   },
 ];
 
 export const Problem = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section id="problem" className="section-padding bg-secondary relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
+    <section ref={sectionRef} id="problem" className="section-padding bg-secondary relative overflow-hidden">
+      {/* Parallax Background Pattern */}
+      <motion.div className="absolute inset-0 opacity-[0.02]" style={{ y: bgY }}>
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }} />
-      </div>
+      </motion.div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -74,9 +88,15 @@ export const Problem = () => {
                 <h3 className="text-lg font-display font-bold mb-4 leading-tight relative z-10">
                   {point.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm relative z-10">
+                <p className="text-muted-foreground leading-relaxed text-sm relative z-10 mb-4">
                   {point.description}
                 </p>
+
+                {/* Cost Badge */}
+                <div className="relative z-10 inline-flex items-center gap-2 bg-red-50 border border-red-200 px-3 py-2 rounded-lg">
+                  <span className="text-red-600 font-bold text-sm">{point.cost}</span>
+                  <span className="text-red-500/70 text-xs">{point.costLabel}</span>
+                </div>
 
                 {/* Hover Gradient */}
                 <motion.div

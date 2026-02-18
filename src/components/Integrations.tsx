@@ -4,9 +4,9 @@ import { useState } from "react";
 // Import local logos
 import makeLogo from "@/assets/logos/make.ico";
 import n8nLogo from "@/assets/logos/n8n.ico";
-import clickupLogo from "@/assets/logos/clickup.png";
+import clickupLogo from "@/assets/logos/clickup.webp";
 import calendlyLogo from "@/assets/logos/calendly.ico";
-import airtableLogo from "@/assets/logos/airtable.png";
+import airtableLogo from "@/assets/logos/airtable.webp";
 import gmailLogo from "@/assets/logos/gmail.webp";
 import outlookLogo from "@/assets/logos/outlook.ico";
 import datevLogo from "@/assets/logos/datev.ico";
@@ -14,25 +14,28 @@ import lexofficeLogo from "@/assets/logos/lexoffice.ico";
 import easybillLogo from "@/assets/logos/easybill.ico";
 import placetelLogo from "@/assets/logos/placetel.ico";
 import closeLogo from "@/assets/logos/close.ico";
-import brevoLogo from "@/assets/logos/brevo.ico";
-import slackLogo from "@/assets/logos/slack.ico";
-import gdriveLogo from "@/assets/logos/gdrive.png";
+import brevoLogo from "@/assets/logos/brevo.svg";
+import slackLogo from "@/assets/logos/slack-icon.svg";
+import gdriveLogo from "@/assets/logos/gdrive.webp";
 import stripeLogo from "@/assets/logos/stripe.webp";
-import trelloLogo from "@/assets/logos/trello.ico";
-import mondayLogo from "@/assets/logos/monday.png";
-import perspectiveLogo from "@/assets/logos/perspective.png";
-import lemlistLogo from "@/assets/logos/lemlist.png";
-import googleadsLogo from "@/assets/logos/googleads.png";
-import twilioLogo from "@/assets/logos/twilio.png";
-import zoomLogo from "@/assets/logos/zoom.png";
-import shopifyLogo from "@/assets/logos/shopify.png";
+import trelloLogo from "@/assets/logos/trello.svg";
+import mondayLogo from "@/assets/logos/monday.webp";
+import perspectiveLogo from "@/assets/logos/perspective.webp";
+import lemlistLogo from "@/assets/logos/lemlist.webp";
+import googleadsLogo from "@/assets/logos/googleads.webp";
+import twilioLogo from "@/assets/logos/twilio.webp";
+import zoomLogo from "@/assets/logos/zoom.webp";
+import shopifyLogo from "@/assets/logos/shopify.webp";
 import whatsappLogo from "@/assets/logos/whatsapp.svg";
-import salesforceLogo from "@/assets/logos/salesforce.png";
-import metaLogo from "@/assets/logos/meta.png";
-import microsoft365Logo from "@/assets/logos/microsoft365.png";
+import salesforceLogo from "@/assets/logos/salesforce.webp";
+import metaLogo from "@/assets/logos/meta.webp";
+import microsoft365Logo from "@/assets/logos/microsoft365.webp";
 import pandadocLogo from "@/assets/logos/pandadoc.svg";
-import descriptLogo from "@/assets/logos/descript.png";
-import intercomLogo from "@/assets/logos/intercom.png";
+import descriptLogo from "@/assets/logos/descript.webp";
+import intercomLogo from "@/assets/logos/intercom.webp";
+import hubspotLogo from "@/assets/logos/hubspot.webp";
+import zapierLogo from "@/assets/logos/zapier.png";
+import notionLogo from "@/assets/logos/notion.webp";
 
 const tools = [
   // Row 1 - top
@@ -78,10 +81,10 @@ const tools = [
   { name: "Meta", logo: metaLogo, position: "top-[84%] right-[0%]", delay: 0.92, size: "md", lineIndex: 27 },
   
   // Row 8 - removed, moved to row 7 area or hidden
-  { name: "HubSpot", logo: "https://www.hubspot.com/hubfs/HubSpot_Logos/HubSpot-Inversed-Favicon.png", position: "top-[96%] left-[2%]", delay: 0.9, size: "md", lineIndex: 28 },
+  { name: "HubSpot", logo: hubspotLogo, position: "top-[96%] left-[2%]", delay: 0.9, size: "md", lineIndex: 28 },
   { name: "Easybill", logo: easybillLogo, position: "top-[96%] left-[14%]", delay: 0.85, size: "md", lineIndex: 29 },
-  { name: "Zapier", logo: "https://cdn.zapier.com/zapier/images/favicon.ico", position: "top-[96%] right-[14%]", delay: 1, size: "md", lineIndex: 30 },
-  { name: "Notion", logo: "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png", position: "top-[96%] right-[2%]", delay: 0.95, size: "md", lineIndex: 31 },
+  { name: "Zapier", logo: zapierLogo, position: "top-[96%] right-[14%]", delay: 1, size: "md", lineIndex: 30 },
+  { name: "Notion", logo: notionLogo, position: "top-[96%] right-[2%]", delay: 0.95, size: "md", lineIndex: 31 },
 ];
 
 const floatingLabels = [
@@ -360,9 +363,13 @@ export const Integrations = () => {
                 >
                   {/* Icon container */}
                   <div className={`${sizeClasses[tool.size as keyof typeof sizeClasses]} rounded-xl bg-gray-800/90 backdrop-blur-sm border border-gray-700/60 flex items-center justify-center shadow-lg group-hover:border-amber-500/50 group-hover:bg-gray-700/90 transition-all duration-300`}>
-                    <img 
-                      src={tool.logo} 
+                    <img
+                      src={tool.logo}
                       alt={tool.name}
+                      width={32}
+                      height={32}
+                      loading="lazy"
+                      decoding="async"
                       className={`${imgSizes[tool.size as keyof typeof imgSizes]} object-contain`}
                       onError={(e) => {
                         e.currentTarget.src = `https://ui-avatars.com/api/?name=${tool.name.charAt(0)}&background=374151&color=9ca3af&size=64&bold=true`;

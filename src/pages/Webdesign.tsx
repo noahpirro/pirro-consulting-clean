@@ -1,6 +1,6 @@
+import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Layout, Smartphone, Zap, Search, CheckCircle, Palette } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -36,9 +36,42 @@ const services = [
 
 const Webdesign = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main id="main-content" className="min-h-screen bg-background">
+      <Helmet>
+        <title>Webdesign & Entwicklung | Pirro Consulting</title>
+        <meta name="description" content="Professionelles Webdesign für Unternehmer. Conversion-optimierte Websites die Kunden gewinnen." />
+        <link rel="canonical" href="https://pirro-consulting.de/webdesign" />
+        <meta property="og:title" content="Webdesign & Entwicklung | Pirro Consulting" />
+        <meta property="og:description" content="Professionelles Webdesign für Unternehmer. Conversion-optimierte Websites die Kunden gewinnen." />
+        <meta property="og:url" content="https://pirro-consulting.de/webdesign" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Webdesign & Entwicklung",
+          "description": "Professionelles Webdesign für Unternehmer. Conversion-optimierte Websites die Kunden gewinnen.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Pirro Consulting",
+            "url": "https://pirro-consulting.de"
+          },
+          "serviceType": "Webdesign",
+          "areaServed": { "@type": "Country", "name": "Deutschland" }
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pirro-consulting.de" },
+            { "@type": "ListItem", "position": 2, "name": "Webdesign & Entwicklung", "item": "https://pirro-consulting.de/webdesign" }
+          ]
+        })}</script>
+      </Helmet>
       <Navbar />
-      
+
       {/* Hero */}
       <section className="min-h-screen flex items-center pt-20 px-4">
         <div className="container mx-auto max-w-4xl">
@@ -82,10 +115,15 @@ const Webdesign = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button size="lg" className="h-14 px-8 text-base font-medium group">
+              <a
+                href="https://calendly.com/pirroconsulting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group"
+              >
                 Kostenloses Website-Audit
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>
@@ -132,10 +170,15 @@ const Webdesign = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button size="lg" className="bg-background text-foreground hover:bg-background/90 h-14 px-8 group">
+              <a
+                href="https://calendly.com/pirroconsulting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-background text-foreground hover:bg-background/90 h-14 px-8 rounded-md font-medium group"
+              >
                 Jetzt Gespräch vereinbaren
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              </a>
             </motion.div>
           </AnimatedSection>
         </div>

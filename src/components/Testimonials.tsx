@@ -1,43 +1,45 @@
-import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatedSection } from "./AnimatedSection";
 
 const testimonials = [
   {
-    name: "Michael Schneider",
+    name: "Michael S.",
     role: "Geschäftsführer",
-    company: "Digital Solutions GmbH",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    company: "E-Commerce Agentur",
+    initials: "MS",
     quote: "Durch Pirro Consulting sparen wir jeden Monat über 40 Stunden manuelle Arbeit. Die Automatisierung unseres Onboardings war ein Game-Changer.",
     rating: 5,
-    result: "40+ Stunden/Monat gespart"
+    result: "40+ Stunden/Monat gespart",
   },
   {
-    name: "Sarah Weber",
+    name: "Sarah W.",
     role: "Head of Operations",
-    company: "ProMotion Pictures",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    company: "Marketing Agentur",
+    initials: "SW",
     quote: "Endlich keine Excel-Listen mehr! Unser CRM läuft jetzt vollautomatisch und wir haben den Überblick über jeden Lead.",
     rating: 5,
-    result: "300% mehr Leads verarbeitet"
+    result: "300% mehr Leads verarbeitet",
   },
   {
-    name: "Thomas Müller",
+    name: "Thomas K.",
     role: "Inhaber",
-    company: "COACHME Academy",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    company: "Coaching-Unternehmen",
+    initials: "TK",
     quote: "Die Zusammenarbeit war professionell und zielorientiert. Innerhalb von 4 Wochen hatten wir ein komplett automatisiertes Fulfillment.",
     rating: 5,
-    result: "4 Wochen bis zur Umsetzung"
+    result: "4 Wochen bis zur Umsetzung",
   },
   {
-    name: "Lisa Hoffmann",
+    name: "Lisa H.",
     role: "Marketing Managerin",
-    company: "Startup Hub Berlin",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+    company: "IT-Dienstleister",
+    initials: "LH",
     quote: "Wir konnten unser Team um 2 Personen verkleinern und machen trotzdem mehr Umsatz. Die Investition hat sich 10-fach rentiert.",
     rating: 5,
-    result: "10x ROI in 6 Monaten"
-  }
+    result: "10x ROI in 6 Monaten",
+  },
 ];
 
 const StarRating = ({ rating }: { rating: number }) => (
@@ -51,20 +53,61 @@ const StarRating = ({ rating }: { rating: number }) => (
   </div>
 );
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 300 : -300,
+    opacity: 0,
+    scale: 0.95,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -300 : 300,
+    opacity: 0,
+    scale: 0.95,
+  }),
+};
+
 export const Testimonials = () => {
-  const averageRating = (testimonials.reduce((acc, t) => acc + t.rating, 0) / testimonials.length).toFixed(1);
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const next = useCallback(() => {
+    setDirection(1);
+    setCurrent((prev) => (prev + 1) % testimonials.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setDirection(-1);
+    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, []);
+
+  const goTo = (index: number) => {
+    setDirection(index > current ? 1 : -1);
+    setCurrent(index);
+  };
+
+  // Autoplay
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [isPaused, next]);
+
+  const t = testimonials[current];
+  const averageRating = (
+    testimonials.reduce((acc, t) => acc + t.rating, 0) / testimonials.length
+  ).toFixed(1);
 
   return (
     <section className="py-24 bg-background" id="testimonials">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          {/* Rating Badge */}
+        <AnimatedSection className="text-center mb-16">
           <motion.div
             className="inline-flex items-center gap-3 px-6 py-3 bg-amber-50 dark:bg-amber-950/30 rounded-full mb-8 border border-amber-200 dark:border-amber-800"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -79,9 +122,6 @@ export const Testimonials = () => {
             <span className="font-semibold text-amber-700 dark:text-amber-300">
               {averageRating} von 5 Sternen
             </span>
-            <span className="text-amber-600/70 dark:text-amber-400/70">
-              • {testimonials.length}+ Bewertungen
-            </span>
           </motion.div>
 
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
@@ -90,58 +130,93 @@ export const Testimonials = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Echte Ergebnisse von echten Unternehmern, die mit uns ihre Prozesse automatisiert haben.
           </p>
-        </motion.div>
+        </AnimatedSection>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <motion.article
-              key={testimonial.name}
-              className="relative p-6 md:p-8 bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg transition-shadow"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              {/* Quote Icon */}
-              <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/10" />
+        {/* Carousel */}
+        <div
+          className="max-w-3xl mx-auto relative"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Navigation Arrows */}
+          <button
+            onClick={prev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-14 z-10 w-10 h-10 rounded-full bg-background border border-border shadow-md flex items-center justify-center hover:bg-secondary transition-colors"
+            aria-label="Vorheriges Testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-14 z-10 w-10 h-10 rounded-full bg-background border border-border shadow-md flex items-center justify-center hover:bg-secondary transition-colors"
+            aria-label="Nächstes Testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
 
-              {/* Rating */}
-              <StarRating rating={testimonial.rating} />
+          {/* Card */}
+          <div className="overflow-hidden px-2">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.article
+                key={current}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="relative p-8 md:p-12 bg-card rounded-2xl border border-border shadow-sm"
+              >
+                <Quote className="absolute top-6 right-6 w-10 h-10 text-primary/10" />
 
-              {/* Quote */}
-              <blockquote className="mt-4 mb-6 text-foreground text-lg leading-relaxed">
-                "{testimonial.quote}"
-              </blockquote>
+                <StarRating rating={t.rating} />
 
-              {/* Result Badge */}
-              <div className="inline-flex items-center px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/30 rounded-full mb-6 border border-emerald-200 dark:border-emerald-800">
-                <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
-                  ✓ {testimonial.result}
-                </span>
-              </div>
+                <blockquote className="mt-6 mb-6 text-foreground text-xl md:text-2xl leading-relaxed font-display">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
 
-              {/* Author */}
-              <footer className="flex items-center gap-4">
-                <img
-                  src={testimonial.image}
-                  alt={`${testimonial.name}, ${testimonial.role} bei ${testimonial.company}`}
-                  className="w-12 h-12 rounded-full object-cover"
-                  loading="lazy"
-                  width={48}
-                  height={48}
-                />
-                <div>
-                  <cite className="not-italic font-semibold text-foreground">
-                    {testimonial.name}
-                  </cite>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.role}, {testimonial.company}
-                  </p>
+                {/* Result Badge */}
+                <div className="inline-flex items-center px-3 py-1.5 bg-emerald-50 dark:bg-emerald-950/30 rounded-full mb-8 border border-emerald-200 dark:border-emerald-800">
+                  <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+                    &#10003; {t.result}
+                  </span>
                 </div>
-              </footer>
-            </motion.article>
-          ))}
+
+                {/* Author */}
+                <footer className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-base font-bold text-primary">
+                      {t.initials}
+                    </span>
+                  </div>
+                  <div>
+                    <cite className="not-italic font-semibold text-foreground text-lg">
+                      {t.name}
+                    </cite>
+                    <p className="text-sm text-muted-foreground">
+                      {t.role}, {t.company}
+                    </p>
+                  </div>
+                </footer>
+              </motion.article>
+            </AnimatePresence>
+          </div>
+
+          {/* Dots */}
+          <div className="flex items-center justify-center gap-2 mt-8">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goTo(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === current
+                    ? "w-8 bg-foreground"
+                    : "w-2 bg-foreground/20 hover:bg-foreground/40"
+                }`}
+                aria-label={`Testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Trust Indicators */}
@@ -153,15 +228,15 @@ export const Testimonials = () => {
           transition={{ delay: 0.4 }}
         >
           <div>
-            <p className="text-3xl md:text-4xl font-bold text-foreground">50+</p>
+            <p className="text-3xl md:text-4xl font-bold text-foreground">10+</p>
             <p className="text-sm text-muted-foreground">Zufriedene Kunden</p>
           </div>
           <div>
-            <p className="text-3xl md:text-4xl font-bold text-foreground">200+</p>
+            <p className="text-3xl md:text-4xl font-bold text-foreground">100+</p>
             <p className="text-sm text-muted-foreground">Automatisierungen</p>
           </div>
           <div>
-            <p className="text-3xl md:text-4xl font-bold text-foreground">10.000+</p>
+            <p className="text-3xl md:text-4xl font-bold text-foreground">1.000+</p>
             <p className="text-sm text-muted-foreground">Stunden gespart</p>
           </div>
           <div>

@@ -2,32 +2,38 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Recruiting from "./pages/Recruiting";
-import Marketing from "./pages/Marketing";
-import Webdesign from "./pages/Webdesign";
-import NotFound from "./pages/NotFound";
+import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { ScrollProgress } from "./components/ScrollProgress";
+import { BackToTop } from "./components/BackToTop";
+import { CookieConsent } from "./components/CookieConsent";
+import { WhatsAppWidget } from "./components/WhatsAppWidget";
+import { LoadingScreen } from "./components/LoadingScreen";
+import { SocialProofPopup } from "./components/SocialProofPopup";
+import { CursorEffect } from "./components/CursorEffect";
+import { AnimatedRoutes } from "./components/AnimatedRoutes";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/recruiting" element={<Recruiting />} />
-          <Route path="/marketing" element={<Marketing />} />
-          <Route path="/webdesign" element={<Webdesign />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <LoadingScreen />
+        <CursorEffect />
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollProgress />
+          <BackToTop />
+          <CookieConsent />
+          <WhatsAppWidget />
+          <SocialProofPopup />
+          <AnimatedRoutes />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

@@ -3,9 +3,9 @@ import { TrendingUp, Users, Clock, Target, Zap, ChevronLeft, ChevronRight } from
 import { useState } from "react";
 
 // Import images
-import ecommerceImage from "@/assets/case-studies/ecommerce-agency.jpg";
-import coachingImage from "@/assets/case-studies/coaching-company.jpg";
-import itImage from "@/assets/case-studies/it-services.jpg";
+import ecommerceImage from "@/assets/case-studies/ecommerce-agency.webp";
+import coachingImage from "@/assets/case-studies/coaching-company.webp";
+import itImage from "@/assets/case-studies/it-services.webp";
 
 const caseStudies = [
   {
@@ -151,6 +151,10 @@ export const CaseStudies = () => {
                     <img
                       src={currentStudy.image}
                       alt={currentStudy.company}
+                      width={600}
+                      height={750}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full aspect-[4/5] object-cover"
                     />
                     {/* Subtle gradient overlay */}

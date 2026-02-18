@@ -1,11 +1,20 @@
-import { ArrowRight, Check, ChevronDown, Bell } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { ArrowRight, Check, ChevronDown, Bell, Star, Shield } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { MagneticButton } from "./MagneticButton";
+
+const rotatingWords = ["Wachstum.", "Umsatz.", "Freiheit.", "Effizienz."];
 
 const benefits = [
   { title: "Klare Strukturen", description: "Jeder weiß, was zu tun ist" },
   { title: "Zeitersparnis", description: "Automatisierte Prozesse" },
   { title: "Skalierbares Fundament", description: "Wachstum ohne Mehraufwand" },
+];
+
+const stats = [
+  { value: "10+", label: "Unternehmen" },
+  { value: "1.000+", label: "Stunden gespart" },
+  { value: "100+", label: "Automationen" },
 ];
 
 const notifications = [
@@ -38,6 +47,15 @@ const itemVariants = {
 };
 
 export const Hero = () => {
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % rotatingWords.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollToNext = () => {
     const element = document.getElementById("problem");
     if (element) {
@@ -105,7 +123,7 @@ export const Hero = () => {
         animate="visible"
       >
         {/* Badge */}
-        <motion.div 
+        <motion.div
           className="inline-flex items-center gap-2 bg-background/10 border border-background/20 px-4 py-2 rounded-full mb-8"
           variants={itemVariants}
         >
@@ -114,7 +132,7 @@ export const Hero = () => {
         </motion.div>
 
         {/* Tagline */}
-        <motion.p 
+        <motion.p
           className="text-sm uppercase tracking-[0.2em] text-background/60 mb-6"
           variants={itemVariants}
         >
@@ -122,22 +140,60 @@ export const Hero = () => {
         </motion.p>
 
         {/* Headline */}
-        <motion.h1 
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight mb-6"
+        <motion.h1
+          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight mb-4"
           variants={itemVariants}
         >
           <span className="inline-block">Weniger Chaos.</span>
           <br />
-          <span className="inline-block text-highlight">Mehr Wachstum.</span>
+          <span className="inline-block">
+            Mehr{" "}
+            <span className="relative inline-block text-highlight">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={rotatingWords[wordIndex]}
+                  className="inline-block"
+                  initial={{ y: 30, opacity: 0, rotateX: -40 }}
+                  animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                  exit={{ y: -30, opacity: 0, rotateX: 40 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                  {rotatingWords[wordIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+          </span>
         </motion.h1>
 
+        {/* Guarantee */}
+        <motion.div
+          className="inline-flex items-center gap-2 bg-highlight/20 border border-highlight/30 px-4 py-2 rounded-full mb-6"
+          variants={itemVariants}
+        >
+          <Shield className="w-4 h-4 text-highlight" />
+          <span className="text-sm font-medium text-highlight">Ergebnisse in 4 Wochen – garantiert</span>
+        </motion.div>
+
         {/* Subheadline */}
-        <motion.p 
-          className="text-lg md:text-xl text-background/70 max-w-2xl mx-auto mb-12"
+        <motion.p
+          className="text-lg md:text-xl text-background/70 max-w-2xl mx-auto mb-8"
           variants={itemVariants}
         >
           Wir digitalisieren und automatisieren dein Unternehmen – damit du dich auf das konzentrieren kannst, was wirklich zählt: Kunden gewinnen und skalieren.
         </motion.p>
+
+        {/* Stats Row */}
+        <motion.div
+          className="flex items-center justify-center gap-8 md:gap-12 mb-10"
+          variants={itemVariants}
+        >
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <p className="text-2xl md:text-3xl font-display font-bold text-background">{stat.value}</p>
+              <p className="text-xs md:text-sm text-background/50">{stat.label}</p>
+            </div>
+          ))}
+        </motion.div>
 
         {/* Benefits */}
         <motion.div 
@@ -160,23 +216,37 @@ export const Hero = () => {
         </motion.div>
 
         {/* CTAs */}
-        <motion.div 
-          className="flex items-center justify-center"
+        <motion.div
+          className="flex flex-col items-center gap-4"
           variants={itemVariants}
         >
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Button 
-              size="lg" 
-              className="h-14 px-8 text-base font-medium bg-background text-foreground hover:bg-background/90 transition-all group"
+          <MagneticButton strength={0.25}>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              Kostenlose Potenzialanalyse sichern
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
+              <a
+                href="https://calendly.com/pirroconsulting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center h-14 px-8 text-base font-medium bg-background text-foreground hover:bg-background/90 transition-all group rounded-md"
+              >
+                Kostenlose Potenzialanalyse sichern
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </motion.div>
+          </MagneticButton>
+          <div className="flex items-center gap-4 text-background/50 text-sm">
+            <span className="flex items-center gap-1">
+              <Star className="w-3 h-3 fill-highlight text-highlight" />
+              <Star className="w-3 h-3 fill-highlight text-highlight" />
+              <Star className="w-3 h-3 fill-highlight text-highlight" />
+              <Star className="w-3 h-3 fill-highlight text-highlight" />
+              <Star className="w-3 h-3 fill-highlight text-highlight" />
+            </span>
+            <span>5/5 von 10+ Unternehmen</span>
+          </div>
         </motion.div>
       </motion.div>
 

@@ -5,12 +5,12 @@ import healthInnovationHub from "@/assets/clients/health-innovation-hub.png";
 import schneehoehen from "@/assets/clients/schneehoehen.svg";
 import alpenguide from "@/assets/clients/alpenguide.svg";
 import omlor from "@/assets/clients/omlor.png";
-import cantinaMexicana from "@/assets/clients/cantina-mexicana.png";
+import cantinaMexicana from "@/assets/clients/cantina-mexicana.webp";
 import autoDoerr from "@/assets/clients/auto-doerr.svg";
-import cocktailsAtHome from "@/assets/clients/cocktails-at-home.png";
+import cocktailsAtHome from "@/assets/clients/cocktails-at-home.webp";
 import sandAusVelsen from "@/assets/clients/sand-aus-velsen.png";
-import aoLogo from "@/assets/clients/ao-logo.png";
-import bfdLogo from "@/assets/clients/bfd-logo.png";
+import aoLogo from "@/assets/clients/ao-logo.webp";
+import bfdLogo from "@/assets/clients/bfd-logo.webp";
 
 const clients = [
   { name: "Health + Innovation Hub", logo: healthInnovationHub, invert: false },
@@ -62,9 +62,13 @@ export const TrustedBy = () => {
               key={index}
               className="flex-shrink-0 h-12 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
             >
-              <img 
-                src={client.logo} 
+              <img
+                src={client.logo}
                 alt={client.name}
+                width={160}
+                height={48}
+                loading="lazy"
+                decoding="async"
                 className={`h-full w-auto object-contain max-w-[160px] ${client.invert ? 'invert' : ''}`}
               />
             </div>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
-import { User, Quote } from "lucide-react";
+import { User, Quote, Play, Linkedin } from "lucide-react";
 
 export const About = () => {
   return (
@@ -17,7 +17,7 @@ export const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image Side */}
           <AnimatedSection direction="right">
-            <motion.div 
+            <motion.div
               className="relative"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4 }}
@@ -25,21 +25,21 @@ export const About = () => {
               {/* Main Image Placeholder */}
               <div className="aspect-[4/5] bg-foreground rounded-2xl relative overflow-hidden">
                 {/* Decorative Elements */}
-                <motion.div 
+                <motion.div
                   className="absolute top-8 right-8 w-24 h-24 border border-background/20 rounded-full"
                   animate={{ rotate: 360 }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 />
-                <motion.div 
+                <motion.div
                   className="absolute bottom-12 left-12 w-16 h-16 bg-background/10 rounded-xl"
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 />
-                
-                {/* Placeholder Content */}
+
+                {/* Placeholder Content - Replace with actual photo */}
                 <div className="absolute inset-0 flex items-center justify-center text-background">
                   <div className="text-center p-8">
-                    <motion.div 
+                    <motion.div
                       className="w-32 h-32 mx-auto mb-4 rounded-full bg-background/20 flex items-center justify-center"
                       whileHover={{ scale: 1.1 }}
                     >
@@ -48,10 +48,19 @@ export const About = () => {
                     <p className="text-background/60 text-sm">Professionelles Portrait</p>
                   </div>
                 </div>
+
+                {/* Video Play Button Overlay */}
+                <motion.div
+                  className="absolute bottom-6 right-6 w-14 h-14 bg-highlight rounded-full flex items-center justify-center cursor-pointer shadow-lg"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Play className="w-6 h-6 text-white ml-1" fill="white" />
+                </motion.div>
               </div>
 
               {/* Floating Quote Card */}
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-6 -right-6 lg:-right-12 bg-background border border-border rounded-2xl p-6 shadow-xl max-w-xs"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -79,10 +88,10 @@ export const About = () => {
                 Pirro Consulting?
               </h2>
             </AnimatedSection>
-            
+
             <AnimatedSection delay={0.1}>
               <p className="text-xl font-display font-medium">
-                [Dein Name] – Gründer von Pirro Consulting
+                Noah Pirro – Gründer von Pirro Consulting
               </p>
             </AnimatedSection>
 
@@ -97,10 +106,24 @@ export const About = () => {
               </div>
             </AnimatedSection>
 
+            {/* Credentials */}
+            <AnimatedSection delay={0.25}>
+              <div className="grid grid-cols-2 gap-4 py-4">
+                <div className="bg-background border border-border rounded-xl p-4 text-center">
+                  <p className="text-2xl font-display font-bold">10+</p>
+                  <p className="text-xs text-muted-foreground">Unternehmen betreut</p>
+                </div>
+                <div className="bg-background border border-border rounded-xl p-4 text-center">
+                  <p className="text-2xl font-display font-bold">100+</p>
+                  <p className="text-xs text-muted-foreground">Automationen gebaut</p>
+                </div>
+              </div>
+            </AnimatedSection>
+
             <AnimatedSection delay={0.3}>
-              <div className="flex flex-wrap gap-4 pt-4">
-                {["Marketing", "Recruiting", "Automatisierung", "KI"].map((tag, index) => (
-                  <motion.span 
+              <div className="flex flex-wrap gap-3 pt-2">
+                {["Marketing", "Recruiting", "Automatisierung", "KI", "CRM", "Prozessoptimierung"].map((tag, index) => (
+                  <motion.span
                     key={tag}
                     className="px-4 py-2 bg-foreground text-background rounded-full text-sm font-medium"
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -112,6 +135,21 @@ export const About = () => {
                     {tag}
                   </motion.span>
                 ))}
+              </div>
+            </AnimatedSection>
+
+            {/* Social Links */}
+            <AnimatedSection delay={0.35}>
+              <div className="flex items-center gap-4 pt-4">
+                <a
+                  href="https://linkedin.com/in/noahpirro"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Linkedin className="w-5 h-5" />
+                  LinkedIn
+                </a>
               </div>
             </AnimatedSection>
           </div>
