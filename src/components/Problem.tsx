@@ -1,9 +1,9 @@
 import { Clock, FolderSearch, Hourglass, AlertTriangle } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
 import { GlowCard } from "./GlowCard";
 import { TextReveal } from "./TextReveal";
+import { InteractiveGrid } from "./InteractiveGrid";
 
 const painPoints = [
   {
@@ -33,22 +33,15 @@ const painPoints = [
 ];
 
 export const Problem = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-
   return (
-    <section ref={sectionRef} id="problem" className="section-padding bg-secondary relative overflow-hidden">
-      {/* Parallax Background Pattern */}
-      <motion.div className="absolute inset-0 opacity-[0.02]" style={{ y: bgY }}>
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
-      </motion.div>
+    <section id="problem" className="section-padding bg-secondary relative overflow-hidden">
+      {/* Interactive Grid Background */}
+      <InteractiveGrid
+        cellSize={40}
+        dotColor="rgba(0,0,0,0.04)"
+        highlightColor="rgba(0,0,0,0.15)"
+        radius={150}
+      />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}

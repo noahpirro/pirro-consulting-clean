@@ -3,6 +3,10 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useState, useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
 import { SplitText } from "./SplitText";
+import { Aurora } from "./Aurora";
+import { FloatingParticles } from "./FloatingParticles";
+import { NoiseTexture } from "./NoiseTexture";
+import { WaveDivider } from "./WaveDivider";
 
 const rotatingWords = ["Wachstum.", "Umsatz.", "Freiheit.", "Effizienz."];
 
@@ -74,33 +78,10 @@ export const Hero = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden bg-foreground text-background">
-      {/* Animated Background Grid */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
-
-      {/* Floating Gradient Orbs */}
-      <motion.div 
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-background/5 rounded-full blur-3xl"
-        animate={{ 
-          x: [0, 50, 0],
-          y: [0, 30, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-background/5 rounded-full blur-3xl"
-        animate={{ 
-          x: [0, -30, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {/* Aurora Background */}
+      <Aurora />
+      <FloatingParticles count={25} color="bg-background/15" />
+      <NoiseTexture opacity={0.04} />
 
       {/* Floating Notification Cards */}
       <div className="absolute right-8 top-32 hidden lg:block">
@@ -277,8 +258,8 @@ export const Hero = () => {
         </motion.div>
       </motion.button>
 
-      {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      {/* Wave Divider */}
+      <WaveDivider position="bottom" fill="hsl(var(--background))" />
     </section>
   );
 };

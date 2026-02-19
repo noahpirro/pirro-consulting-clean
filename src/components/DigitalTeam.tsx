@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
 import { GlowCard } from "./GlowCard";
 import { TextReveal } from "./TextReveal";
+import { NoiseTexture } from "./NoiseTexture";
 import { Bot, Zap, Brain, MessageSquare, BarChart3, Mail, Users } from "lucide-react";
 
 const teamMembers = [
@@ -64,13 +65,8 @@ const teamMembers = [
 export const DigitalTeam = () => {
   return (
     <section className="section-padding bg-secondary relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
-      </div>
+      {/* Background */}
+      <NoiseTexture opacity={0.025} />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}

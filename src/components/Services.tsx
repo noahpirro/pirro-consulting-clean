@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
 import { GlowCard } from "./GlowCard";
 import { TextReveal } from "./TextReveal";
+import { FloatingParticles } from "./FloatingParticles";
+import { NoiseTexture } from "./NoiseTexture";
 
 const services = [
   {
@@ -53,12 +55,8 @@ export const Services = () => {
   return (
     <section id="services" className="section-padding bg-foreground text-background relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
+      <NoiseTexture opacity={0.035} />
+      <FloatingParticles count={20} color="bg-background/10" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}

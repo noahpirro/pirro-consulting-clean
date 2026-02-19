@@ -6,6 +6,7 @@ import { TrustedBy } from "@/components/TrustedBy";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Problem } from "@/components/Problem";
 import { InlineCTA } from "@/components/InlineCTA";
+import { MarqueeBand } from "@/components/MarqueeBand";
 import { Footer } from "@/components/Footer";
 
 // Lazy-load below-fold components
@@ -21,6 +22,7 @@ const About = lazy(() => import("@/components/About").then(m => ({ default: m.Ab
 const DigitalTeam = lazy(() => import("@/components/DigitalTeam").then(m => ({ default: m.DigitalTeam })));
 const FAQ = lazy(() => import("@/components/FAQ").then(m => ({ default: m.FAQ })));
 const CTA = lazy(() => import("@/components/CTA").then(m => ({ default: m.CTA })));
+const BigNumbers = lazy(() => import("@/components/BigNumbers").then(m => ({ default: m.BigNumbers })));
 
 const Index = () => {
   return (
@@ -49,6 +51,11 @@ const Index = () => {
       />
       <Suspense fallback={null}>
         <Solution />
+        <MarqueeBand
+          texts={["Automatisierung", "Digitalisierung", "KI-Lösungen", "Skalierung", "Effizienz"]}
+          speed={25}
+          variant="dark"
+        />
         <Services />
         <InlineCTA
           headline="Bereit, dein Unternehmen zu systematisieren?"
@@ -56,13 +63,14 @@ const Index = () => {
         />
         <AISection />
         <Integrations />
-        <InlineCTA
-          headline="Welche Tools passen zu deinem Business?"
-          buttonText="Jetzt herausfinden"
-          variant="dark"
-        />
+        <BigNumbers />
         <ROICalculator />
         <CaseStudies />
+        <MarqueeBand
+          texts={["10+ Unternehmen", "100+ Automationen", "1.000+ Stunden gespart", "98% Weiterempfehlung"]}
+          speed={30}
+          variant="light"
+        />
         <Testimonials />
         <Process />
         <InlineCTA
