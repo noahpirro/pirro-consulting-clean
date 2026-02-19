@@ -43,6 +43,9 @@ export const ExitIntentPopup = () => {
           {/* Modal */}
           <motion.div
             className="fixed z-[61] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-lg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="exit-popup-title"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -66,7 +69,7 @@ export const ExitIntentPopup = () => {
                   <Zap className="w-7 h-7 text-highlight" />
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">
+                <h3 id="exit-popup-title" className="text-2xl md:text-3xl font-display font-bold mb-3">
                   Warte kurz!
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">

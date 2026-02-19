@@ -150,6 +150,9 @@ export const Kontakt = () => {
                         name="name"
                         type="text"
                         required
+                        minLength={2}
+                        maxLength={100}
+                        autoComplete="name"
                         placeholder="Max Mustermann"
                         className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
                       />
@@ -166,6 +169,8 @@ export const Kontakt = () => {
                         name="email"
                         type="email"
                         required
+                        autoComplete="email"
+                        inputMode="email"
                         placeholder="max@beispiel.de"
                         className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
                       />
@@ -183,6 +188,8 @@ export const Kontakt = () => {
                       id="company"
                       name="company"
                       type="text"
+                      maxLength={150}
+                      autoComplete="organization"
                       placeholder="Mustermann GmbH"
                       className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
                     />
@@ -227,6 +234,8 @@ export const Kontakt = () => {
                       name="message"
                       required
                       rows={5}
+                      minLength={10}
+                      maxLength={2000}
                       placeholder="Erzähl uns kurz, wobei wir dir helfen können..."
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all resize-none"
                     />

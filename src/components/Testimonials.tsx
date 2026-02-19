@@ -141,6 +141,9 @@ export const Testimonials = () => {
         {/* Carousel */}
         <div
           className="max-w-3xl mx-auto relative"
+          role="region"
+          aria-label="Kundenstimmen Karussell"
+          aria-live="polite"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >

@@ -82,7 +82,7 @@ export const CaseStudies = () => {
         </motion.div>
 
         {/* Case Study Content */}
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto" role="region" aria-label="Fallstudien Karussell" aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}

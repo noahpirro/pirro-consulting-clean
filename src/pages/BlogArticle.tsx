@@ -33,7 +33,7 @@ const BlogArticle = () => {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
+            "@type": "BlogPosting",
             headline: article.title,
             description: article.excerpt,
             datePublished: article.date,
