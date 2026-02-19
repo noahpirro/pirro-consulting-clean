@@ -10,6 +10,7 @@ import { WhatsAppWidget } from "./components/WhatsAppWidget";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { SocialProofPopup } from "./components/SocialProofPopup";
 import { AnimatedRoutes } from "./components/AnimatedRoutes";
+import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
 const App = () => (
@@ -25,6 +26,7 @@ const App = () => (
           <CookieConsent />
           <WhatsAppWidget />
           <SocialProofPopup />
+          <ExitIntentPopup />
           <AnimatedRoutes />
         </BrowserRouter>
       </TooltipProvider>

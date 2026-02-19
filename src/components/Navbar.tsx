@@ -147,6 +147,16 @@ export const Navbar = () => {
                 >
                   Blog
                 </Link>
+                <Link
+                  to="/kontakt"
+                  className={`transition-colors font-medium ${
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  Kontakt
+                </Link>
                 <button
                   onClick={() => scrollToSection("faq")}
                   className={`transition-colors font-medium ${
@@ -179,6 +189,16 @@ export const Navbar = () => {
                   }`}
                 >
                   Blog
+                </Link>
+                <Link
+                  to="/kontakt"
+                  className={`transition-colors font-medium ${
+                    scrolled
+                      ? "text-muted-foreground hover:text-foreground"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  Kontakt
                 </Link>
                 <Link
                   to="/#faq"
@@ -333,6 +353,13 @@ export const Navbar = () => {
                     >
                       Blog
                     </Link>
+                    <Link
+                      to="/kontakt"
+                      className="text-left text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Kontakt
+                    </Link>
                     <button
                       onClick={() => scrollToSection("faq")}
                       className="text-left text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
@@ -355,6 +382,13 @@ export const Navbar = () => {
                       onClick={() => setIsOpen(false)}
                     >
                       Blog
+                    </Link>
+                    <Link
+                      to="/kontakt"
+                      className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Kontakt
                     </Link>
                     <Link
                       to="/#faq"
