@@ -9,7 +9,6 @@ import { CookieConsent } from "./components/CookieConsent";
 import { WhatsAppWidget } from "./components/WhatsAppWidget";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { SocialProofPopup } from "./components/SocialProofPopup";
-import { CursorEffect } from "./components/CursorEffect";
 import { AnimatedRoutes } from "./components/AnimatedRoutes";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
@@ -18,7 +17,6 @@ const App = () => (
   <HelmetProvider>
       <TooltipProvider>
         <LoadingScreen />
-        <CursorEffect />
         <Toaster />
         <Sonner />
         <BrowserRouter>

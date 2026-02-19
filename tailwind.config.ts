@@ -80,6 +80,12 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "float-particle": {
+          "0%, 100%": { transform: "translateY(0) translateX(0)", opacity: "0" },
+          "10%": { opacity: "0.4" },
+          "50%": { transform: "translateY(-30px) translateX(15px)", opacity: "0.6" },
+          "90%": { opacity: "0.4" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -87,6 +93,7 @@ export default {
         "fade-in": "fade-in 0.6s ease-out forwards",
         "spin-slow": "spin-slow 4s linear infinite",
         "shimmer": "shimmer 3s ease-in-out infinite",
+        "float-particle": "float-particle 12s ease-in-out infinite",
       },
     },
   },

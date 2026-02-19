@@ -1,23 +1,16 @@
 /**
  * Subtle film grain / noise overlay for premium feel.
+ * Uses a CSS repeating background instead of SVG feTurbulence for GPU performance.
  * Place inside a section with `position: relative` and `overflow: hidden`.
  */
 export const NoiseTexture = ({ opacity = 0.03 }: { opacity?: number }) => (
   <div
     className="pointer-events-none absolute inset-0 z-[1]"
-    style={{ opacity }}
-  >
-    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-      <filter id="noise">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.8"
-          numOctaves="4"
-          stitchTiles="stitch"
-        />
-        <feColorMatrix type="saturate" values="0" />
-      </filter>
-      <rect width="100%" height="100%" filter="url(#noise)" />
-    </svg>
-  </div>
+    style={{
+      opacity,
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+      backgroundRepeat: "repeat",
+      backgroundSize: "256px 256px",
+    }}
+  />
 );
