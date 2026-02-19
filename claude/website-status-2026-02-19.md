@@ -1,7 +1,7 @@
 # Pirro Consulting Website - Projekt-Statusdokument
 
 **Erstellt:** 19. Februar 2026
-**Letzte Aktualisierung:** 19. Februar 2026, Abend
+**Letzte Aktualisierung:** 19. Februar 2026, Session 5 (Abend)
 **Projekt-Pfad:** `/Users/noahpirro/pirro-consulting-clean`
 **Ersteller:** Claude (AI-Assistent) im Auftrag von Noah Pirro
 
@@ -28,7 +28,7 @@ Das bedeutet: Jede Codezeile, jede Optimierung, jede Entscheidung wird auf hoech
 - **Adresse:** Trippstadter Str. 110, 67663 Kaiserslautern
 - **E-Mail:** info@pirroconsulting.de
 - **USt-IdNr.:** DE353674802
-- **Telefon:** NOCH NICHT VORHANDEN - Platzhalter `4915XXX` in 4 Dateien (7 Stellen) - Noah liefert die Nummer
+- **Telefon:** +4915152522522 (WhatsApp + Anruf, in allen Komponenten eingesetzt)
 - **LinkedIn:** https://www.linkedin.com/in/noahpirro
 - **Instagram:** https://www.instagram.com/pirroconsulting
 - **Calendly:** https://calendly.com/pirroconsulting
@@ -42,9 +42,9 @@ Das bedeutet: Jede Codezeile, jede Optimierung, jede Entscheidung wird auf hoech
 ### GitHub Repository
 - **URL:** https://github.com/noahpirro/pirro-consulting-clean.git
 - **Branch:** main (einziger Branch)
-- **Letzter Commit:** `6b71909` - SEO & Accessibility: OG-Tags, Skip-Link, Hash-Navigation, main-content IDs
+- **Letzter Commit:** `4eb5b13` - feat: Marketing & Webdesign auf Recruiting-Niveau, Telefonnummer eingesetzt
 - **Zugang:** HTTPS (kein SSH-Key konfiguriert)
-- **Commits insgesamt:** 9
+- **Commits insgesamt:** 11
 
 ### Hosting / Server
 - **KEIN Hosting konfiguriert** - Es gibt keine Deployment-Pipeline, keinen Server, keine IPs
@@ -215,9 +215,9 @@ pirro-consulting-clean/
 │   │   └── PageTransition.tsx  # Seiten-Uebergang + ScrollToTop + Hash-Scroll
 │   ├── pages/
 │   │   ├── Index.tsx           # Startseite (12 lazy-loaded Below-Fold Sektionen)
-│   │   ├── Recruiting.tsx      # Service: Recruiting (mit Cross-Links)
-│   │   ├── Marketing.tsx       # Service: Marketing (mit Cross-Links)
-│   │   ├── Webdesign.tsx       # Service: Webdesign (mit Cross-Links)
+│   │   ├── Recruiting.tsx      # Service: Recruiting (7 Sektionen, vollstaendig)
+│   │   ├── Marketing.tsx       # Service: Marketing (7 Sektionen, vollstaendig)
+│   │   ├── Webdesign.tsx       # Service: Webdesign (7 Sektionen, vollstaendig)
 │   │   ├── Blog.tsx            # Blog-Uebersicht (Kategorie-Filter, Newsletter)
 │   │   ├── BlogArticle.tsx     # Blog-Artikel Detail (/blog/:slug)
 │   │   ├── Impressum.tsx       # Impressum (§5 TMG, echte Daten)
@@ -347,7 +347,10 @@ vendor-router.js   ~21KB (8KB gzip)  - React Router
 vendor-helmet.js   ~14KB (6KB gzip)  - Helmet
 Integrations.js    ~57KB (35KB gzip) - Tool-Logos Chunk
 articles.js        ~11KB (5KB gzip)  - Blog-Artikel Daten
-+ ~12 weitere lazy-loaded Chunks (je 2-15KB)
+Recruiting.js  ~15KB (4KB gzip)  - Service-Seite
+Marketing.js   ~15KB (4KB gzip)  - Service-Seite
+Webdesign.js   ~14KB (4KB gzip)  - Service-Seite
++ ~10 weitere lazy-loaded Chunks (je 2-11KB)
 ```
 **Total Dist:** ~2.3MB (inklusive Pre-Compressed .gz/.br Dateien)
 **Initial Load (gzip):** ~61KB JS + ~10KB CSS
@@ -387,6 +390,8 @@ articles.js        ~11KB (5KB gzip)  - Blog-Artikel Daten
 ## 11. COMMIT-HISTORIE (KOMPLETT)
 
 ```
+4eb5b13  feat: Marketing & Webdesign auf Recruiting-Niveau, Telefonnummer eingesetzt
+d19a1bc  Status-Dokument komplett aktualisiert, 7 alte Client-PNGs gelöscht
 6b71909  SEO & Accessibility: OG-Tags, Skip-Link, Hash-Navigation, main-content IDs
 597fff7  Cleanup: 33 alte ICO/PNG gelöscht, Sitemap+Blog-URLs, Accessibility, Theme-Farben
 08dd07d  Projekt-Status-Dokument für Kontinuität zwischen Sessions
@@ -501,18 +506,48 @@ articles.js        ~11KB (5KB gzip)  - Blog-Artikel Daten
 - **Blog.tsx**: `import * as React` → sauberer `import { useState }`
 - Projekt-Status-Dokument erstellt und aktualisiert
 
+### Session 5 - Subpages & Telefonnummer (`4eb5b13`) [19. Feb 2026]
+
+**Marketing.tsx auf Recruiting-Niveau gebracht:**
+- Intro-Text bei Stats-Sektion ergaenzt ("Warum Online Marketing?")
+- **Vorteile-Sektion** hinzugefuegt (4 Karten: Kosteneffizient, Transparenz, Massgeschneidert, Zeitersparnis)
+- **Werte-Sektion** hinzugefuegt (dunkler Hintergrund, 3 Karten: Ein Kunde pro Branche, Keine festen Arbeitszeiten, Verbesserungsbesessen)
+- **Erfahrungs-Sektion** hinzugefuegt mit CTA
+- CTA von `bg-foreground` auf `bg-primary text-primary-foreground` geaendert (konsistent mit Recruiting)
+- Hero-Headline mit `<span className="text-primary">` versehen
+
+**Webdesign.tsx auf Recruiting-Niveau gebracht:**
+- **Stats-Sektion** komplett neu (50+ Websites, 100% Responsive, < 3s Ladezeit)
+- **Vorteile-Sektion** hinzugefuegt (4 Karten: Fair & Transparent, Enger Austausch, Ihre Vision, Schnelle Lieferung)
+- **Werte-Sektion** hinzugefuegt (gleiche Struktur wie Recruiting/Marketing)
+- **Erfahrungs-Sektion** hinzugefuegt mit CTA
+- **Styling-Fixes:** `section-padding` → `py-24`, `rounded-lg` → `rounded-2xl`, `text-foreground` → `text-primary` auf CheckCircle, Icon-Styling in Service-Cards konsistent gemacht (wrapper div + strokeWidth)
+- CTA von `bg-foreground` auf `bg-primary text-primary-foreground`
+
+**Telefonnummer eingesetzt (+4915152522522):**
+- `src/components/WhatsAppWidget.tsx` → `wa.me/4915152522522`
+- `src/components/CTA.tsx` → `wa.me/4915152522522`
+- `src/components/FAQ.tsx` → `wa.me/4915152522522`
+- `src/components/Navbar.tsx` (Desktop) → `wa.me/4915152522522` + `tel:+4915152522522`
+- `src/components/Navbar.tsx` (Mobile) → `wa.me/4915152522522` + `tel:+4915152522522`
+- Kein Platzhalter `4915XXX` mehr im gesamten Projekt
+
+**Alle 3 Service-Seiten haben jetzt identische Struktur:**
+1. Hero (mit Benefits + CTA)
+2. Stats (bg-muted/30, 3 Karten mit Intro-Text)
+3. Services (bg-background, 2x2 Grid)
+4. Vorteile (bg-muted/30, 4 Karten)
+5. Werte (bg-foreground, dunkle Sektion, 3 Karten)
+6. Erfahrung (bg-muted/30, mit CTA)
+7. CTA (bg-primary)
+8. Weitere Leistungen (bg-secondary, Cross-Links)
+
 ---
 
 ## 13. OFFENE PUNKTE / TODOS
 
-### KRITISCH - Sofort machen wenn Info vorliegt
-1. **Telefonnummer ersetzen** - Platzhalter `4915XXX` in 4 Dateien, 7 Stellen:
-   - `src/components/WhatsAppWidget.tsx` (Zeile 22: WhatsApp-URL)
-   - `src/components/CTA.tsx` (Zeile 113: WhatsApp-Link)
-   - `src/components/Navbar.tsx` (Zeilen 202, 215: WhatsApp + tel: Desktop)
-   - `src/components/Navbar.tsx` (Zeilen 376, 385: WhatsApp + tel: Mobile)
-   - `src/components/FAQ.tsx` (Zeile 109: WhatsApp-Link)
-   - **Noah muss die echte Telefonnummer mitteilen**
+### KRITISCH
+1. ~~**Telefonnummer ersetzen**~~ - ERLEDIGT (Session 5, +4915152522522 in allen 7 Stellen eingesetzt)
 
 2. **Hosting / Deployment einrichten**
    - Domain pirro-consulting.de muss auf Hosting zeigen
@@ -530,13 +565,12 @@ articles.js        ~11KB (5KB gzip)  - Blog-Artikel Daten
 ### NICE TO HAVE
 6. **Blog Pagination** - Bei mehr als ~9 Artikeln noetig
 7. **Echte Testimonial-Avatare** - Aktuell Initialen-Kreise mit Gradient-Hintergrund
-8. **Service-Seiten Pricing** - Preissektionen fehlen auf Recruiting/Marketing/Webdesign
-9. **Kontaktformular** - Aktuell nur Calendly-Link, kein eigenes Formular auf der Seite
-10. **Analytics einbinden** - Google Analytics 4 oder Plausible (Privacy-freundlich, kein Cookie-Consent noetig)
-11. **Performance Monitoring** - Lighthouse CI in GitHub Actions, Web Vitals Tracking
-12. **E2E Tests** - Playwright fuer kritische User Flows (Navigation, CTA-Clicks, Blog-Filter)
-13. **@tanstack/react-query entfernen** - Wird aktuell nicht genutzt. Kann entfernt werden wenn kein Backend kommt.
-14. **Echte Blog-Bilder** - Aktuell Platzhalter mit Nummern, keine Artikelbilder
+8. **Kontaktformular** - Aktuell nur Calendly-Link, kein eigenes Formular auf der Seite
+9. **Analytics einbinden** - Google Analytics 4 oder Plausible (Privacy-freundlich, kein Cookie-Consent noetig)
+10. **Performance Monitoring** - Lighthouse CI in GitHub Actions, Web Vitals Tracking
+11. **E2E Tests** - Playwright fuer kritische User Flows (Navigation, CTA-Clicks, Blog-Filter)
+12. **@tanstack/react-query entfernen** - Wird aktuell nicht genutzt. Kann entfernt werden wenn kein Backend kommt.
+13. **Echte Blog-Bilder** - Aktuell Platzhalter mit Nummern, keine Artikelbilder
 
 ---
 
@@ -570,7 +604,7 @@ articles.js        ~11KB (5KB gzip)  - Blog-Artikel Daten
 | Impressum-Daten | `src/pages/Impressum.tsx` |
 | Datenschutz-Text | `src/pages/Datenschutz.tsx` |
 | Cookie Banner | `src/components/CookieConsent.tsx` + `src/hooks/use-cookie-consent.ts` |
-| Telefonnummer (Platzhalter) | WhatsAppWidget, CTA, Navbar, FAQ (suche nach `4915XXX`) |
+| Telefonnummer | WhatsAppWidget, CTA, Navbar, FAQ (suche nach `4915152522522`) |
 | Sitemap | `public/sitemap.xml` |
 | Robots | `public/robots.txt` |
 
@@ -605,21 +639,19 @@ git push origin main
 
 ---
 
-## 17. TELEFONNUMMER-PLATZHALTER - SCHNELLE ANLEITUNG
+## 17. TELEFONNUMMER - ALLE STELLEN
 
-Wenn Noah die Telefonnummer liefert (z.B. `491761234567`), muessen folgende Stellen aktualisiert werden:
+Telefonnummer `+4915152522522` ist in folgenden Dateien eingesetzt:
 
 ```
-src/components/WhatsAppWidget.tsx:22  → wa.me/491761234567
-src/components/CTA.tsx:113           → wa.me/491761234567
-src/components/Navbar.tsx:202        → wa.me/491761234567
-src/components/Navbar.tsx:215        → tel:+491761234567
-src/components/Navbar.tsx:376        → wa.me/491761234567
-src/components/Navbar.tsx:385        → tel:+491761234567
-src/components/FAQ.tsx:109           → wa.me/491761234567
+src/components/WhatsAppWidget.tsx  → wa.me/4915152522522
+src/components/CTA.tsx             → wa.me/4915152522522
+src/components/FAQ.tsx             → wa.me/4915152522522
+src/components/Navbar.tsx (Desktop)→ wa.me/4915152522522 + tel:+4915152522522
+src/components/Navbar.tsx (Mobile) → wa.me/4915152522522 + tel:+4915152522522
 ```
 
-Zusaetzlich sollte die Nummer auch in `index.html` im JSON-LD Schema als `telephone` Property hinzugefuegt werden.
+**Noch offen:** Nummer auch in `index.html` im JSON-LD Schema als `telephone` Property hinzufuegen.
 
 ---
 
