@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, memo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight, ShoppingCart, Megaphone, GraduationCap, Monitor } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 
@@ -10,6 +10,8 @@ const testimonials = [
     role: "Geschäftsführer",
     company: "E-Commerce Agentur",
     initials: "MS",
+    avatarGradient: "from-blue-500 to-cyan-400",
+    icon: ShoppingCart,
     quote: "Durch Pirro Consulting sparen wir jeden Monat über 40 Stunden manuelle Arbeit. Die Automatisierung unseres Onboardings war ein Game-Changer.",
     rating: 5,
     result: "40+ Stunden/Monat gespart",
@@ -19,6 +21,8 @@ const testimonials = [
     role: "Head of Operations",
     company: "Marketing Agentur",
     initials: "SW",
+    avatarGradient: "from-violet-500 to-purple-400",
+    icon: Megaphone,
     quote: "Endlich keine Excel-Listen mehr! Unser CRM läuft jetzt vollautomatisch und wir haben den Überblick über jeden Lead.",
     rating: 5,
     result: "300% mehr Leads verarbeitet",
@@ -28,6 +32,8 @@ const testimonials = [
     role: "Inhaber",
     company: "Coaching-Unternehmen",
     initials: "TK",
+    avatarGradient: "from-amber-500 to-orange-400",
+    icon: GraduationCap,
     quote: "Die Zusammenarbeit war professionell und zielorientiert. Innerhalb von 4 Wochen hatten wir ein komplett automatisiertes Fulfillment.",
     rating: 5,
     result: "4 Wochen bis zur Umsetzung",
@@ -37,6 +43,8 @@ const testimonials = [
     role: "Marketing Managerin",
     company: "IT-Dienstleister",
     initials: "LH",
+    avatarGradient: "from-emerald-500 to-teal-400",
+    icon: Monitor,
     quote: "Wir konnten unser Team um 2 Personen verkleinern und machen trotzdem mehr Umsatz. Die Investition hat sich 10-fach rentiert.",
     rating: 5,
     result: "10x ROI in 6 Monaten",
@@ -92,7 +100,6 @@ export const Testimonials = () => {
     setCurrent(index);
   };
 
-  // Autoplay
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(next, 5000);
@@ -100,6 +107,7 @@ export const Testimonials = () => {
   }, [isPaused, next]);
 
   const t = testimonials[current];
+  const Icon = t.icon;
   const averageRating = (
     testimonials.reduce((acc, t) => acc + t.rating, 0) / testimonials.length
   ).toFixed(1);
@@ -109,12 +117,7 @@ export const Testimonials = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <AnimatedSection className="text-center mb-16">
-          <motion.div
-            className="inline-flex items-center gap-3 px-6 py-3 bg-highlight/10 rounded-full mb-8 border border-highlight/20"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-highlight/10 rounded-full mb-8 border border-highlight/20">
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-5 h-5 fill-highlight text-highlight" />
@@ -123,7 +126,7 @@ export const Testimonials = () => {
             <span className="font-semibold text-highlight">
               {averageRating} von 5 Sternen
             </span>
-          </motion.div>
+          </div>
 
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
             <TextReveal text="Was unsere" />{" "}
@@ -187,49 +190,53 @@ export const Testimonials = () => {
 
                 {/* Author */}
                 <footer className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-base font-bold text-primary">
+                  <div className={`relative w-14 h-14 rounded-full bg-gradient-to-br ${t.avatarGradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                    <span className="text-base font-bold text-white">
                       {t.initials}
                     </span>
                   </div>
-                  <div>
-                    <cite className="not-italic font-semibold text-foreground text-lg">
+                  <div className="flex-1 min-w-0">
+                    <cite className="not-italic font-semibold text-foreground text-lg block">
                       {t.name}
                     </cite>
                     <p className="text-sm text-muted-foreground">
                       {t.role}, {t.company}
                     </p>
                   </div>
+                  <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full">
+                    <Icon className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground font-medium">{t.company}</span>
+                  </div>
                 </footer>
               </motion.article>
             </AnimatePresence>
           </div>
 
-          {/* Dots */}
-          <div className="flex items-center justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
+          {/* Avatar Preview Strip + Dots */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            {testimonials.map((person, index) => (
               <button
                 key={index}
                 onClick={() => goTo(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === current
-                    ? "w-8 bg-foreground"
-                    : "w-2 bg-foreground/20 hover:bg-foreground/40"
+                className={`group relative transition-all duration-300 ${
+                  index === current ? "scale-110" : "opacity-60 hover:opacity-100"
                 }`}
-                aria-label={`Testimonial ${index + 1}`}
-              />
+                aria-label={`Testimonial von ${person.name}`}
+              >
+                <div
+                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${person.avatarGradient} flex items-center justify-center transition-shadow duration-300 ${
+                    index === current ? "ring-2 ring-foreground ring-offset-2 ring-offset-background" : ""
+                  }`}
+                >
+                  <span className="text-xs font-bold text-white">{person.initials}</span>
+                </div>
+              </button>
             ))}
           </div>
         </div>
 
         {/* Trust Indicators */}
-        <motion.div
-          className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-        >
+        <div className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16 text-center">
           <div>
             <p className="text-3xl md:text-4xl font-bold text-foreground">10+</p>
             <p className="text-sm text-muted-foreground">Zufriedene Kunden</p>
@@ -246,7 +253,7 @@ export const Testimonials = () => {
             <p className="text-3xl md:text-4xl font-bold text-foreground">98%</p>
             <p className="text-sm text-muted-foreground">Weiterempfehlung</p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

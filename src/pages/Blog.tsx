@@ -1,17 +1,28 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { ArrowRight, Clock, Tag, BookOpen } from "lucide-react";
+import { ArrowRight, Clock, Tag, BookOpen, Search, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { toast } from "sonner";
 import { articles, categories } from "@/data/articles";
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("Alle");
-  const filtered = activeCategory === "Alle" ? articles : articles.filter((a) => a.category === activeCategory);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    let result = activeCategory === "Alle" ? articles : articles.filter((a) => a.category === activeCategory);
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (a) => a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q) || a.category.toLowerCase().includes(q)
+      );
+    }
+    return result;
+  }, [activeCategory, searchQuery]);
+
   const featured = filtered.find((a) => a.featured);
   const rest = filtered.filter((a) => !a.featured);
 
@@ -86,23 +97,46 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Categories */}
+      {/* Search + Categories */}
       <section className="py-8 border-b border-border sticky top-20 bg-background/95 backdrop-blur-md z-30">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                  cat === activeCategory
-                    ? "bg-foreground text-background"
-                    : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            {/* Search */}
+            <div className="relative w-full sm:w-64 flex-shrink-0">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Artikel suchen..."
+                className="w-full h-10 pl-9 pr-9 rounded-full bg-secondary border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label="Suche leeren"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+            {/* Categories */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+                    cat === activeCategory
+                      ? "bg-foreground text-background"
+                      : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -113,10 +147,8 @@ const Blog = () => {
           <div className="container mx-auto px-4">
             <AnimatedSection>
               <Link to={`/blog/${featured.slug}`} className="block">
-              <motion.article
-                className="group relative grid md:grid-cols-2 gap-8 bg-card border border-border rounded-2xl overflow-hidden cursor-pointer"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
+              <article
+                className="group relative grid md:grid-cols-2 gap-8 bg-card border border-border rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-1 transition-transform duration-300"
               >
                 {/* Image */}
                 <div className="aspect-[16/10] md:aspect-auto bg-foreground relative overflow-hidden">
@@ -157,9 +189,22 @@ const Blog = () => {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
-              </motion.article>
+              </article>
               </Link>
             </AnimatedSection>
+          </div>
+        </section>
+      )}
+
+      {/* No Results */}
+      {!featured && rest.length === 0 && (
+        <section className="py-20">
+          <div className="container mx-auto px-4 text-center">
+            <Search className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+            <p className="text-lg font-medium text-muted-foreground mb-2">Keine Artikel gefunden</p>
+            <p className="text-sm text-muted-foreground/60">
+              Versuche einen anderen Suchbegriff oder wähle eine andere Kategorie.
+            </p>
           </div>
         </section>
       )}
@@ -171,10 +216,8 @@ const Blog = () => {
             {rest.map((article, index) => (
               <AnimatedSection key={article.slug} delay={index * 0.1}>
                 <Link to={`/blog/${article.slug}`} className="block h-full">
-                <motion.article
-                  className="group bg-card border border-border rounded-2xl overflow-hidden h-full cursor-pointer"
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
+                <article
+                  className="group bg-card border border-border rounded-2xl overflow-hidden h-full cursor-pointer hover:-translate-y-1.5 transition-transform duration-300"
                 >
                   {/* Image */}
                   <div className="aspect-[16/9] bg-secondary relative overflow-hidden group-hover:bg-secondary/80 transition-colors">
@@ -210,7 +253,7 @@ const Blog = () => {
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
-                </motion.article>
+                </article>
                 </Link>
               </AnimatedSection>
             ))}
@@ -249,15 +292,13 @@ const Blog = () => {
                 placeholder="deine@email.de"
                 className="flex-1 h-12 px-4 rounded-lg bg-background/10 border border-background/20 text-background placeholder:text-background/40 focus:outline-none focus:border-background/40 transition-colors"
               />
-              <motion.button
+              <button
                 type="submit"
-                className="h-12 px-6 bg-highlight text-white rounded-lg font-medium hover:bg-highlight/90 transition-colors flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                className="h-12 px-6 bg-highlight text-white rounded-lg font-medium hover:bg-highlight/90 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
               >
                 Abonnieren
                 <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              </button>
             </form>
             <p className="text-xs text-background/40 mt-4">
               Jederzeit abbestellbar. Deine Daten sind sicher.
