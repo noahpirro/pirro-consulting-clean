@@ -228,9 +228,6 @@ export const Hero = () => {
               </a>
             </motion.div>
           </MagneticButton>
-          <p className="text-background/40 text-sm">
-            Unverbindlich & kostenlos · 30 Minuten · Ergebnisse in 4 Wochen
-          </p>
         </motion.div>
       </motion.div>
 
