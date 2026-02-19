@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ArrowRight, BarChart3, Megaphone, Target, TrendingUp, CheckCircle } from "lucide-react";
+import { ArrowRight, BarChart3, Megaphone, Target, TrendingUp, CheckCircle, Crown, Clock, Heart, Award, BadgePercent, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -14,7 +14,7 @@ const benefits = [
 
 const stats = [
   { value: "8+", label: "Jahre Online Marketing Erfahrung" },
-  { value: "1 Mio €", label: "Werbebudget verwaltet" },
+  { value: "1 Mio \u20AC", label: "Werbebudget verwaltet" },
   { value: "1.500+", label: "Kampagnen" },
 ];
 
@@ -22,12 +22,12 @@ const services = [
   {
     icon: Target,
     title: "Performance Marketing",
-    description: "Datengetriebene Werbekampagnen auf Meta, Google & LinkedIn. Wir optimieren kontinuierlich für maximalen ROI.",
+    description: "Datengetriebene Werbekampagnen auf Meta, Google & LinkedIn. Wir optimieren kontinuierlich f\u00FCr maximalen ROI.",
   },
   {
     icon: Megaphone,
     title: "Social Media Marketing",
-    description: "Strategische Präsenz auf den relevanten Plattformen. Content, der Aufmerksamkeit erregt und Vertrauen aufbaut.",
+    description: "Strategische Pr\u00E4senz auf den relevanten Plattformen. Content, der Aufmerksamkeit erregt und Vertrauen aufbaut.",
   },
   {
     icon: TrendingUp,
@@ -37,7 +37,48 @@ const services = [
   {
     icon: BarChart3,
     title: "Marketing Automatisierung",
-    description: "E-Mail-Sequenzen, Retargeting und CRM-Integration. Dein Marketing läuft auch, wenn du schläfst.",
+    description: "E-Mail-Sequenzen, Retargeting und CRM-Integration. Dein Marketing l\u00E4uft auch, wenn du schl\u00E4fst.",
+  },
+];
+
+const advantages = [
+  {
+    icon: BadgePercent,
+    title: "Kosteneffizient",
+    description: "Wir sind im Durchschnitt 40-60% g\u00FCnstiger als klassische Agenturen. Dazu optimieren wir Ihre Werbebudgets kontinuierlich f\u00FCr maximalen ROI.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Transparenz",
+    description: "W\u00F6chentliche Reports und offene Kommunikation. Sie wissen immer, wie Ihre Kampagnen performen und wohin Ihr Budget flie\u00DFt.",
+  },
+  {
+    icon: Crown,
+    title: "Ma\u00DFgeschneidert",
+    description: "Keine Standardl\u00F6sungen von der Stange. Jede Strategie wird individuell auf Ihr Unternehmen, Ihre Zielgruppe und Ihre Ziele zugeschnitten.",
+  },
+  {
+    icon: Clock,
+    title: "Zeitersparnis",
+    description: "Wir \u00FCbernehmen die komplette Marketing-Strategie \u2013 von der Planung \u00FCber die Umsetzung bis zur Optimierung. Sie k\u00F6nnen sich auf Ihr Kerngesch\u00E4ft konzentrieren.",
+  },
+];
+
+const values = [
+  {
+    icon: Award,
+    title: "Ein Kunde, pro Branche, pro Region",
+    description: "Um unseren Kunden die bestm\u00F6glichen Ergebnisse zu liefern, betreuen wir nicht mehrere Kunden in \u00E4hnlichen Branchen. So vermeiden wir Interessenkonflikte und sichern Ihnen exklusive Strategien.",
+  },
+  {
+    icon: Clock,
+    title: "Keine bestimmten Arbeitszeiten",
+    description: "Wir haben keine festen Arbeitszeiten. Die Marketing-Welt schl\u00E4ft nie \u2013 und wir sind bereit, an Feiertagen und Wochenenden alles f\u00FCr die bestm\u00F6glichen Ergebnisse zu tun.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Verbesserungsbesessen",
+    description: "Wir sind nie zufrieden mit dem Status Quo. Kontinuierliche Optimierung und A/B-Testing unserer Kampagnen ist unser Antrieb \u2013 f\u00FCr immer bessere Ergebnisse.",
   },
 ];
 
@@ -94,15 +135,15 @@ const Marketing = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
               Mehr Kunden.
               <br />
-              Weniger Aufwand.
+              <span className="text-primary">Weniger Aufwand.</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              Wir entwickeln und betreuen deine Marketing-Kampagnen – von der Strategie bis zur Umsetzung.
+              Wir entwickeln und betreuen deine Marketing-Kampagnen &ndash; von der Strategie bis zur Umsetzung.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               {benefits.map((benefit, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   className="flex items-center gap-2"
                   initial={{ opacity: 0, y: 20 }}
@@ -142,11 +183,14 @@ const Marketing = () => {
           <div className="max-w-4xl mx-auto">
             <AnimatedSection className="text-center mb-16">
               <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-                Unsere Erfahrung
+                Warum Online Marketing?
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-                Zahlen, die <span className="text-primary">überzeugen</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
+                Ergebnisse, die <span className="text-primary">&uuml;berzeugen</span>
               </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Online Marketing ist der effektivste Weg, neue Kunden zu gewinnen. Mit datengetriebenen Strategien und automatisierten Prozessen erreichen wir Ihre Zielgruppe genau dort, wo sie sich aufh&auml;lt &ndash; und verwandeln Interessenten in zahlende Kunden.
+              </p>
             </AnimatedSection>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -195,15 +239,117 @@ const Marketing = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Advantages */}
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <AnimatedSection className="text-center mb-16">
+            <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+              Ihre Vorteile
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
+              Warum <span className="text-primary">Pirro Consulting</span>?
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {advantages.map((advantage, index) => (
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <motion.div
+                  className="p-6 bg-card border border-border rounded-2xl h-full text-center"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <advantage.icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg font-display font-bold mb-2">{advantage.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{advantage.description}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
       <section className="py-24 bg-foreground text-background">
+        <div className="container mx-auto px-4">
+          <AnimatedSection className="text-center mb-16">
+            <Heart className="w-12 h-12 mx-auto mb-6 text-primary" />
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
+              Unsere Werte
+            </h2>
+            <p className="text-background/70 max-w-2xl mx-auto">
+              Wir legen sehr gro&szlig;en Wert auf unsere Werte aber auch die Werte unserer Kunden. Um eine ideale Zusammenarbeit zu garantieren, glauben wir, dass beide Seiten sich mit den Werten voneinander identifizieren m&uuml;ssen.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {values.map((value, index) => (
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <motion.div
+                  className="p-8 bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl h-full"
+                  whileHover={{ y: -5, backgroundColor: "rgba(255,255,255,0.1)" }}
+                >
+                  <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center mb-4">
+                    <value.icon className="w-6 h-6" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-display font-bold mb-3">{value.title}</h3>
+                  <p className="text-background/70 leading-relaxed">{value.description}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section className="py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <AnimatedSection>
+              <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+                Unsere Erfahrung
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
+                Jahrelange Erfahrung, <span className="text-primary">messbare Erfolge</span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12">
+                Mit &uuml;ber 8 Jahren Erfahrung im Online Marketing und mehr als 1.500 betreuten Kampagnen wissen wir genau, was funktioniert &ndash; und was nicht. Jede Strategie basiert auf echten Daten und bew&auml;hrten Methoden.
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.2}>
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <a
+                  href="https://calendly.com/pirroconsulting"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group"
+                >
+                  Kostenloses Erstgespr&auml;ch vereinbaren
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </motion.div>
+              <p className="text-sm text-muted-foreground mt-4">
+                Kostenlos und unverbindlich &ndash; um festzustellen, ob wir der richtige Partner f&uuml;r Ihr Marketing sind.
+              </p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-              Bereit für mehr Neukunden?
+              Bereit f&uuml;r mehr Neukunden?
             </h2>
-            <p className="text-background/70 max-w-xl mx-auto mb-8">
-              Lass uns gemeinsam herausfinden, wie wir dein Marketing auf das nächste Level bringen können.
+            <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
+              Lass uns gemeinsam herausfinden, wie wir dein Marketing auf das n&auml;chste Level bringen k&ouml;nnen.
             </p>
             <motion.div
               whileHover={{ scale: 1.03 }}
@@ -213,9 +359,9 @@ const Marketing = () => {
                 href="https://calendly.com/pirroconsulting"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center bg-background text-foreground hover:bg-background/90 h-14 px-8 rounded-md font-medium group"
+                className="inline-flex items-center h-14 px-8 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md font-medium group"
               >
-                Jetzt Gespräch vereinbaren
+                Jetzt Gespr&auml;ch vereinbaren
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
             </motion.div>
@@ -233,7 +379,7 @@ const Marketing = () => {
             <Link to="/recruiting" className="group">
               <motion.div className="p-6 bg-card border border-border rounded-2xl h-full" whileHover={{ y: -4 }}>
                 <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors">Recruiting & Mitarbeitergewinnung</h3>
-                <p className="text-sm text-muted-foreground">Social Recruiting und Active Sourcing – qualifizierte Bewerber in kürzester Zeit.</p>
+                <p className="text-sm text-muted-foreground">Social Recruiting und Active Sourcing &ndash; qualifizierte Bewerber in k&uuml;rzester Zeit.</p>
               </motion.div>
             </Link>
             <Link to="/webdesign" className="group">

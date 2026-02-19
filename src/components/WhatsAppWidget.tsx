@@ -19,7 +19,7 @@ export const WhatsAppWidget = () => {
     return () => clearTimeout(timer);
   }, [visible]);
 
-  const whatsappUrl = "https://wa.me/4915XXX?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Potenzialanalyse.";
+  const whatsappUrl = "https://wa.me/4915152522522?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Potenzialanalyse.";
 
   return (
     <AnimatePresence>

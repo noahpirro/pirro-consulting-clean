@@ -199,7 +199,7 @@ export const Navbar = () => {
           {/* Desktop Contact & CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="https://wa.me/4915XXX"
+              href="https://wa.me/4915152522522"
               target="_blank"
               rel="noopener noreferrer nofollow"
               className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
@@ -212,7 +212,7 @@ export const Navbar = () => {
               <span className="hidden lg:inline">WhatsApp</span>
             </a>
             <a
-              href="tel:+4915XXX"
+              href="tel:+4915152522522"
               className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
                 scrolled
                   ? "text-muted-foreground hover:text-foreground"
@@ -373,7 +373,7 @@ export const Navbar = () => {
 
                 <div className="flex items-center gap-4 mt-4">
                   <a
-                    href="https://wa.me/4915XXX"
+                    href="https://wa.me/4915152522522"
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                     className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors py-2"
@@ -382,7 +382,7 @@ export const Navbar = () => {
                     WhatsApp
                   </a>
                   <a
-                    href="tel:+4915XXX"
+                    href="tel:+4915152522522"
                     className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors py-2"
                   >
                     <Phone className="w-5 h-5" />

@@ -110,7 +110,7 @@ export const CTA = () => {
 
           {/* Secondary Option */}
           <a
-            href="https://wa.me/4915XXX"
+            href="https://wa.me/4915152522522"
             target="_blank"
             rel="noopener noreferrer nofollow"
             className="text-background/50 hover:text-background/80 transition-colors text-sm"
