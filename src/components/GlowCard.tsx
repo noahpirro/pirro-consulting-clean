@@ -63,10 +63,10 @@ export const GlowCard = ({
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
         style={{ background }}
       />
-      {/* Animated gradient border */}
+      {/* Static gradient border */}
       <div className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0 overflow-hidden">
         <div
-          className="absolute inset-0 animate-spin-slow"
+          className="absolute inset-0"
           style={{
             background: `conic-gradient(from 0deg, transparent, ${glowColor}, transparent, ${glowColor}, transparent)`,
           }}

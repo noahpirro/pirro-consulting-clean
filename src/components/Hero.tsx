@@ -228,15 +228,26 @@ export const Hero = () => {
               </a>
             </motion.div>
           </MagneticButton>
-          <div className="flex items-center gap-4 text-background/50 text-sm">
-            <span className="flex items-center gap-1">
-              <Star className="w-3 h-3 fill-highlight text-highlight" />
-              <Star className="w-3 h-3 fill-highlight text-highlight" />
-              <Star className="w-3 h-3 fill-highlight text-highlight" />
-              <Star className="w-3 h-3 fill-highlight text-highlight" />
-              <Star className="w-3 h-3 fill-highlight text-highlight" />
-            </span>
-            <span>5/5 von 10+ Unternehmen</span>
+          <div className="flex items-center gap-6 text-background/50 text-sm">
+            <a
+              href="https://www.trustpilot.com/review/pirro-consulting.de"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="flex items-center gap-2 hover:text-background/70 transition-colors"
+            >
+              <span className="flex items-center gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="w-4 h-4 bg-[#00b67a] flex items-center justify-center">
+                    <Star className="w-3 h-3 fill-white text-white" />
+                  </span>
+                ))}
+              </span>
+              <span>5/5 auf Trustpilot</span>
+            </a>
+            <span className="hidden sm:inline text-background/30">|</span>
+            <a href="#testimonials" className="hidden sm:inline hover:text-background/70 transition-colors">
+              Kundenstimmen ansehen →
+            </a>
           </div>
         </motion.div>
       </motion.div>

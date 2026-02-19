@@ -3,14 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
 const proofItems = [
-  { name: "Max", city: "München", action: "hat eine Potenzialanalyse gebucht" },
-  { name: "Julia", city: "Hamburg", action: "hat ihr CRM automatisiert" },
-  { name: "Stefan", city: "Berlin", action: "hat eine Potenzialanalyse gebucht" },
-  { name: "Anna", city: "Frankfurt", action: "hat 30+ Stunden/Monat gespart" },
-  { name: "Tobias", city: "Köln", action: "hat sein Onboarding automatisiert" },
-  { name: "Lena", city: "Stuttgart", action: "hat eine Potenzialanalyse gebucht" },
-  { name: "Markus", city: "Düsseldorf", action: "hat seinen Vertrieb digitalisiert" },
-  { name: "Sandra", city: "Wien", action: "hat eine Potenzialanalyse gebucht" },
+  { company: "Mustermann GmbH", action: "hat einen neuen Mitarbeiter geonboarded" },
+  { company: "Schmidt & Partner", action: "hat 12 Follow-ups automatisch versendet" },
+  { company: "Weber Consulting", action: "hat ihr CRM-System automatisiert" },
+  { company: "Fischer Handwerk", action: "hat 3 Rechnungen automatisch erstellt" },
+  { company: "Braun Digital", action: "hat Lead-Qualifizierung automatisiert" },
+  { company: "König & Söhne", action: "hat Kunden-Onboarding digitalisiert" },
+  { company: "Meyer Marketing", action: "hat Reporting-Dashboard eingerichtet" },
+  { company: "Hoffmann Logistik", action: "hat Auftragseingang automatisiert" },
+  { company: "Becker IT Services", action: "hat KI-Chatbot für Support aktiviert" },
+  { company: "Schulz Immobilien", action: "hat Exposé-Versand automatisiert" },
 ];
 
 const timeAgoOptions = [
@@ -36,12 +38,10 @@ export const SocialProofPopup = () => {
   }, []);
 
   useEffect(() => {
-    // Erste Anzeige nach 8 Sekunden
-    const initialTimer = setTimeout(showNext, 8000);
-    // Danach alle 15-25 Sekunden
-    const interval = setInterval(() => {
-      showNext();
-    }, 15000 + Math.random() * 10000);
+    // Erste Anzeige nach 10 Sekunden
+    const initialTimer = setTimeout(showNext, 10000);
+    // Danach alle 30 Sekunden
+    const interval = setInterval(showNext, 30000);
 
     return () => {
       clearTimeout(initialTimer);
@@ -71,7 +71,7 @@ export const SocialProofPopup = () => {
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-medium text-foreground leading-snug">
-                  {current.name} aus {current.city}
+                  {current.company}
                 </p>
                 <p className="text-xs text-muted-foreground mt-0.5">
                   {current.action}
