@@ -10,6 +10,7 @@ const serviceLinks = [
 ];
 
 const legalLinks = [
+  { label: "Kontakt", href: "/kontakt" },
   { label: "Blog", href: "/blog" },
   { label: "Impressum", href: "/impressum" },
   { label: "Datenschutz", href: "/datenschutz" },

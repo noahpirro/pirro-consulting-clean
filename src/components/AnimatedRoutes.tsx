@@ -11,6 +11,7 @@ const Impressum = lazy(() => import("../pages/Impressum"));
 const Datenschutz = lazy(() => import("../pages/Datenschutz"));
 const Blog = lazy(() => import("../pages/Blog"));
 const BlogArticle = lazy(() => import("../pages/BlogArticle"));
+const Kontakt = lazy(() => import("../pages/Kontakt"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 export const AnimatedRoutes = () => {
@@ -28,6 +29,7 @@ export const AnimatedRoutes = () => {
           <Route path="/datenschutz" element={<PageTransition><Datenschutz /></PageTransition>} />
           <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
           <Route path="/blog/:slug" element={<PageTransition><BlogArticle /></PageTransition>} />
+          <Route path="/kontakt" element={<PageTransition><Kontakt /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>
       </Suspense>
