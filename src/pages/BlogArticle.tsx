@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { articles } from "@/data/articles";
@@ -74,12 +73,7 @@ const BlogArticle = () => {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            className="max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="max-w-3xl mx-auto animate-fade-in">
             <Link
               to="/blog"
               className="inline-flex items-center gap-2 text-sm text-background/60 hover:text-background transition-colors mb-8"
@@ -103,19 +97,14 @@ const BlogArticle = () => {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold leading-tight">
               {article.title}
             </h1>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Article Content */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <motion.div
-            className="max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
+          <div className="max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: "150ms" }}>
             <div className="prose prose-lg max-w-none">
               {article.content.map((paragraph, i) => (
                 <p
@@ -147,7 +136,7 @@ const BlogArticle = () => {
                 </a>
               </div>
             </AnimatedSection>
-          </motion.div>
+          </div>
         </div>
       </section>
 

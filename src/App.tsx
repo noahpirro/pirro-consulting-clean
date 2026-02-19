@@ -11,6 +11,7 @@ import { LoadingScreen } from "./components/LoadingScreen";
 import { SocialProofPopup } from "./components/SocialProofPopup";
 import { AnimatedRoutes } from "./components/AnimatedRoutes";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
+import { StickyMobileCTA } from "./components/StickyMobileCTA";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
 const App = () => (
@@ -27,6 +28,7 @@ const App = () => (
           <WhatsAppWidget />
           <SocialProofPopup />
           <ExitIntentPopup />
+          <StickyMobileCTA />
           <AnimatedRoutes />
         </BrowserRouter>
       </TooltipProvider>

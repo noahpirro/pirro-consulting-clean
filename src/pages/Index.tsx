@@ -8,6 +8,7 @@ import { Problem } from "@/components/Problem";
 import { InlineCTA } from "@/components/InlineCTA";
 import { MarqueeBand } from "@/components/MarqueeBand";
 import { Footer } from "@/components/Footer";
+import { ToolsLogos } from "@/components/ToolsLogos";
 
 // Lazy-load below-fold components
 const Solution = lazy(() => import("@/components/Solution").then(m => ({ default: m.Solution })));
@@ -63,6 +64,7 @@ const Index = () => {
         />
         <AISection />
         <Integrations />
+        <ToolsLogos />
         <BigNumbers />
         <ROICalculator />
         <CaseStudies />

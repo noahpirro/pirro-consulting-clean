@@ -1,8 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { motion } from "framer-motion";
-
 const Impressum = () => {
   return (
     <main id="main-content" className="min-h-screen bg-background">
@@ -15,22 +13,13 @@ const Impressum = () => {
 
       <section className="pt-28 pb-24 px-4">
         <div className="container mx-auto max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-12">
               Impressum
             </h1>
-          </motion.div>
+          </div>
 
-          <motion.div
-            className="prose prose-lg max-w-none text-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
+          <div className="prose prose-lg max-w-none text-foreground animate-fade-in" style={{ animationDelay: "100ms" }}>
             {/* Angaben gemäß § 5 TMG */}
             <h2 className="text-2xl font-display font-bold mt-10 mb-4">
               Angaben gemäß § 5 TMG
@@ -139,7 +128,7 @@ const Impressum = () => {
               Rechtsverletzungen werden wir derartige Inhalte umgehend
               entfernen.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 

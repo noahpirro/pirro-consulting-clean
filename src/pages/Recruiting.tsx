@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ArrowRight, Users, Target, Zap, CheckCircle, UserCheck, MessageSquare, Crown, Clock, Heart, TrendingUp, Award, BadgePercent } from "lucide-react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { TextReveal } from "@/components/TextReveal";
@@ -125,12 +124,7 @@ const Recruiting = () => {
       {/* Hero */}
       <section className="min-h-screen flex items-center pt-20 px-4">
         <div className="container mx-auto max-w-4xl">
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <div className="text-center animate-fade-in">
             <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-6">
               Recruiting & Personalgewinnung
             </p>
@@ -145,37 +139,25 @@ const Recruiting = () => {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               {benefits.map((benefit, index) => (
-                <motion.div 
-                  key={index}
-                  className="flex items-center gap-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                >
+                <div key={index} className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-primary" />
                   <span className="text-sm font-medium">{benefit}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <div>
               <a
                 href="https://calendly.com/pirroconsulting"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group"
+                className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform"
               >
                 Kostenloses Erstgespräch sichern
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -199,13 +181,10 @@ const Recruiting = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {stats.map((stat, index) => (
                 <AnimatedSection key={index} delay={index * 0.1}>
-                  <motion.div
-                    className="flex flex-col items-center justify-center text-center p-8 bg-card border border-border rounded-2xl h-40"
-                    whileHover={{ y: -5 }}
-                  >
+                  <div className="flex flex-col items-center justify-center text-center p-8 bg-card border border-border rounded-2xl h-40 hover:-translate-y-1 transition-transform">
                     <p className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</p>
                     <p className="text-muted-foreground text-center">{stat.label}</p>
-                  </motion.div>
+                  </div>
                 </AnimatedSection>
               ))}
             </div>
@@ -255,16 +234,13 @@ const Recruiting = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {advantages.map((advantage, index) => (
               <AnimatedSection key={index} delay={index * 0.1}>
-                <motion.div
-                  className="p-6 bg-card border border-border rounded-2xl h-full text-center"
-                  whileHover={{ y: -5 }}
-                >
+                <div className="p-6 bg-card border border-border rounded-2xl h-full text-center hover:-translate-y-1 transition-transform">
                   <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <advantage.icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-lg font-display font-bold mb-2">{advantage.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{advantage.description}</p>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>
@@ -287,16 +263,13 @@ const Recruiting = () => {
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {values.map((value, index) => (
               <AnimatedSection key={index} delay={index * 0.1}>
-                <motion.div
-                  className="p-8 bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl h-full"
-                  whileHover={{ y: -5, backgroundColor: "rgba(255,255,255,0.1)" }}
-                >
+                <div className="p-8 bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl h-full hover:-translate-y-1 hover:bg-white/10 transition-all">
                   <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center mb-4">
                     <value.icon className="w-6 h-6" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-xl font-display font-bold mb-3">{value.title}</h3>
                   <p className="text-background/70 leading-relaxed">{value.description}</p>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>
@@ -320,20 +293,17 @@ const Recruiting = () => {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
+              <div>
                 <a
                   href="https://calendly.com/pirroconsulting"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group"
+                  className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform"
                 >
                   Kostenloses Erstgespräch vereinbaren
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
-              </motion.div>
+              </div>
               <p className="text-sm text-muted-foreground mt-4">
                 Kostenlos und unverbindlich – um festzustellen, ob Sie sich mit unseren Werten und Strategien identifizieren können.
               </p>
@@ -352,20 +322,17 @@ const Recruiting = () => {
             <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
               Lass uns gemeinsam herausfinden, wie wir dein Recruiting auf das nächste Level bringen können.
             </p>
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <div>
               <a
                 href="https://calendly.com/pirroconsulting"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center h-14 px-8 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md font-medium group"
+                className="inline-flex items-center h-14 px-8 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md font-medium group hover:scale-[1.03] active:scale-[0.98] transition-transform"
               >
                 Jetzt Gespräch vereinbaren
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
-            </motion.div>
+            </div>
           </AnimatedSection>
         </div>
       </section>
@@ -378,16 +345,16 @@ const Recruiting = () => {
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             <Link to="/marketing" className="group">
-              <motion.div className="p-6 bg-card border border-border rounded-2xl h-full" whileHover={{ y: -4 }}>
+              <div className="p-6 bg-card border border-border rounded-2xl h-full hover:-translate-y-1 transition-transform">
                 <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors">Marketing & Neukundengewinnung</h3>
                 <p className="text-sm text-muted-foreground">Datengetriebene Kampagnen und automatisierte Lead-Generierung für nachhaltiges Wachstum.</p>
-              </motion.div>
+              </div>
             </Link>
             <Link to="/webdesign" className="group">
-              <motion.div className="p-6 bg-card border border-border rounded-2xl h-full" whileHover={{ y: -4 }}>
+              <div className="p-6 bg-card border border-border rounded-2xl h-full hover:-translate-y-1 transition-transform">
                 <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors">Webdesign & Entwicklung</h3>
                 <p className="text-sm text-muted-foreground">Conversion-optimierte Websites und Landing Pages, die Besucher zu Kunden machen.</p>
-              </motion.div>
+              </div>
             </Link>
           </div>
         </div>
