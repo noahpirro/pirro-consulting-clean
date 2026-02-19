@@ -1,6 +1,7 @@
 import { Search, FileText, Rocket, GraduationCap, Route } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
+import { TextReveal } from "./TextReveal";
 
 const steps = [
   {
@@ -48,7 +49,7 @@ export const Process = () => {
             <span className="text-sm text-foreground/60">Der Ablauf</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold">
-            So läuft eine Zusammenarbeit ab
+            <TextReveal text="So läuft eine Zusammenarbeit ab" />
           </h2>
         </AnimatedSection>
 

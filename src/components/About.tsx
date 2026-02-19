@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
+import { TextReveal } from "./TextReveal";
 import { User, Quote, Play, Linkedin } from "lucide-react";
 
 export const About = () => {
@@ -83,9 +84,9 @@ export const About = () => {
                 <span className="text-sm text-foreground/60">Über mich</span>
               </div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold">
-                Wer steckt hinter
+                <TextReveal text="Wer steckt hinter" />
                 <br />
-                Pirro Consulting?
+                <TextReveal text="Pirro Consulting?" delay={0.15} />
               </h2>
             </AnimatedSection>
 

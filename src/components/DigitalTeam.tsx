@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
+import { GlowCard } from "./GlowCard";
+import { TextReveal } from "./TextReveal";
 import { Bot, Zap, Brain, MessageSquare, BarChart3, Mail, Users } from "lucide-react";
 
 const teamMembers = [
@@ -78,7 +80,8 @@ export const DigitalTeam = () => {
             <span className="text-sm text-foreground/60">Mein digitales Team</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            Ein Team aus <span className="text-highlight">KI-Spezialisten</span>
+            <TextReveal text="Ein Team aus" />{" "}
+            <span className="text-highlight"><TextReveal text="KI-Spezialisten" delay={0.12} /></span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Statt ein großes Team einzustellen, setze ich auf spezialisierte KI-Systeme –
@@ -90,6 +93,7 @@ export const DigitalTeam = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {teamMembers.map((member, index) => (
             <AnimatedSection key={index} delay={index * 0.1}>
+              <GlowCard glowColor="rgba(0,0,0,0.05)" tiltStrength={5}>
               <motion.div
                 className={`relative p-6 bg-background border ${member.borderColor} rounded-xl h-full group cursor-default overflow-hidden`}
                 whileHover={{
@@ -135,6 +139,7 @@ export const DigitalTeam = () => {
                   ))}
                 </div>
               </motion.div>
+              </GlowCard>
             </AnimatedSection>
           ))}
         </div>

@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
+import { TextReveal } from "./TextReveal";
 import { HelpCircle, MessageCircle } from "lucide-react";
 
 const faqs = [
@@ -62,7 +63,7 @@ export const FAQ = () => {
             FAQ
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            Häufig gestellte Fragen
+            <TextReveal text="Häufig gestellte Fragen" />
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Alles, was du wissen musst – bevor wir loslegen.

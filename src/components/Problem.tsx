@@ -2,6 +2,8 @@ import { Clock, FolderSearch, Hourglass, AlertTriangle } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { AnimatedSection } from "./AnimatedSection";
+import { GlowCard } from "./GlowCard";
+import { TextReveal } from "./TextReveal";
 
 const painPoints = [
   {
@@ -56,7 +58,7 @@ export const Problem = () => {
             <span className="text-sm text-foreground/60">Das Kernproblem</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold">
-            Kommt dir das bekannt vor?
+            <TextReveal text="Kommt dir das bekannt vor?" />
           </h2>
         </AnimatedSection>
 
@@ -64,9 +66,10 @@ export const Problem = () => {
         <div className="grid md:grid-cols-3 gap-6 mb-16">
           {painPoints.map((point, index) => (
             <AnimatedSection key={index} delay={index * 0.15}>
+              <GlowCard glowColor="rgba(239,68,68,0.08)" tiltStrength={5}>
               <motion.div
                 className="relative p-8 bg-background border border-border rounded-xl h-full group cursor-default overflow-hidden"
-                whileHover={{ 
+                whileHover={{
                   y: -8,
                   boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)"
                 }}
@@ -103,6 +106,7 @@ export const Problem = () => {
                   className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </motion.div>
+              </GlowCard>
             </AnimatedSection>
           ))}
         </div>

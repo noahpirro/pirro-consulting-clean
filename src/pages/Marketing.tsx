@@ -5,6 +5,8 @@ import { ArrowRight, BarChart3, Megaphone, Target, TrendingUp, CheckCircle, Crow
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { TextReveal } from "@/components/TextReveal";
+import { GlowCard } from "@/components/GlowCard";
 
 const benefits = [
   "Mehr qualifizierte Leads",
@@ -133,9 +135,9 @@ const Marketing = () => {
               Marketing & Neukundengewinnung
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-6">
-              Mehr Kunden.
+              <TextReveal text="Mehr Kunden." delay={0.2} />
               <br />
-              <span className="text-primary">Weniger Aufwand.</span>
+              <span className="text-primary"><TextReveal text="Weniger Aufwand." delay={0.4} /></span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
               Wir entwickeln und betreuen deine Marketing-Kampagnen &ndash; von der Strategie bis zur Umsetzung.
@@ -222,17 +224,15 @@ const Marketing = () => {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {services.map((service, index) => (
               <AnimatedSection key={index} delay={index * 0.1}>
-                <motion.div
-                  className="p-8 bg-card border border-border rounded-2xl h-full"
-                  whileHover={{ y: -8, boxShadow: "0 20px 40px -20px rgba(0,0,0,0.1)" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                    <service.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                <GlowCard glowColor="rgba(0,0,0,0.06)" tiltStrength={5}>
+                  <div className="p-8 bg-card border border-border rounded-2xl h-full">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                      <service.icon className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-xl font-display font-bold mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{service.description}</p>
                   </div>
-                  <h3 className="text-xl font-display font-bold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-                </motion.div>
+                </GlowCard>
               </AnimatedSection>
             ))}
           </div>

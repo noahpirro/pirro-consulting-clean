@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
+import { GlowCard } from "./GlowCard";
+import { TextReveal } from "./TextReveal";
 import { Lightbulb, ArrowRight } from "lucide-react";
 
 const solutions = [
@@ -34,9 +36,9 @@ export const Solution = () => {
             <span className="text-sm text-foreground/60">Die Lösung</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6">
-            Dein Unternehmen als
+            <TextReveal text="Dein Unternehmen als" />
             <br />
-            funktionierendes System
+            <TextReveal text="funktionierendes System" delay={0.2} />
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Wir bauen dir ein digitales Fundament, das mitwächst. Keine isolierten Quick-Fixes, sondern ein durchdachtes System.
@@ -47,12 +49,7 @@ export const Solution = () => {
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {solutions.map((solution, index) => (
             <AnimatedSection key={index} delay={index * 0.15}>
-              <motion.div 
-                className="relative group"
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Card */}
+              <GlowCard glowColor="rgba(0,0,0,0.06)" tiltStrength={5}>
                 <div className="relative bg-secondary border border-border rounded-2xl p-8 h-full overflow-hidden">
                   {/* Number */}
                   <motion.span 
@@ -81,7 +78,7 @@ export const Solution = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </GlowCard>
             </AnimatedSection>
           ))}
         </div>

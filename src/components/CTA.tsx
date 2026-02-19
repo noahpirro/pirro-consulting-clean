@@ -1,6 +1,7 @@
 import { ArrowRight, Calendar, Sparkles, Shield, Clock, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { MagneticButton } from "./MagneticButton";
+import { TextReveal } from "./TextReveal";
 
 export const CTA = () => {
   return (
@@ -56,11 +57,11 @@ export const CTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Bereit für weniger Chaos
+          <TextReveal text="Bereit für weniger Chaos" />
           <br />
-          und{" "}
+          <TextReveal text="und" delay={0.2} />{" "}
           <span className="relative inline-block">
-            <span className="text-highlight">mehr Wachstum?</span>
+            <span className="text-highlight"><TextReveal text="mehr Wachstum?" delay={0.25} /></span>
             <motion.span
               className="absolute -bottom-2 left-0 right-0 h-1 bg-highlight/40 rounded-full"
               initial={{ scaleX: 0 }}

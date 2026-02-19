@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
+import { TextReveal } from "./TextReveal";
 
 const testimonials = [
   {
@@ -125,7 +126,9 @@ export const Testimonials = () => {
           </motion.div>
 
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Was unsere <span className="text-primary">Kunden</span> sagen
+            <TextReveal text="Was unsere" />{" "}
+            <span className="text-primary"><TextReveal text="Kunden" delay={0.12} /></span>{" "}
+            <TextReveal text="sagen" delay={0.16} />
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Echte Ergebnisse von echten Unternehmern, die mit uns ihre Prozesse automatisiert haben.

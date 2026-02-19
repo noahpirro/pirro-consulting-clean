@@ -1,7 +1,8 @@
 import { ArrowRight, Check, ChevronDown, Bell, Star, Shield } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
+import { SplitText } from "./SplitText";
 
 const rotatingWords = ["Wachstum.", "Umsatz.", "Freiheit.", "Effizienz."];
 
@@ -48,6 +49,14 @@ const itemVariants = {
 
 export const Hero = () => {
   const [wordIndex, setWordIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
+  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,7 +73,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden bg-foreground text-background">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden bg-foreground text-background">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
@@ -116,11 +125,12 @@ export const Hero = () => {
         ))}
       </div>
 
-      <motion.div 
+      <motion.div
         className="container mx-auto max-w-4xl text-center relative z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
       >
         {/* Badge */}
         <motion.div
@@ -144,10 +154,10 @@ export const Hero = () => {
           className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight mb-4"
           variants={itemVariants}
         >
-          <span className="inline-block">Weniger Chaos.</span>
+          <SplitText text="Weniger Chaos." type="words" stagger={0.04} delay={0.3} />
           <br />
           <span className="inline-block">
-            Mehr{" "}
+            <SplitText text="Mehr" type="words" stagger={0.04} delay={0.6} />{" "}
             <span className="relative inline-block text-highlight">
               <AnimatePresence mode="wait">
                 <motion.span

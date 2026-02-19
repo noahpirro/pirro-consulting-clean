@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
+import { TextReveal } from "./TextReveal";
 import { Bot, Zap, BarChart3, Target, Sparkles, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -213,8 +214,8 @@ export const AISection = () => {
             <span className="text-sm font-medium">KI-gestützte Prozesse</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 md:mb-6 max-w-3xl mx-auto">
-            Intelligente Automatisierung
-            <span className="block text-muted-foreground">für Ihr Unternehmen</span>
+            <TextReveal text="Intelligente Automatisierung" />
+            <span className="block text-muted-foreground"><TextReveal text="für Ihr Unternehmen" delay={0.2} /></span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
             Unsere KI-Lösungen analysieren, personalisieren und automatisieren – 

@@ -1,6 +1,8 @@
 import { TrendingUp, UserPlus, Kanban, FileText, Bot, Link, Briefcase, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
+import { GlowCard } from "./GlowCard";
+import { TextReveal } from "./TextReveal";
 
 const services = [
   {
@@ -66,7 +68,7 @@ export const Services = () => {
             <span className="text-sm text-background/60">Unsere Leistungen</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold">
-            Was wir für dich umsetzen
+            <TextReveal text="Was wir für dich umsetzen" />
           </h2>
         </AnimatedSection>
 
@@ -74,63 +76,60 @@ export const Services = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <AnimatedSection key={index} delay={index * 0.1}>
-              <motion.div
-                className="group relative bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl p-6 h-full cursor-default overflow-hidden"
-                whileHover={{ 
-                  borderColor: "rgba(255,255,255,0.3)",
-                  y: -4,
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Gradient Background on Hover */}
-                <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                />
-                
-                <div className="relative z-10">
-                  {/* Icon & Arrow */}
-                  <div className="flex items-start justify-between mb-4">
-                    <motion.div 
-                      className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center"
-                      whileHover={{ scale: 1.1, rotate: -5 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <service.icon className="w-6 h-6" strokeWidth={1.5} />
-                    </motion.div>
-                    <motion.div
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
-                      whileHover={{ scale: 1.2 }}
-                    >
-                      <ArrowUpRight className="w-5 h-5 text-background/50" />
-                    </motion.div>
-                  </div>
+              <GlowCard glowColor="rgba(255,255,255,0.08)" tiltStrength={6}>
+                <div
+                  className="group relative bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl p-6 h-full cursor-default overflow-hidden"
+                >
+                  {/* Gradient Background on Hover */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  />
 
-                  {/* Title & Subtitle */}
-                  <h3 className="text-lg font-display font-bold mb-1">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-background/60 mb-4">
-                    {service.subtitle}
-                  </p>
-
-                  {/* Features */}
-                  <ul className="space-y-2">
-                    {service.features.map((feature, i) => (
-                      <motion.li 
-                        key={i} 
-                        className="flex items-center gap-2 text-sm text-background/70"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 + i * 0.05 + 0.3 }}
+                  <div className="relative z-10">
+                    {/* Icon & Arrow */}
+                    <div className="flex items-start justify-between mb-4">
+                      <motion.div
+                        className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center"
+                        whileHover={{ scale: 1.1, rotate: -5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-background/40 flex-shrink-0" />
-                        {feature}
-                      </motion.li>
-                    ))}
-                  </ul>
+                        <service.icon className="w-6 h-6" strokeWidth={1.5} />
+                      </motion.div>
+                      <motion.div
+                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                        whileHover={{ scale: 1.2 }}
+                      >
+                        <ArrowUpRight className="w-5 h-5 text-background/50" />
+                      </motion.div>
+                    </div>
+
+                    {/* Title & Subtitle */}
+                    <h3 className="text-lg font-display font-bold mb-1">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-background/60 mb-4">
+                      {service.subtitle}
+                    </p>
+
+                    {/* Features */}
+                    <ul className="space-y-2">
+                      {service.features.map((feature, i) => (
+                        <motion.li
+                          key={i}
+                          className="flex items-center gap-2 text-sm text-background/70"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.1 + i * 0.05 + 0.3 }}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-background/40 flex-shrink-0" />
+                          {feature}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </motion.div>
+              </GlowCard>
             </AnimatedSection>
           ))}
         </div>
