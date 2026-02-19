@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 import { NoiseTexture } from "./NoiseTexture";
-import { User, Quote, Play, Linkedin } from "lucide-react";
+import { User, Quote, Linkedin } from "lucide-react";
 
 export const About = () => {
   return (
@@ -14,62 +13,33 @@ export const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image Side */}
           <AnimatedSection direction="right">
-            <motion.div
-              className="relative"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-            >
-              {/* Main Image Placeholder */}
+            <div className="relative">
+              {/* Main Image */}
               <div className="aspect-[4/5] bg-foreground rounded-2xl relative overflow-hidden">
                 {/* Decorative Elements */}
-                <motion.div
-                  className="absolute top-8 right-8 w-24 h-24 border border-background/20 rounded-full"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                  className="absolute bottom-12 left-12 w-16 h-16 bg-background/10 rounded-xl"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                />
+                <div className="absolute top-8 right-8 w-24 h-24 border border-background/20 rounded-full animate-[spin_20s_linear_infinite]" />
+                <div className="absolute bottom-12 left-12 w-16 h-16 bg-background/10 rounded-xl" />
 
-                {/* Placeholder Content - Replace with actual photo */}
+                {/* Placeholder – replace with <img> when photo is ready */}
                 <div className="absolute inset-0 flex items-center justify-center text-background">
                   <div className="text-center p-8">
-                    <motion.div
-                      className="w-32 h-32 mx-auto mb-4 rounded-full bg-background/20 flex items-center justify-center"
-                      whileHover={{ scale: 1.1 }}
-                    >
+                    <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-background/20 flex items-center justify-center">
                       <User className="w-16 h-16 text-background/40" />
-                    </motion.div>
-                    <p className="text-background/60 text-sm">Professionelles Portrait</p>
+                    </div>
+                    <p className="text-background/60 text-sm font-display font-medium">Noah Pirro</p>
+                    <p className="text-background/40 text-xs mt-1">Gründer & Berater</p>
                   </div>
                 </div>
-
-                {/* Video Play Button Overlay */}
-                <motion.div
-                  className="absolute bottom-6 right-6 w-14 h-14 bg-highlight rounded-full flex items-center justify-center cursor-pointer shadow-lg"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Play className="w-6 h-6 text-white ml-1" fill="white" />
-                </motion.div>
               </div>
 
               {/* Floating Quote Card */}
-              <motion.div
-                className="absolute -bottom-6 -right-6 lg:-right-12 bg-background border border-border rounded-2xl p-6 shadow-xl max-w-xs"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-              >
+              <div className="absolute -bottom-6 -right-6 lg:-right-12 bg-background border border-border rounded-2xl p-6 shadow-xl max-w-xs">
                 <Quote className="w-8 h-8 text-foreground/20 mb-3" />
                 <p className="text-sm text-muted-foreground italic">
                   "Ich empfehle nur, was ich selbst nutze und was nachweislich funktioniert."
                 </p>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </AnimatedSection>
 
           {/* Text Content */}
@@ -119,18 +89,13 @@ export const About = () => {
 
             <AnimatedSection delay={0.3}>
               <div className="flex flex-wrap gap-3 pt-2">
-                {["Marketing", "Recruiting", "Automatisierung", "KI", "CRM", "Prozessoptimierung"].map((tag, index) => (
-                  <motion.span
+                {["Marketing", "Recruiting", "Automatisierung", "KI", "CRM", "Prozessoptimierung"].map((tag) => (
+                  <span
                     key={tag}
                     className="px-4 py-2 bg-foreground text-background rounded-full text-sm font-medium"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
                   >
                     {tag}
-                  </motion.span>
+                  </span>
                 ))}
               </div>
             </AnimatedSection>

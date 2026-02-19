@@ -80,7 +80,7 @@ export const Hero = () => {
     <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden bg-foreground text-background">
       {/* Aurora Background */}
       <Aurora />
-      <FloatingParticles count={25} color="bg-background/15" />
+      <FloatingParticles count={25} color="rgba(255,255,255,0.15)" />
       <NoiseTexture opacity={0.04} />
 
       {/* Floating Notification Cards */}

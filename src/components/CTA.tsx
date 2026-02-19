@@ -11,7 +11,7 @@ export const CTA = () => {
     <section className="py-28 md:py-36 bg-foreground text-background relative overflow-hidden">
       {/* Background Effects */}
       <Aurora />
-      <FloatingParticles count={20} color="bg-background/10" />
+      <FloatingParticles count={20} color="rgba(255,255,255,0.1)" />
       <NoiseTexture opacity={0.035} />
 
       <div className="container mx-auto px-4 text-center relative z-10">

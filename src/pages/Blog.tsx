@@ -118,17 +118,11 @@ const Blog = () => {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Image Placeholder */}
+                {/* Image */}
                 <div className="aspect-[16/10] md:aspect-auto bg-foreground relative overflow-hidden">
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-highlight/20 to-transparent"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.5 }}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-highlight/20 to-transparent group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-6xl font-display font-bold text-background/10">
-                      01
-                    </span>
+                    <BookOpen className="w-16 h-16 text-background/10" />
                   </div>
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-highlight text-white text-xs font-medium rounded-full">
@@ -182,12 +176,10 @@ const Blog = () => {
                   whileHover={{ y: -6 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {/* Image Placeholder */}
-                  <div className="aspect-[16/9] bg-secondary relative overflow-hidden">
+                  {/* Image */}
+                  <div className="aspect-[16/9] bg-secondary relative overflow-hidden group-hover:bg-secondary/80 transition-colors">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-5xl font-display font-bold text-foreground/5">
-                        {String(index + 2).padStart(2, "0")}
-                      </span>
+                      <BookOpen className="w-10 h-10 text-foreground/5" />
                     </div>
                     <div className="absolute top-3 left-3">
                       <span className="px-2.5 py-1 bg-background/90 backdrop-blur-sm text-xs font-medium rounded-full">

@@ -214,29 +214,11 @@ const Datenschutz = () => {
               8. Analyse-Tools und Tracking
             </h2>
 
-            <h3 className="text-xl font-display font-semibold mt-8 mb-3">
-              Google Analytics
-            </h3>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              [Dieser Abschnitt ist ein Platzhalter. Falls Google Analytics
-              oder ein anderes Tracking-Tool eingesetzt wird, muss dieser
-              Abschnitt entsprechend angepasst werden.]
-            </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Diese Website benutzt ggf. Google Analytics, einen
-              Webanalysedienst der Google LLC. Google Analytics verwendet
-              sog. „Cookies", Textdateien, die auf Ihrem Computer
-              gespeichert werden und die eine Analyse der Benutzung der
-              Website durch Sie ermöglichen. Die durch den Cookie erzeugten
-              Informationen über Ihre Benutzung dieser Website werden in der
-              Regel an einen Server von Google in den USA übertragen und dort
-              gespeichert. Im Falle der Aktivierung der IP-Anonymisierung
-              auf dieser Website wird Ihre IP-Adresse von Google jedoch
-              innerhalb von Mitgliedstaaten der Europäischen Union oder in
-              anderen Vertragsstaaten des Abkommens über den Europäischen
-              Wirtschaftsraum zuvor gekürzt. Sie können die Speicherung der
-              Cookies durch eine entsprechende Einstellung Ihrer
-              Browser-Software verhindern.
+              Diese Website verwendet derzeit keine externen
+              Analyse- oder Tracking-Tools. Sollte sich dies in Zukunft
+              ändern, wird dieser Abschnitt entsprechend aktualisiert und
+              Sie werden über unseren Cookie-Hinweis informiert.
             </p>
 
             {/* 9. Aktualität und Änderung */}

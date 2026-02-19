@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowRight, Linkedin, Instagram } from "lucide-react";
 import logo from "@/assets/logo.webp";
 
@@ -25,7 +24,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-4">
-              <img src={logo} alt="Pirro Consulting" width={120} height={32} className="h-8 w-auto brightness-0 invert" />
+              <img src={logo} alt="Pirro Consulting" width={120} height={32} className="h-8 w-auto brightness-0 invert" loading="lazy" />
             </Link>
             <p className="text-background/60 text-sm leading-relaxed mb-6">
               Automatisierung & Digitalisierung für Unternehmer. Weniger Chaos, mehr Wachstum.
@@ -98,17 +97,15 @@ export const Footer = () => {
             <p className="text-background/60 text-sm mb-4">
               Kostenlose Potenzialanalyse für dein Unternehmen.
             </p>
-            <motion.a
+            <a
               href="https://calendly.com/pirroconsulting"
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-background text-foreground rounded-lg text-sm font-medium hover:bg-background/90 transition-colors"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-background text-foreground rounded-lg text-sm font-medium hover:bg-background/90 hover:scale-[1.03] active:scale-[0.98] transition-all"
             >
               Erstgespräch buchen
               <ArrowRight className="w-4 h-4" />
-            </motion.a>
+            </a>
           </div>
         </div>
       </div>

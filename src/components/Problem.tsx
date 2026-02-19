@@ -1,5 +1,4 @@
 import { Clock, FolderSearch, Hourglass, AlertTriangle } from "lucide-react";
-import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
 import { GlowCard } from "./GlowCard";
 import { TextReveal } from "./TextReveal";
@@ -60,27 +59,18 @@ export const Problem = () => {
           {painPoints.map((point, index) => (
             <AnimatedSection key={index} delay={index * 0.15}>
               <GlowCard glowColor="rgba(239,68,68,0.08)" tiltStrength={5}>
-              <motion.div
-                className="relative p-8 bg-background border border-border rounded-xl h-full group cursor-default overflow-hidden"
-                whileHover={{
-                  y: -8,
-                  boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)"
-                }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+              <div
+                className="relative p-8 bg-background border border-border rounded-xl h-full group cursor-default overflow-hidden hover:-translate-y-2 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] transition-all duration-300"
               >
                 {/* Number Background */}
                 <span className="absolute top-4 right-4 text-8xl font-display font-bold text-foreground/[0.03] select-none">
                   {point.number}
                 </span>
 
-                <motion.div 
-                  className="w-14 h-14 rounded-xl bg-foreground/5 flex items-center justify-center mb-6 relative z-10"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
+                <div className="w-14 h-14 rounded-xl bg-foreground/5 flex items-center justify-center mb-6 relative z-10 hover:scale-110 hover:rotate-[5deg] transition-transform">
                   <point.icon className="w-7 h-7 text-foreground" strokeWidth={1.5} />
-                </motion.div>
-                
+                </div>
+
                 <h3 className="text-lg font-display font-bold mb-4 leading-tight relative z-10">
                   {point.title}
                 </h3>
@@ -95,10 +85,8 @@ export const Problem = () => {
                 </div>
 
                 {/* Hover Gradient */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-              </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
               </GlowCard>
             </AnimatedSection>
           ))}
@@ -106,17 +94,13 @@ export const Problem = () => {
 
         {/* Transition Statement */}
         <AnimatedSection className="max-w-3xl mx-auto" delay={0.3}>
-          <motion.div 
-            className="relative bg-foreground text-background p-8 md:p-12 rounded-2xl text-center"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="relative bg-foreground text-background p-8 md:p-12 rounded-2xl text-center hover:scale-[1.02] transition-transform duration-300">
             <p className="text-xl md:text-2xl font-display font-bold leading-relaxed">
               Das Problem ist nicht fehlendes Engagement.
               <br />
               <span className="text-background/70">Das Problem ist ein fehlendes System.</span>
             </p>
-          </motion.div>
+          </div>
         </AnimatedSection>
       </div>
     </section>

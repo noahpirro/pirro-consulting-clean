@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
 import { GlowCard } from "./GlowCard";
 import { TextReveal } from "./TextReveal";
@@ -90,13 +89,8 @@ export const DigitalTeam = () => {
           {teamMembers.map((member, index) => (
             <AnimatedSection key={index} delay={index * 0.1}>
               <GlowCard glowColor="rgba(0,0,0,0.05)" tiltStrength={5}>
-              <motion.div
-                className={`relative p-6 bg-background border ${member.borderColor} rounded-xl h-full group cursor-default overflow-hidden`}
-                whileHover={{
-                  y: -6,
-                  boxShadow: "0 20px 40px -12px rgba(0,0,0,0.1)"
-                }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+              <div
+                className={`relative p-6 bg-background border ${member.borderColor} rounded-xl h-full group cursor-default overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] transition-all duration-300`}
               >
                 {/* Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${member.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
@@ -108,13 +102,9 @@ export const DigitalTeam = () => {
                 </div>
 
                 {/* Icon */}
-                <motion.div
-                  className="w-14 h-14 rounded-xl bg-foreground/5 flex items-center justify-center mb-4 relative z-10"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
+                <div className="w-14 h-14 rounded-xl bg-foreground/5 flex items-center justify-center mb-4 relative z-10 hover:scale-110 hover:rotate-[5deg] transition-transform">
                   <member.icon className="w-7 h-7 text-foreground" strokeWidth={1.5} />
-                </motion.div>
+                </div>
 
                 {/* Content */}
                 <h3 className="text-lg font-display font-bold mb-1 relative z-10">{member.name}</h3>
@@ -134,7 +124,7 @@ export const DigitalTeam = () => {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
               </GlowCard>
             </AnimatedSection>
           ))}

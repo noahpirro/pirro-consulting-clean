@@ -1,5 +1,4 @@
 import { TrendingUp, UserPlus, Kanban, FileText, Bot, Link, Briefcase, ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
 import { GlowCard } from "./GlowCard";
 import { TextReveal } from "./TextReveal";
@@ -56,7 +55,7 @@ export const Services = () => {
     <section id="services" className="section-padding bg-foreground text-background relative overflow-hidden">
       {/* Background Elements */}
       <NoiseTexture opacity={0.035} />
-      <FloatingParticles count={20} color="bg-background/10" />
+      <FloatingParticles count={20} color="rgba(255,255,255,0.1)" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -86,19 +85,12 @@ export const Services = () => {
                   <div className="relative z-10">
                     {/* Icon & Arrow */}
                     <div className="flex items-start justify-between mb-4">
-                      <motion.div
-                        className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center"
-                        whileHover={{ scale: 1.1, rotate: -5 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                      >
+                      <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center hover:scale-110 hover:-rotate-[5deg] transition-transform">
                         <service.icon className="w-6 h-6" strokeWidth={1.5} />
-                      </motion.div>
-                      <motion.div
-                        className="opacity-0 group-hover:opacity-100 transition-opacity"
-                        whileHover={{ scale: 1.2 }}
-                      >
+                      </div>
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                         <ArrowUpRight className="w-5 h-5 text-background/50" />
-                      </motion.div>
+                      </div>
                     </div>
 
                     {/* Title & Subtitle */}
@@ -112,17 +104,13 @@ export const Services = () => {
                     {/* Features */}
                     <ul className="space-y-2">
                       {service.features.map((feature, i) => (
-                        <motion.li
+                        <li
                           key={i}
                           className="flex items-center gap-2 text-sm text-background/70"
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.1 + i * 0.05 + 0.3 }}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-background/40 flex-shrink-0" />
                           {feature}
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </div>

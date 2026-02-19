@@ -62,14 +62,12 @@ export const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center">
-            <motion.img 
+            <img
               src={logo}
               alt="Pirro Consulting"
               width={120}
               height={32}
-              className={`h-8 w-auto transition-all duration-300 ${!scrolled ? "brightness-0 invert" : ""}`}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              className={`h-8 w-auto transition-all duration-300 hover:scale-105 ${!scrolled ? "brightness-0 invert" : ""}`}
             />
           </Link>
 
@@ -222,21 +220,18 @@ export const Navbar = () => {
               <Phone className="w-4 h-4" />
               <span className="hidden lg:inline">Anrufen</span>
             </a>
-            <motion.a
+            <a
               href="https://calendly.com/pirroconsulting"
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+              className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] ${
                 scrolled
                   ? "bg-primary text-primary-foreground hover:bg-primary/90"
                   : "bg-background text-foreground hover:bg-background/90"
               }`}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               Potenzialanalyse sichern
-            </motion.a>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
