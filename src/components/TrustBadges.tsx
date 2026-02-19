@@ -1,112 +1,122 @@
-import { motion } from "framer-motion";
 import { AnimatedSection } from "./AnimatedSection";
-import { Award, Shield, Star, ExternalLink } from "lucide-react";
+import { Award, Shield, Star, ExternalLink, Quote } from "lucide-react";
 
-const badges = [
+const testimonialPreviews = [
   {
-    icon: Shield,
-    title: "DSGVO-konform",
-    description: "Alle Prozesse datenschutzkonform",
-    gradient: "from-blue-500/10 to-blue-600/5",
-    iconColor: "text-blue-600",
-    borderColor: "border-blue-200",
+    quote: "Über 40 Stunden manuelle Arbeit pro Monat gespart.",
+    name: "Michael S.",
+    role: "Geschäftsführer, E-Commerce Agentur",
   },
   {
-    icon: null,
-    title: "Trustpilot",
-    description: "Bewertungen ansehen",
-    gradient: "from-emerald-500/10 to-emerald-600/5",
-    iconColor: "text-emerald-600",
-    borderColor: "border-emerald-200",
-    isTrustpilot: true,
+    quote: "Unser CRM läuft jetzt vollautomatisch.",
+    name: "Sarah W.",
+    role: "Head of Operations, Marketing Agentur",
   },
   {
-    icon: Award,
-    title: "10+ Projekte",
-    description: "Erfolgreich umgesetzt",
-    gradient: "from-purple-500/10 to-purple-600/5",
-    iconColor: "text-purple-600",
-    borderColor: "border-purple-200",
+    quote: "Innerhalb von 4 Wochen komplett automatisiertes Fulfillment.",
+    name: "Thomas K.",
+    role: "Inhaber, Coaching-Unternehmen",
   },
 ];
-
-const TrustpilotStars = () => (
-  <div className="flex gap-0.5 mb-1">
-    {[...Array(5)].map((_, i) => (
-      <div key={i} className="w-6 h-6 bg-[#00b67a] flex items-center justify-center">
-        <Star className="w-3.5 h-3.5 text-white fill-white" />
-      </div>
-    ))}
-  </div>
-);
 
 export const TrustBadges = () => {
   return (
     <section className="py-16 bg-background border-y border-border">
       <div className="container mx-auto px-4">
-        <AnimatedSection>
-          <div className="flex flex-col items-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 mb-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <p className="text-sm text-muted-foreground font-medium">
-                Vertrauen & Sicherheit
-              </p>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
-          {badges.map((badge, index) => (
-            <AnimatedSection key={index} delay={index * 0.1}>
-              {badge.isTrustpilot ? (
-                <motion.a
-                  href="https://www.trustpilot.com/review/pirro-consulting.de"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className={`relative flex flex-col items-center text-center p-6 rounded-2xl bg-gradient-to-br ${badge.gradient} border ${badge.borderColor} overflow-hidden group cursor-pointer block`}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  {/* Shine effect on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute -inset-full top-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rotate-12 group-hover:translate-x-[200%] transition-transform duration-1000" />
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto">
+          {/* Left: Trust Signals */}
+          <AnimatedSection>
+            <div className="space-y-6">
+              {/* Trustpilot Card */}
+              <a
+                href="https://www.trustpilot.com/review/pirro-consulting.de"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="flex items-center gap-5 p-5 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border border-emerald-200 hover:-translate-y-1 hover:shadow-lg transition-all group"
+              >
+                <div className="flex-shrink-0">
+                  <div className="flex gap-0.5 mb-1.5">
+                    {[...Array(5)].map((_, i) => (
+                      <div key={i} className="w-7 h-7 bg-[#00b67a] flex items-center justify-center">
+                        <Star className="w-4 h-4 text-white fill-white" />
+                      </div>
+                    ))}
                   </div>
-
-                  <div className="mb-3">
-                    <TrustpilotStars />
+                  <p className="text-xs text-muted-foreground">TrustScore 5.0</p>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <p className="font-display font-bold text-lg">5/5 auf Trustpilot</p>
+                    <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <svg viewBox="0 0 126 31" className="h-5 w-auto" aria-label="Trustpilot">
-                      <path d="M33.3 13.6h-8.7l-2.7-8.3L19.2 13.6l-8.7 0 7 5.1-2.7 8.3 7-5.1 7 5.1-2.7-8.3 7-5.1z" fill="#00b67a"/>
-                      <path d="M40.5 27.2l.8-2.5 3-2.2-3.8 4.7z" fill="#005128"/>
-                      <text x="50" y="22" fill="#191919" fontSize="14" fontFamily="Arial, sans-serif" fontWeight="700">Trustpilot</text>
-                    </svg>
-                    <ExternalLink className="w-3 h-3 text-muted-foreground" />
-                  </div>
-                  <p className="text-xs text-muted-foreground leading-relaxed mt-2">
-                    {badge.description}
+                  <p className="text-sm text-muted-foreground">
+                    Basierend auf 10+ verifizierten Bewertungen
                   </p>
-                </motion.a>
-              ) : (
-                <motion.div
-                  className={`relative flex flex-col items-center text-center p-6 rounded-2xl bg-gradient-to-br ${badge.gradient} border ${badge.borderColor} overflow-hidden group cursor-default`}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  {/* Shine effect on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute -inset-full top-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rotate-12 group-hover:translate-x-[200%] transition-transform duration-1000" />
-                  </div>
+                </div>
+              </a>
 
-                  <div className={`w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center mb-4 ${badge.iconColor}`}>
-                    {badge.icon && <badge.icon className="w-7 h-7" strokeWidth={1.5} />}
+              {/* Other Badges */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-200">
+                  <div className="w-11 h-11 rounded-lg bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-display font-bold text-base mb-1">{badge.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{badge.description}</p>
-                </motion.div>
-              )}
-            </AnimatedSection>
-          ))}
+                  <div>
+                    <p className="font-display font-bold text-sm">DSGVO-konform</p>
+                    <p className="text-xs text-muted-foreground">Alle Prozesse datenschutzkonform</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-200">
+                  <div className="w-11 h-11 rounded-lg bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                    <Award className="w-6 h-6 text-purple-600" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <p className="font-display font-bold text-sm">10+ Projekte</p>
+                    <p className="text-xs text-muted-foreground">Erfolgreich umgesetzt</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Right: Kundenstimmen Preview */}
+          <AnimatedSection delay={0.15}>
+            <div>
+              <div className="flex items-center justify-between mb-5">
+                <h3 className="font-display font-bold text-lg">Kundenstimmen</h3>
+                <a
+                  href="#testimonials"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Alle ansehen →
+                </a>
+              </div>
+              <div className="space-y-4">
+                {testimonialPreviews.map((t, i) => (
+                  <a
+                    key={i}
+                    href="#testimonials"
+                    className="flex items-start gap-4 p-4 rounded-xl border border-border hover:border-foreground/20 hover:bg-secondary/50 transition-all group"
+                  >
+                    <Quote className="w-5 h-5 text-foreground/15 flex-shrink-0 mt-0.5" />
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium leading-snug mb-1.5 group-hover:text-foreground transition-colors">
+                        "{t.quote}"
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {t.name} · {t.role}
+                      </p>
+                    </div>
+                    <div className="flex gap-0.5 flex-shrink-0 mt-0.5">
+                      {[...Array(5)].map((_, j) => (
+                        <Star key={j} className="w-3 h-3 fill-highlight text-highlight" />
+                      ))}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>
