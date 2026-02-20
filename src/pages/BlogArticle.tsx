@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Tag, Mail } from "lucide-react";
+import { toast } from "sonner";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { articles } from "@/data/articles";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -186,6 +187,61 @@ const BlogArticle = () => {
                   Kostenloses Erstgespräch buchen
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter CTA */}
+      <section className="pb-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <AnimatedSection>
+              <div className="bg-foreground text-background rounded-2xl p-8 md:p-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-background/70" />
+                  </div>
+                  <h3 className="text-xl font-display font-bold">
+                    Keine Insights verpassen
+                  </h3>
+                </div>
+                <p className="text-background/70 mb-6">
+                  Erhalte die neuesten Tipps zu Automatisierung und Digitalisierung direkt in dein Postfach.
+                </p>
+                <form
+                  className="flex flex-col sm:flex-row gap-3"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const email = new FormData(form).get("email") as string;
+                    if (email) {
+                      toast.success("Danke für deine Anmeldung!", {
+                        description: "Du erhältst bald unsere neuesten Insights.",
+                      });
+                      form.reset();
+                    }
+                  }}
+                >
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="deine@email.de"
+                    className="flex-1 h-12 px-4 rounded-lg bg-background/10 border border-background/20 text-background placeholder:text-background/40 focus:outline-none focus:border-background/40 transition-colors"
+                  />
+                  <button
+                    type="submit"
+                    className="h-12 px-6 bg-highlight text-white rounded-lg font-medium hover:bg-highlight/90 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                  >
+                    Abonnieren
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </form>
+                <p className="text-xs text-background/40 mt-3">
+                  Kein Spam. Jederzeit abbestellbar.
+                </p>
               </div>
             </AnimatedSection>
           </div>

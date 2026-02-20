@@ -17,6 +17,39 @@ import {
 
 export const Kontakt = () => {
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+
+  const validateName = (value: string) => {
+    if (!value || value.trim().length < 2) {
+      return "Bitte gib deinen Namen ein (mind. 2 Zeichen)";
+    }
+    return undefined;
+  };
+
+  const validateEmail = (value: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!value || !emailRegex.test(value)) {
+      return "Bitte gib eine gültige E-Mail-Adresse ein";
+    }
+    return undefined;
+  };
+
+  const validateMessage = (value: string) => {
+    if (!value || value.trim().length < 10) {
+      return "Bitte beschreibe dein Anliegen (mind. 10 Zeichen)";
+    }
+    return undefined;
+  };
+
+  const handleBlur = (field: "name" | "email" | "message", value: string) => {
+    const validators = { name: validateName, email: validateEmail, message: validateMessage };
+    const error = validators[field](value);
+    setErrors((prev) => ({ ...prev, [field]: error }));
+  };
+
+  const handleChange = (field: "name" | "email" | "message") => {
+    setErrors((prev) => ({ ...prev, [field]: undefined }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -154,8 +187,15 @@ export const Kontakt = () => {
                         maxLength={100}
                         autoComplete="name"
                         placeholder="Max Mustermann"
-                        className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
+                        aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? "name-error" : undefined}
+                        onBlur={(e) => handleBlur("name", e.target.value)}
+                        onChange={() => handleChange("name")}
+                        className={`w-full h-12 px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all ${errors.name ? "border-destructive" : "border-border"}`}
                       />
+                      {errors.name && (
+                        <p id="name-error" className="text-sm text-destructive mt-1">{errors.name}</p>
+                      )}
                     </div>
                     <div>
                       <label
@@ -172,8 +212,15 @@ export const Kontakt = () => {
                         autoComplete="email"
                         inputMode="email"
                         placeholder="max@beispiel.de"
-                        className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
+                        aria-invalid={!!errors.email}
+                        aria-describedby={errors.email ? "email-error" : undefined}
+                        onBlur={(e) => handleBlur("email", e.target.value)}
+                        onChange={() => handleChange("email")}
+                        className={`w-full h-12 px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all ${errors.email ? "border-destructive" : "border-border"}`}
                       />
+                      {errors.email && (
+                        <p id="email-error" className="text-sm text-destructive mt-1">{errors.email}</p>
+                      )}
                     </div>
                   </div>
 
@@ -205,6 +252,7 @@ export const Kontakt = () => {
                     <select
                       id="interest"
                       name="interest"
+                      aria-label="Worum geht es?"
                       className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all appearance-none"
                     >
                       <option value="">Bitte auswählen</option>
@@ -237,8 +285,15 @@ export const Kontakt = () => {
                       minLength={10}
                       maxLength={2000}
                       placeholder="Erzähl uns kurz, wobei wir dir helfen können..."
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all resize-none"
+                      aria-invalid={!!errors.message}
+                      aria-describedby={errors.message ? "message-error" : undefined}
+                      onBlur={(e) => handleBlur("message", e.target.value)}
+                      onChange={() => handleChange("message")}
+                      className={`w-full px-4 py-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all resize-none ${errors.message ? "border-destructive" : "border-border"}`}
                     />
+                    {errors.message && (
+                      <p id="message-error" className="text-sm text-destructive mt-1">{errors.message}</p>
+                    )}
                   </div>
 
                   <button

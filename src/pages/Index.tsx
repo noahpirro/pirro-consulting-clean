@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { ArrowRight, Clock, Tag } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { TrustedBy } from "@/components/TrustedBy";
@@ -9,6 +11,8 @@ import { InlineCTA } from "@/components/InlineCTA";
 import { MarqueeBand } from "@/components/MarqueeBand";
 import { Footer } from "@/components/Footer";
 import { ToolsLogos } from "@/components/ToolsLogos";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { articles } from "@/data/articles";
 
 // Lazy-load below-fold components
 const Solution = lazy(() => import("@/components/Solution").then(m => ({ default: m.Solution })));
@@ -84,6 +88,62 @@ const Index = () => {
         <FAQ />
         <CTA />
       </Suspense>
+
+      {/* Latest Blog Articles */}
+      <section className="py-20 bg-secondary/50">
+        <div className="container mx-auto px-4">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Neueste <span className="text-highlight">Insights</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Praxis-Tipps zu Automatisierung, Digitalisierung und skalierbarem Wachstum.
+            </p>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {articles.slice(0, 3).map((article, i) => (
+              <AnimatedSection key={article.slug} delay={i * 0.1}>
+                <Link to={`/blog/${article.slug}`} className="block h-full">
+                  <article className="group bg-card border border-border rounded-2xl overflow-hidden h-full hover:-translate-y-1.5 transition-transform duration-300">
+                    <div className="p-6">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-secondary rounded-full text-xs text-muted-foreground">
+                          <Tag className="w-3 h-3" />
+                          {article.category}
+                        </span>
+                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                          <Clock className="w-3 h-3" />
+                          {article.readTime}
+                        </span>
+                      </div>
+                      <h3 className="text-lg font-display font-bold mb-3 leading-snug group-hover:text-highlight transition-colors">
+                        {article.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+                        {article.excerpt}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 text-sm font-medium group-hover:text-highlight transition-colors">
+                        Weiterlesen
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+          <AnimatedSection delay={0.3} className="text-center mt-10">
+            <Link
+              to="/blog"
+              className="inline-flex items-center h-12 px-6 border border-border rounded-lg font-medium hover:bg-secondary transition-colors group"
+            >
+              Alle Artikel ansehen
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

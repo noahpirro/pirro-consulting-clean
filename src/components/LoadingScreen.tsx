@@ -5,13 +5,13 @@ export const LoadingScreen = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(false), 350);
+    const timer = setTimeout(() => setIsVisible(false), 200);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-foreground transition-opacity duration-250 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-foreground transition-opacity duration-200 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
     >
       <img
         src={logo}

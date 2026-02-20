@@ -97,5 +97,19 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addBase }: { addBase: (styles: Record<string, Record<string, string>>) => void }) {
+      addBase({
+        "@media (prefers-reduced-motion: reduce)": {
+          "*": {
+            "animation-duration": "0.01ms !important",
+            "animation-iteration-count": "1 !important",
+            "transition-duration": "0.01ms !important",
+            "scroll-behavior": "auto !important",
+          },
+        },
+      });
+    },
+  ],
 } satisfies Config;
