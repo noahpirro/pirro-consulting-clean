@@ -56,8 +56,8 @@ export const InteractiveGrid = ({
     canvas.width = parent.clientWidth;
     canvas.height = parent.clientHeight;
 
-    parent.addEventListener("mousemove", handleMouseMove);
-    parent.addEventListener("mouseleave", handleMouseLeave);
+    parent.addEventListener("mousemove", handleMouseMove, { passive: true });
+    parent.addEventListener("mouseleave", handleMouseLeave, { passive: true });
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -100,6 +100,7 @@ export const InteractiveGrid = ({
     <canvas
       ref={canvasRef}
       className="pointer-events-none absolute inset-0 z-[1]"
+      aria-hidden="true"
     />
   );
 };

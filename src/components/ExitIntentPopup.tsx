@@ -16,7 +16,7 @@ export const ExitIntentPopup = () => {
   useEffect(() => {
     // Only on desktop, after 5 seconds on page
     const timer = setTimeout(() => {
-      document.addEventListener("mouseleave", handleMouseLeave);
+      document.addEventListener("mouseleave", handleMouseLeave, { passive: true });
     }, 5000);
 
     return () => {

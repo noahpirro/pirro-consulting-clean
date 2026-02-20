@@ -81,6 +81,7 @@ export const Navbar = () => {
               alt="Pirro Consulting"
               width={120}
               height={32}
+              decoding="async"
               className={`h-8 w-auto transition-all duration-300 hover:scale-105 ${!scrolled ? "brightness-0 invert" : ""}`}
             />
           </Link>

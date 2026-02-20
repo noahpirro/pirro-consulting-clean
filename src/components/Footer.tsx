@@ -26,7 +26,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-4">
-              <img src={logo} alt="Pirro Consulting" width={120} height={32} className="h-8 w-auto brightness-0 invert" loading="lazy" />
+              <img src={logo} alt="Pirro Consulting" width={120} height={32} decoding="async" className="h-8 w-auto brightness-0 invert" loading="lazy" />
             </Link>
             <p className="text-background/60 text-sm leading-relaxed mb-6">
               Automatisierung & Digitalisierung für Unternehmer. Weniger Chaos, mehr Wachstum.
