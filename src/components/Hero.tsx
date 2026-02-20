@@ -183,7 +183,7 @@ export const Hero = () => {
               <a
                 href={CALENDLY_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex items-center h-14 px-8 text-base font-medium bg-background text-foreground hover:bg-background/90 transition-all group rounded-md"
               >
                 Kostenlose Potenzialanalyse sichern

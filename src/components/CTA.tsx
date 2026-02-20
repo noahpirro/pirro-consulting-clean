@@ -80,7 +80,7 @@ export const CTA = () => {
               <a
                 href={CALENDLY_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex items-center h-16 px-10 text-lg font-medium bg-highlight text-white hover:bg-highlight/90 shadow-lg shadow-highlight/25 group rounded-md"
               >
                 <Calendar className="w-5 h-5 mr-2" />

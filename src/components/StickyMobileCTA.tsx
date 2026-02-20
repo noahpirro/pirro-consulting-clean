@@ -24,7 +24,7 @@ export const StickyMobileCTA = () => {
         <a
           href={CALENDLY_URL}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow"
           className="flex items-center justify-center gap-2 w-full h-12 bg-primary text-primary-foreground rounded-lg font-medium text-sm active:scale-[0.98] transition-transform"
         >
           Kostenlose Potenzialanalyse

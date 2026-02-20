@@ -379,7 +379,7 @@ export const ROICalculator = () => {
           <a
             href={CALENDLY_URL}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className="inline-block hover:scale-[1.03] active:scale-[0.98] transition-transform"
           >
             <Button

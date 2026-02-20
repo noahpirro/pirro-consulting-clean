@@ -38,7 +38,7 @@ export const InlineCTA = ({
           <a
             href={CALENDLY_URL}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className={`inline-flex items-center h-12 px-6 text-base font-medium rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform ${
               isLight
                 ? "bg-foreground text-background hover:bg-foreground/90"

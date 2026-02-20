@@ -188,7 +188,7 @@ export const Navbar = () => {
             <a
               href={CALENDLY_URL}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] ${
                 scrolled
                   ? "bg-primary text-primary-foreground hover:bg-primary/90"
@@ -318,7 +318,7 @@ export const Navbar = () => {
               <a
                 href={CALENDLY_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex items-center justify-center w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-2 px-4 py-2 rounded-md text-sm font-medium"
               >
                 Potenzialanalyse sichern

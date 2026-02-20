@@ -74,7 +74,7 @@ export const ExitIntentPopup = () => {
               <a
                 href={CALENDLY_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex items-center justify-center h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-lg font-medium transition-all hover:scale-[1.02] active:scale-[0.98] group"
               >
                 Kostenlose Analyse sichern

@@ -137,7 +137,7 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
               <a
                 href={CALENDLY_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform"
               >
                 {hero.ctaText}
@@ -281,7 +281,7 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
                 <a
                   href={CALENDLY_URL}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform"
                 >
                   {experience.ctaText}
@@ -304,7 +304,7 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
               <a
                 href={CALENDLY_URL}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="inline-flex items-center h-14 px-8 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md font-medium group hover:scale-[1.03] active:scale-[0.98] transition-transform"
               >
                 Jetzt Gespräch vereinbaren

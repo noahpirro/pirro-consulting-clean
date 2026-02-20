@@ -182,7 +182,7 @@ export const Kontakt = () => {
                       <a
                         href={CALENDLY_URL}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="inline-flex items-center h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-lg font-medium group"
                       >
                         Direkt Termin buchen
@@ -472,7 +472,7 @@ export const Kontakt = () => {
                     <a
                       href={CALENDLY_URL}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer nofollow"
                       className="inline-flex items-center gap-2 px-5 py-3 bg-background text-foreground rounded-lg text-sm font-medium hover:bg-background/90 hover:scale-[1.02] active:scale-[0.98] transition-all"
                     >
                       Termin buchen

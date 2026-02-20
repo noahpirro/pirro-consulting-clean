@@ -197,7 +197,7 @@ const BlogArticle = () => {
             <a
               href={twitterUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               aria-label="Auf Twitter / X teilen"
               className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-secondary text-foreground/70 hover:bg-[#1DA1F2] hover:text-white transition-colors"
             >
@@ -210,7 +210,7 @@ const BlogArticle = () => {
             <a
               href={linkedInUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               aria-label="Auf LinkedIn teilen"
               className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-secondary text-foreground/70 hover:bg-[#0A66C2] hover:text-white transition-colors"
             >
@@ -223,7 +223,7 @@ const BlogArticle = () => {
             <a
               href={whatsAppUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               aria-label="Über WhatsApp teilen"
               className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-secondary text-foreground/70 hover:bg-[#25D366] hover:text-white transition-colors"
             >
@@ -293,7 +293,7 @@ const BlogArticle = () => {
                 <a
                   href={CALENDLY_URL}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="inline-flex items-center h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-md font-medium group"
                 >
                   Kostenloses Erstgespräch buchen
