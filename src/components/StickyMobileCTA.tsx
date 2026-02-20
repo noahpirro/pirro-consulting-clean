@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import { CALENDLY_URL } from "@/constants";
 
 export const StickyMobileCTA = () => {
   const [visible, setVisible] = useState(false);
@@ -21,7 +22,7 @@ export const StickyMobileCTA = () => {
     >
       <div className="bg-background/95 backdrop-blur-md border-t border-border px-4 py-3">
         <a
-          href="https://calendly.com/pirroconsulting"
+          href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 w-full h-12 bg-primary text-primary-foreground rounded-lg font-medium text-sm active:scale-[0.98] transition-transform"

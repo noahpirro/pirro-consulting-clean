@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ArrowRight, Layout, Smartphone, Search, CheckCircle, Palette, Crown, Clock, Heart, TrendingUp, Award, BadgePercent, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CALENDLY_URL } from "@/constants";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { TextReveal } from "@/components/TextReveal";
 import { GlowCard } from "@/components/GlowCard";
@@ -152,7 +153,7 @@ const Webdesign = () => {
 
             <div>
               <a
-                href="https://calendly.com/pirroconsulting"
+                href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform"
@@ -304,7 +305,7 @@ const Webdesign = () => {
             <AnimatedSection delay={0.2}>
               <div>
                 <a
-                  href="https://calendly.com/pirroconsulting"
+                  href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center h-14 px-8 text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform"
@@ -333,7 +334,7 @@ const Webdesign = () => {
             </p>
             <div>
               <a
-                href="https://calendly.com/pirroconsulting"
+                href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center h-14 px-8 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md font-medium group hover:scale-[1.03] active:scale-[0.98] transition-transform"

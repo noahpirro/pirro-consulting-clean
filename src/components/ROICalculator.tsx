@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Calculator, Clock, TrendingUp, Euro, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useInView } from "@/hooks/useInView";
+import { CALENDLY_URL } from "@/constants";
 
 /* ------------------------------------------------------------------ */
 /*  Animated number display – counts up smoothly via rAF              */
@@ -188,7 +189,7 @@ export const ROICalculator = () => {
   const [rate, setRate] = useState(50);
 
   /* derived values */
-  const timeSavedMonth = Math.round(hours * 0.7 * 4.33);
+  const timeSavedMonth = Math.round(hours * 0.7 * 4.33 * members);
   const costSavedMonth = Math.round(timeSavedMonth * rate);
   const costSavedYear = costSavedMonth * 12;
 
@@ -329,7 +330,7 @@ export const ROICalculator = () => {
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-background/60">Ohne Automatisierung</span>
-                <span className="text-background font-medium">{Math.round(hours * 4.33)} h/Monat</span>
+                <span className="text-background font-medium">{Math.round(hours * 4.33 * members)} h/Monat</span>
               </div>
               <div className="h-3 bg-background/10 rounded-full overflow-hidden">
                 <div
@@ -342,7 +343,7 @@ export const ROICalculator = () => {
             <div>
               <div className="flex justify-between text-sm mb-2">
                 <span className="text-background/60">Mit Automatisierung</span>
-                <span className="text-highlight font-medium">{Math.round(hours * 0.3 * 4.33)} h/Monat</span>
+                <span className="text-highlight font-medium">{Math.round(hours * 0.3 * 4.33 * members)} h/Monat</span>
               </div>
               <div className="h-3 bg-background/10 rounded-full overflow-hidden">
                 <div
@@ -375,7 +376,12 @@ export const ROICalculator = () => {
           }`}
           style={{ transitionDelay: ctaInView ? "350ms" : "0ms" }}
         >
-          <div className="inline-block hover:scale-[1.03] active:scale-[0.98] transition-transform">
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block hover:scale-[1.03] active:scale-[0.98] transition-transform"
+          >
             <Button
               size="lg"
               className="h-14 px-8 text-base font-medium bg-background text-foreground hover:bg-background/90 transition-all group"
@@ -383,7 +389,7 @@ export const ROICalculator = () => {
               Jetzt Potenzialanalyse sichern
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-          </div>
+          </a>
 
           <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-background/50 text-sm">
             <span className="flex items-center gap-2">

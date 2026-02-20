@@ -8,6 +8,7 @@ import { useInView } from "@/hooks/useInView";
 import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 import { HelpCircle, MessageCircle } from "lucide-react";
+import { WHATSAPP_URL } from "@/constants";
 
 const faqs = [
   {
@@ -116,7 +117,7 @@ export const FAQ = () => {
         {/* Still have questions? */}
         <AnimatedSection className="text-center mt-12" delay={0.3}>
           <a
-            href="https://wa.me/4915152522522"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer nofollow"
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:scale-[1.03] transition-transform"

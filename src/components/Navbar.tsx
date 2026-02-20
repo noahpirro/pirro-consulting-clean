@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, Phone, MessageCircle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.webp";
+import { CALENDLY_URL, WHATSAPP_URL, PHONE } from "@/constants";
 
 const serviceLinks = [
   { label: "Recruiting", href: "/recruiting" },
@@ -161,7 +162,7 @@ export const Navbar = () => {
           {/* Desktop Contact & CTA */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="https://wa.me/4915152522522"
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer nofollow"
               className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
@@ -174,7 +175,7 @@ export const Navbar = () => {
               <span className="hidden lg:inline">WhatsApp</span>
             </a>
             <a
-              href="tel:+4915152522522"
+              href={`tel:${PHONE}`}
               className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
                 scrolled
                   ? "text-muted-foreground hover:text-foreground"
@@ -185,7 +186,7 @@ export const Navbar = () => {
               <span className="hidden lg:inline">Anrufen</span>
             </a>
             <a
-              href="https://calendly.com/pirroconsulting"
+              href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] ${
@@ -297,7 +298,7 @@ export const Navbar = () => {
 
               <div className="flex items-center gap-4 mt-4">
                 <a
-                  href="https://wa.me/4915152522522"
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors py-2"
@@ -306,7 +307,7 @@ export const Navbar = () => {
                   WhatsApp
                 </a>
                 <a
-                  href="tel:+4915152522522"
+                  href={`tel:${PHONE}`}
                   className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors py-2"
                 >
                   <Phone className="w-5 h-5" />
@@ -314,7 +315,7 @@ export const Navbar = () => {
                 </a>
               </div>
               <a
-                href="https://calendly.com/pirroconsulting"
+                href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-2 px-4 py-2 rounded-md text-sm font-medium"

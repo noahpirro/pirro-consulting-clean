@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { MessageCircle, X } from "lucide-react";
+import { WHATSAPP_CTA_URL } from "@/constants";
 
 export const WhatsAppWidget = () => {
   const [visible, setVisible] = useState(false);
@@ -18,7 +19,7 @@ export const WhatsAppWidget = () => {
     return () => clearTimeout(timer);
   }, [visible]);
 
-  const whatsappUrl = "https://wa.me/4915152522522?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Potenzialanalyse.";
+  const whatsappUrl = WHATSAPP_CTA_URL;
 
   return (
     <div className="fixed bottom-6 left-6 z-50 flex items-end gap-3">

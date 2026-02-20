@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Linkedin, Instagram } from "lucide-react";
 import logo from "@/assets/logo.webp";
+import { CALENDLY_URL, SOCIAL } from "@/constants";
 
 const serviceLinks = [
   { label: "Automatisierung", href: "/#services" },
@@ -32,7 +33,7 @@ export const Footer = () => {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="https://www.linkedin.com/in/noahpirro"
+                href={SOCIAL.linkedin}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
@@ -41,7 +42,7 @@ export const Footer = () => {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://www.instagram.com/pirroconsulting"
+                href={SOCIAL.instagram}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors"
@@ -99,7 +100,7 @@ export const Footer = () => {
               Kostenlose Potenzialanalyse für dein Unternehmen.
             </p>
             <a
-              href="https://calendly.com/pirroconsulting"
+              href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer nofollow"
               className="inline-flex items-center gap-2 px-4 py-2.5 bg-background text-foreground rounded-lg text-sm font-medium hover:bg-background/90 hover:scale-[1.03] active:scale-[0.98] transition-all"

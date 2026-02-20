@@ -150,10 +150,10 @@ export const CaseStudies = () => {
 
               {/* CTA Button */}
               <a
-                href="#kontakt"
+                href="/kontakt"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg font-medium hover:bg-white/30 transition-all duration-300 border border-white/30"
               >
-                Fallstudie im Detail
+                Jetzt ähnliche Ergebnisse erzielen
               </a>
             </div>
 

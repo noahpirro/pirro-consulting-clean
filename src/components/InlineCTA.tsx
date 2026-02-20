@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
+import { CALENDLY_URL } from "@/constants";
 
 interface InlineCTAProps {
   headline: string;
@@ -35,7 +36,7 @@ export const InlineCTA = ({
           </h3>
 
           <a
-            href="https://calendly.com/pirroconsulting"
+            href={CALENDLY_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={`inline-flex items-center h-12 px-6 text-base font-medium rounded-md group hover:scale-[1.03] active:scale-[0.98] transition-transform ${

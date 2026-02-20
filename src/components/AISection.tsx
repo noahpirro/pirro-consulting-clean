@@ -92,31 +92,33 @@ const WorkflowStep = ({
 // Animated stat card
 const StatCard = ({ value, label, delay }: { value: string; label: string; delay: number }) => {
   const [count, setCount] = useState(0);
-  const numericValue = parseInt(value.replace(/\D/g, ''));
+  const isNumeric = /^\d+/.test(value.replace(/\D/g, ''));
+  const numericValue = isNumeric ? parseInt(value.replace(/[^0-9]/g, '')) : 0;
+  const isStatic = value.includes('/'); // e.g. "24/7"
   const [ref, inView] = useInView();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const duration = 2000;
-      const steps = 60;
-      const increment = numericValue / steps;
-      let current = 0;
+    if (isStatic || !inView) return;
 
-      const interval = setInterval(() => {
-        current += increment;
-        if (current >= numericValue) {
-          setCount(numericValue);
-          clearInterval(interval);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, duration / steps);
+    const duration = 2000;
+    const steps = 60;
+    const increment = numericValue / steps;
+    let current = 0;
 
-      return () => clearInterval(interval);
-    }, delay * 1000);
+    const interval = setInterval(() => {
+      current += increment;
+      if (current >= numericValue) {
+        setCount(numericValue);
+        clearInterval(interval);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
 
-    return () => clearTimeout(timer);
-  }, [numericValue, delay]);
+    return () => clearInterval(interval);
+  }, [numericValue, delay, inView, isStatic]);
+
+  const suffix = value.includes('%') ? '%' : value.includes('+') ? '+' : value.includes('x') ? 'x' : '';
 
   return (
     <div
@@ -129,7 +131,7 @@ const StatCard = ({ value, label, delay }: { value: string; label: string; delay
       }}
     >
       <span className="block text-3xl md:text-4xl font-display font-bold text-foreground">
-        {count}{value.includes('%') ? '%' : value.includes('+') ? '+' : ''}
+        {isStatic ? value : `${count}${suffix}`}
       </span>
       <span className="text-sm text-muted-foreground">{label}</span>
     </div>
@@ -201,7 +203,7 @@ export const AISection = () => {
     {
       icon: Sparkles,
       title: "Personalisierung",
-      description: "Maßgeschneiderte Lösungen für Ihr Unternehmen",
+      description: "Maßgeschneiderte Lösungen für dein Unternehmen",
       step: 3,
     },
     {
@@ -276,11 +278,11 @@ export const AISection = () => {
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 md:mb-6 max-w-3xl mx-auto">
             <TextReveal text="Intelligente Automatisierung" />
-            <span className="block text-muted-foreground"><TextReveal text="für Ihr Unternehmen" delay={0.2} /></span>
+            <span className="block text-muted-foreground"><TextReveal text="für dein Unternehmen" delay={0.2} /></span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
             Unsere KI-Lösungen analysieren, personalisieren und automatisieren –
-            damit Sie sich auf das Wesentliche konzentrieren können.
+            damit du dich auf das Wesentliche konzentrieren kannst.
           </p>
         </AnimatedSection>
 
@@ -354,7 +356,7 @@ export const AISection = () => {
                 {
                   icon: Target,
                   title: "Personalisierung",
-                  description: "Maßgeschneiderte Lösungen, die sich an Ihre spezifischen Anforderungen anpassen.",
+                  description: "Maßgeschneiderte Lösungen, die sich an deine spezifischen Anforderungen anpassen.",
                 },
               ].map((feature, i) => (
                 <FeatureItem key={feature.title} feature={feature} index={i} />

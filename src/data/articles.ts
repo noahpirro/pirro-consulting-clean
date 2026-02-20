@@ -5,6 +5,7 @@ export interface Article {
   category: string;
   readTime: string;
   date: string;
+  dateISO: string;
   featured: boolean;
   content: string[];
 }
@@ -16,7 +17,7 @@ function calcReadTime(content: string[]): string {
   return `${minutes} Min.`;
 }
 
-type RawArticle = Omit<Article, "readTime">;
+type RawArticle = Omit<Article, "readTime" | "dateISO">;
 
 const rawArticles: RawArticle[] = [
   {
@@ -134,9 +135,22 @@ const rawArticles: RawArticle[] = [
   },
 ];
 
+/** Convert German date "12. Feb 2026" to ISO "2026-02-12" */
+function toISO(date: string): string {
+  const months: Record<string, string> = {
+    Jan: "01", Feb: "02", Mär: "03", Apr: "04", Mai: "05", Jun: "06",
+    Jul: "07", Aug: "08", Sep: "09", Okt: "10", Nov: "11", Dez: "12",
+  };
+  const match = date.match(/(\d+)\.\s*(\w+)\s*(\d{4})/);
+  if (!match) return date;
+  const [, day, month, year] = match;
+  return `${year}-${months[month] || "01"}-${day.padStart(2, "0")}`;
+}
+
 export const articles: Article[] = rawArticles.map((a) => ({
   ...a,
   readTime: calcReadTime(a.content),
+  dateISO: toISO(a.date),
 }));
 
 export const categories = ["Alle", "Automatisierung", "CRM", "KI", "Prozesse", "Tools", "Strategie"];

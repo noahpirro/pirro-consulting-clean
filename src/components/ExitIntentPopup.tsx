@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { X, ArrowRight, Zap } from "lucide-react";
+import { CALENDLY_URL } from "@/constants";
 
 export const ExitIntentPopup = () => {
   const [visible, setVisible] = useState(false);
@@ -70,7 +71,7 @@ export const ExitIntentPopup = () => {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="https://calendly.com/pirroconsulting"
+                href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-lg font-medium transition-all hover:scale-[1.02] active:scale-[0.98] group"

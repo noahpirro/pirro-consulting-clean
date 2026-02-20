@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, ArrowRight, Clock, Tag, Mail, Share2 } from "lucide-react";
 import { toast } from "sonner";
+import { CALENDLY_URL } from "@/constants";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { articles } from "@/data/articles";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -108,7 +109,7 @@ const BlogArticle = () => {
             "@type": "BlogPosting",
             headline: article.title,
             description: article.excerpt,
-            datePublished: article.date,
+            datePublished: article.dateISO,
             author: { "@type": "Person", name: "Noah Pirro" },
             publisher: {
               "@type": "Organization",
@@ -264,7 +265,7 @@ const BlogArticle = () => {
                   In einem kostenlosen Erstgespräch zeigen wir dir, wie du diese Strategien in deinem Unternehmen anwenden kannst.
                 </p>
                 <a
-                  href="https://calendly.com/pirroconsulting"
+                  href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-md font-medium group"

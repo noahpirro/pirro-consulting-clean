@@ -5,6 +5,7 @@ import { TextReveal } from "./TextReveal";
 import { Aurora } from "./Aurora";
 import { FloatingParticles } from "./FloatingParticles";
 import { NoiseTexture } from "./NoiseTexture";
+import { CALENDLY_URL, WHATSAPP_URL } from "@/constants";
 
 export const CTA = () => {
   const [ref, inView] = useInView();
@@ -77,7 +78,7 @@ export const CTA = () => {
           <MagneticButton strength={0.3}>
             <div className="hover:scale-[1.03] active:scale-[0.98] transition-transform">
               <a
-                href="https://calendly.com/pirroconsulting"
+                href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center h-16 px-10 text-lg font-medium bg-highlight text-white hover:bg-highlight/90 shadow-lg shadow-highlight/25 group rounded-md"
@@ -91,7 +92,7 @@ export const CTA = () => {
 
           {/* Secondary Option */}
           <a
-            href="https://wa.me/4915152522522"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer nofollow"
             className="text-background/50 hover:text-background/80 transition-colors text-sm"

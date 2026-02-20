@@ -6,6 +6,7 @@ import { Aurora } from "./Aurora";
 import { FloatingParticles } from "./FloatingParticles";
 import { NoiseTexture } from "./NoiseTexture";
 import { WaveDivider } from "./WaveDivider";
+import { CALENDLY_URL } from "@/constants";
 
 const rotatingWords = ["Wachstum.", "Umsatz.", "Freiheit.", "Effizienz."];
 
@@ -182,7 +183,7 @@ export const Hero = () => {
           <MagneticButton strength={0.25}>
             <div className="hover:scale-[1.03] active:scale-[0.98] transition-transform">
               <a
-                href="https://calendly.com/pirroconsulting"
+                href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center h-14 px-8 text-base font-medium bg-background text-foreground hover:bg-background/90 transition-all group rounded-md"

@@ -15,6 +15,7 @@ import {
   Loader2,
   CheckCircle2,
 } from "lucide-react";
+import { CALENDLY_URL, WHATSAPP_URL, PHONE, PHONE_DISPLAY, EMAIL } from "@/constants";
 
 export const Kontakt = () => {
   const [loading, setLoading] = useState(false);
@@ -177,7 +178,7 @@ export const Kontakt = () => {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <a
-                        href="https://calendly.com/pirroconsulting"
+                        href={CALENDLY_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-lg font-medium group"
@@ -374,7 +375,7 @@ export const Kontakt = () => {
                     </h3>
                     <div className="space-y-4">
                       <a
-                        href="tel:+4915152522522"
+                        href={`tel:${PHONE}`}
                         className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
                       >
                         <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center group-hover:bg-foreground/5 transition-colors">
@@ -384,11 +385,11 @@ export const Kontakt = () => {
                           <p className="text-sm font-medium text-foreground">
                             Telefon
                           </p>
-                          <p className="text-sm">+49 151 5252 2522</p>
+                          <p className="text-sm">{PHONE_DISPLAY}</p>
                         </div>
                       </a>
                       <a
-                        href="https://wa.me/4915152522522"
+                        href={WHATSAPP_URL}
                         target="_blank"
                         rel="noopener noreferrer nofollow"
                         className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
@@ -404,7 +405,7 @@ export const Kontakt = () => {
                         </div>
                       </a>
                       <a
-                        href="mailto:info@pirro-consulting.de"
+                        href={`mailto:${EMAIL}`}
                         className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
                       >
                         <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center group-hover:bg-foreground/5 transition-colors">
@@ -414,7 +415,7 @@ export const Kontakt = () => {
                           <p className="text-sm font-medium text-foreground">
                             E-Mail
                           </p>
-                          <p className="text-sm">info@pirro-consulting.de</p>
+                          <p className="text-sm">{EMAIL}</p>
                         </div>
                       </a>
                     </div>
@@ -467,7 +468,7 @@ export const Kontakt = () => {
                       Buche eine kostenlose 30-Minuten Potenzialanalyse.
                     </p>
                     <a
-                      href="https://calendly.com/pirroconsulting"
+                      href={CALENDLY_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-3 bg-background text-foreground rounded-lg text-sm font-medium hover:bg-background/90 hover:scale-[1.02] active:scale-[0.98] transition-all"

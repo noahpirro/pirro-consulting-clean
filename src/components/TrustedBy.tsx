@@ -33,9 +33,9 @@ export const TrustedBy = () => {
   return (
     <section className="py-12 bg-background border-b border-border overflow-hidden">
       <style>{`
-        @keyframes marquee {
+        @keyframes marquee-logos {
           from { transform: translateX(0); }
-          to { transform: translateX(-800px); }
+          to { transform: translateX(-33.333%); }
         }
       `}</style>
 
@@ -62,7 +62,7 @@ export const TrustedBy = () => {
         <div
           className="flex gap-20 items-center"
           style={{
-            animation: "marquee 20s linear infinite",
+            animation: "marquee-logos 20s linear infinite",
           }}
         >
           {allClients.map((client, index) => (

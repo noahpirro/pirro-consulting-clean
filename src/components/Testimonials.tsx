@@ -63,21 +63,17 @@ const StarRating = ({ rating }: { rating: number }) => (
 
 export const Testimonials = () => {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
 
   const next = useCallback(() => {
-    setDirection(1);
     setCurrent((prev) => (prev + 1) % testimonials.length);
   }, []);
 
   const prev = useCallback(() => {
-    setDirection(-1);
     setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   }, []);
 
   const goTo = (index: number) => {
-    setDirection(index > current ? 1 : -1);
     setCurrent(index);
   };
 
