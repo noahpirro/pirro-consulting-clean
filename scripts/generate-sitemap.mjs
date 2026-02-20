@@ -30,13 +30,9 @@ const blogPages = slugs.map((slug) => ({
   priority: "0.6",
 }));
 
-// Legal pages
-const legalPages = [
-  { loc: "/impressum", changefreq: "yearly", priority: "0.3" },
-  { loc: "/datenschutz", changefreq: "yearly", priority: "0.3" },
-];
+// Legal pages are excluded from sitemap (they have noindex meta tags)
 
-const allPages = [...staticPages, ...blogPages, ...legalPages];
+const allPages = [...staticPages, ...blogPages];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -124,7 +124,7 @@ export const CaseStudies = () => {
 
               {/* Testimonial */}
               <blockquote className="text-white/80 text-lg md:text-xl leading-relaxed mb-4">
-                &bdquo;{currentStudy.testimonial}&ldquo;
+                &bdquo;{currentStudy.testimonial}&rdquo;
               </blockquote>
 
               {/* Author */}

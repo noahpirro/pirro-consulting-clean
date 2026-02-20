@@ -58,7 +58,7 @@ export const TrustBadges = () => {
               {/* Other Badges */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-200">
-                  <div className="w-11 h-11 rounded-lg bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                  <div className="w-11 h-11 rounded-lg bg-background shadow-sm flex items-center justify-center flex-shrink-0">
                     <Shield className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
                   </div>
                   <div>
@@ -67,7 +67,7 @@ export const TrustBadges = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-200">
-                  <div className="w-11 h-11 rounded-lg bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                  <div className="w-11 h-11 rounded-lg bg-background shadow-sm flex items-center justify-center flex-shrink-0">
                     <Award className="w-6 h-6 text-purple-600" strokeWidth={1.5} />
                   </div>
                   <div>

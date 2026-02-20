@@ -8,7 +8,7 @@ const tools = [
   { name: "Zapier", color: "#ff4a00" },
   { name: "Calendly", color: "#006bff" },
   { name: "Slack", color: "#4a154b" },
-  { name: "Notion", color: "#000000" },
+  { name: "Notion", color: "#787774" },
 ];
 
 export const ToolsLogos = () => {

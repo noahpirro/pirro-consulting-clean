@@ -203,6 +203,7 @@ export const Navbar = () => {
           <button
             className={`md:hidden p-2 transition-colors duration-300 active:scale-95 ${scrolled ? "text-foreground" : "text-white"}`}
             onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
             aria-label={isOpen ? "Menü schließen" : "Menü öffnen"}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

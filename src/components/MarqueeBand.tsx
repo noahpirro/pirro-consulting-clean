@@ -37,7 +37,7 @@ export const MarqueeBand = ({
           }}
         >
           {repeated.map((text, i) => (
-            <span key={i} className="flex items-center gap-8 md:gap-12">
+            <span key={i} className="flex items-center gap-8 md:gap-12" {...(i >= texts.length ? { "aria-hidden": true } : {})}>
               <span
                 className={`text-3xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight ${
                   isDark ? "text-background/90" : "text-foreground/90"

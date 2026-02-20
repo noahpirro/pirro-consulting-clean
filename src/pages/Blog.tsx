@@ -130,6 +130,7 @@ const Blog = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Artikel suchen..."
+                aria-label="Blog-Artikel durchsuchen"
                 className="w-full h-10 pl-9 pr-9 rounded-full bg-secondary border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
               />
               {searchQuery && (

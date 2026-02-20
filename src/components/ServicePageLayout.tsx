@@ -247,7 +247,7 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {values.items.map((value, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="p-8 bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl h-full hover:-translate-y-1 hover:bg-white/10 transition-all">
+                <div className="p-8 bg-background/5 backdrop-blur-sm border border-background/10 rounded-2xl h-full hover:-translate-y-1 hover:bg-background/10 transition-all">
                   <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center mb-4">
                     <value.icon className="w-6 h-6" strokeWidth={1.5} />
                   </div>

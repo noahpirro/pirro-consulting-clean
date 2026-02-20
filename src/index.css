@@ -131,7 +131,6 @@ body {
 /* Content-visibility fuer Sections unter dem Fold */
 section:not(:first-of-type) {
   content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
 }
 
 /* Animated gradient shift for featured blog covers */

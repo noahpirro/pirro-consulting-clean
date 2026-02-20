@@ -123,6 +123,8 @@ export const Testimonials = () => {
           aria-live="polite"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
         >
           {/* Navigation Arrows */}
           <button

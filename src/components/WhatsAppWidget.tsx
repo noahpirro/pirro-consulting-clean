@@ -25,12 +25,12 @@ export const WhatsAppWidget = () => {
     <div className="fixed bottom-6 left-6 z-50 flex items-end gap-3">
       {/* Tooltip */}
       <div
-        className={`relative bg-white text-foreground rounded-2xl shadow-xl border border-border p-4 max-w-[240px] transition-all duration-300 ${tooltipVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 -translate-x-5 scale-90 pointer-events-none'}`}
+        className={`relative bg-background text-foreground rounded-2xl shadow-xl border border-border p-4 max-w-[240px] transition-all duration-300 ${tooltipVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 -translate-x-5 scale-90 pointer-events-none'}`}
       >
         <button
           onClick={() => setTooltipVisible(false)}
           className="absolute top-2 right-2 text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="Schliessen"
+          aria-label="Schließen"
         >
           <X className="w-3.5 h-3.5" />
         </button>
@@ -39,7 +39,7 @@ export const WhatsAppWidget = () => {
           Wir antworten meistens innerhalb weniger Minuten.
         </p>
         {/* Arrow */}
-        <div className="absolute -right-2 bottom-4 w-4 h-4 bg-white border-r border-b border-border rotate-[-45deg]" />
+        <div className="absolute -right-2 bottom-4 w-4 h-4 bg-background border-r border-b border-border rotate-[-45deg]" />
       </div>
 
       {/* WhatsApp Button */}

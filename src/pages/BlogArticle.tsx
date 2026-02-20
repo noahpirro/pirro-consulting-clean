@@ -114,7 +114,9 @@ const BlogArticle = () => {
             "@type": "BlogPosting",
             headline: article.title,
             description: article.excerpt,
+            url: `https://pirro-consulting.de/blog/${article.slug}`,
             datePublished: article.dateISO,
+            dateModified: article.dateISO,
             author: { "@type": "Person", name: "Noah Pirro" },
             publisher: {
               "@type": "Organization",

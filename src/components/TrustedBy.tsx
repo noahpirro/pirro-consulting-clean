@@ -69,10 +69,11 @@ export const TrustedBy = () => {
             <div
               key={index}
               className="flex-shrink-0 h-12 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+              {...(index >= clients.length ? { "aria-hidden": true } : {})}
             >
               <img
                 src={client.logo}
-                alt={client.name}
+                alt={index < clients.length ? client.name : ""}
                 width={160}
                 height={48}
                 loading="lazy"

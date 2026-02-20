@@ -184,7 +184,7 @@ export const Integrations = () => {
             Für jedes Problem das <span className="text-highlight">richtige</span> Tool
           </h2>
           <p className="text-background/50 max-w-3xl mx-auto text-lg">
-            Für jedes Problem wählen wir die passenden Tools aus und verbinden sie zu einem maßgeschneiderten Workflow. So entsteht eine individuelle Lösung, die Prozesse vereinfacht, Zeit spart und Ihr Unternehmen spürbar entlastet.
+            Für jedes Problem wählen wir die passenden Tools aus und verbinden sie zu einem maßgeschneiderten Workflow. So entsteht eine individuelle Lösung, die Prozesse vereinfacht, Zeit spart und dein Unternehmen spürbar entlastet.
           </p>
         </div>
 
@@ -342,7 +342,7 @@ export const Integrations = () => {
                 onMouseEnter={() => setHoveredToolIndex(tool.lineIndex)}
                 onMouseLeave={() => setHoveredToolIndex(null)}
               >
-                <div className="group relative hover:scale-115 transition-transform duration-200">
+                <div className="group relative hover:scale-110 transition-transform duration-200">
                   {/* Icon container */}
                   <div className={`${sizeClasses[tool.size as keyof typeof sizeClasses]} rounded-xl bg-background/10 backdrop-blur-sm border border-background/15 flex items-center justify-center shadow-lg group-hover:border-highlight/50 group-hover:bg-background/20 transition-all duration-300`}>
                     <img

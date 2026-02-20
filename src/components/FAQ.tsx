@@ -109,7 +109,7 @@ export const FAQ = () => {
         <AnimatedSection className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
-              <FAQItem key={index} faq={faq} index={index} />
+              <FAQItem key={faq.question} faq={faq} index={index} />
             ))}
           </Accordion>
         </AnimatedSection>

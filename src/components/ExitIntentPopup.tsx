@@ -41,6 +41,7 @@ export const ExitIntentPopup = () => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="exit-popup-title"
+        aria-describedby="exit-popup-desc"
       >
         <div className="relative bg-background rounded-2xl border border-border shadow-2xl overflow-hidden">
           {/* Close */}
@@ -63,7 +64,7 @@ export const ExitIntentPopup = () => {
             <h3 id="exit-popup-title" className="text-2xl md:text-3xl font-display font-bold mb-3">
               Warte kurz!
             </h3>
-            <p className="text-muted-foreground leading-relaxed mb-6">
+            <p id="exit-popup-desc" className="text-muted-foreground leading-relaxed mb-6">
               Erfahre in einer kostenlosen 30-Minuten Potenzialanalyse, wie
               viel Zeit und Geld du mit Automatisierung sparen kannst –
               individuell für dein Unternehmen.
