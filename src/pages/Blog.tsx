@@ -2,11 +2,29 @@ import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { ArrowRight, Clock, Tag, BookOpen, Search, X } from "lucide-react";
+import { ArrowRight, Clock, Tag, BookOpen, Search, X, Zap, Users, Brain, GitBranch, Wrench, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { toast } from "sonner";
 import { articles, categories } from "@/data/articles";
+
+const categoryGradients: Record<string, string> = {
+  Automatisierung: "from-orange-500/20 to-amber-500/10",
+  CRM: "from-blue-500/20 to-cyan-500/10",
+  KI: "from-purple-500/20 to-violet-500/10",
+  Prozesse: "from-emerald-500/20 to-green-500/10",
+  Tools: "from-rose-500/20 to-pink-500/10",
+  Strategie: "from-indigo-500/20 to-blue-500/10",
+};
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  Automatisierung: <Zap className="w-full h-full" />,
+  CRM: <Users className="w-full h-full" />,
+  KI: <Brain className="w-full h-full" />,
+  Prozesse: <GitBranch className="w-full h-full" />,
+  Tools: <Wrench className="w-full h-full" />,
+  Strategie: <Target className="w-full h-full" />,
+};
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("Alle");
@@ -38,11 +56,11 @@ const Blog = () => {
         <meta property="og:title" content="Blog & Ressourcen | Pirro Consulting" />
         <meta property="og:description" content="Praxis-Tipps zu Automatisierung, Digitalisierung, CRM und KI für Unternehmer." />
         <meta property="og:url" content="https://pirro-consulting.de/blog" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
         <meta property="og:image:alt" content="Pirro Consulting Blog – Insights zu Automatisierung und Digitalisierung" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.webp" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -156,9 +174,41 @@ const Blog = () => {
               >
                 {/* Image */}
                 <div className="aspect-[16/10] md:aspect-auto bg-foreground relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-highlight/20 to-transparent group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <BookOpen className="w-16 h-16 text-background/10" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-highlight/20 to-transparent scale-100 group-hover:scale-110 transition-transform duration-700" />
+                  {/* Category gradient background with animation */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${categoryGradients[featured.category] || "from-highlight/20 to-transparent"} group-hover:scale-105 transition-transform duration-500`}
+                    style={{
+                      backgroundSize: "200% 200%",
+                      animation: "gradientShift 6s ease infinite",
+                    }}
+                  />
+                  {/* Decorative diagonal lines */}
+                  <div
+                    className="absolute inset-0 opacity-[0.07]"
+                    style={{
+                      backgroundImage: `repeating-linear-gradient(
+                        45deg,
+                        currentColor 0px,
+                        currentColor 1px,
+                        transparent 1px,
+                        transparent 16px
+                      )`,
+                    }}
+                  />
+                  {/* Decorative dot grid */}
+                  <div
+                    className="absolute inset-0 opacity-[0.04]"
+                    style={{
+                      backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
+                      backgroundSize: "32px 32px",
+                    }}
+                  />
+                  {/* Category icon */}
+                  <div className="absolute inset-0 flex items-center justify-center text-background/[0.07]">
+                    <div className="w-24 h-24">
+                      {categoryIcons[featured.category] || <BookOpen className="w-full h-full" />}
+                    </div>
                   </div>
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-highlight text-white text-xs font-medium rounded-full">
@@ -224,9 +274,38 @@ const Blog = () => {
                   className="group bg-card border border-border rounded-2xl overflow-hidden h-full cursor-pointer hover:-translate-y-1.5 transition-transform duration-300"
                 >
                   {/* Image */}
-                  <div className="aspect-[16/9] bg-secondary relative overflow-hidden group-hover:bg-secondary/80 transition-colors">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <BookOpen className="w-10 h-10 text-foreground/5" />
+                  <div className="aspect-[16/9] bg-secondary relative overflow-hidden transition-colors">
+                    <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent scale-100 group-hover:scale-110 transition-transform duration-500" />
+                    {/* Category gradient background */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${categoryGradients[article.category] || "from-foreground/10 to-transparent"}`}
+                    />
+                    {/* Decorative diagonal lines */}
+                    <div
+                      className="absolute inset-0 opacity-[0.06]"
+                      style={{
+                        backgroundImage: `repeating-linear-gradient(
+                          -45deg,
+                          currentColor 0px,
+                          currentColor 1px,
+                          transparent 1px,
+                          transparent 14px
+                        )`,
+                      }}
+                    />
+                    {/* Decorative dot grid */}
+                    <div
+                      className="absolute inset-0 opacity-[0.03]"
+                      style={{
+                        backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
+                        backgroundSize: "24px 24px",
+                      }}
+                    />
+                    {/* Category icon */}
+                    <div className="absolute inset-0 flex items-center justify-center text-foreground/[0.05]">
+                      <div className="w-14 h-14">
+                        {categoryIcons[article.category] || <BookOpen className="w-full h-full" />}
+                      </div>
                     </div>
                     <div className="absolute top-3 left-3">
                       <span className="px-2.5 py-1 bg-background/90 backdrop-blur-sm text-xs font-medium rounded-full">

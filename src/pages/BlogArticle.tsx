@@ -99,7 +99,7 @@ const BlogArticle = () => {
         <meta property="og:description" content={article.excerpt} />
         <meta property="og:url" content={`https://pirro-consulting.de/blog/${article.slug}`} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
         <meta property="og:image:alt" content={article.title} />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
@@ -119,7 +119,7 @@ const BlogArticle = () => {
             wordCount: article.content.join(" ").split(/\s+/).length,
             articleSection: article.category,
             articleBody: article.content.join("\n\n"),
-            image: "https://pirro-consulting.de/og-image.png",
+            image: "https://pirro-consulting.de/og-image.webp",
             inLanguage: "de-DE",
           })}
         </script>

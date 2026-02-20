@@ -40,10 +40,10 @@ const Index = () => {
         <meta property="og:description" content="Weniger Chaos. Mehr Wachstum. Wir digitalisieren und automatisieren dein Unternehmen – von CRM über Onboarding bis Backoffice." />
         <meta property="og:url" content="https://pirro-consulting.de" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
         <meta property="og:image:alt" content="Pirro Consulting – Automatisierung & Digitalisierung für Unternehmer" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.webp" />
       </Helmet>
       <Navbar />
       <Hero />

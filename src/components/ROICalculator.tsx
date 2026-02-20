@@ -196,6 +196,7 @@ export const ROICalculator = () => {
   const [headerRef, headerInView] = useInView<HTMLDivElement>({ margin: "-80px" });
   const [slidersRef, slidersInView] = useInView<HTMLDivElement>({ margin: "-80px" });
   const [ctaRef, ctaInView] = useInView<HTMLDivElement>();
+  const [compRef, compInView] = useInView<HTMLDivElement>();
 
   return (
     <section className="section-padding bg-foreground text-background relative overflow-hidden">
@@ -310,6 +311,57 @@ export const ROICalculator = () => {
               prefix="\u20AC"
               delay={0.3}
             />
+          </div>
+        </div>
+
+        {/* Visual Comparison */}
+        <div
+          ref={compRef}
+          className={`mt-10 bg-background/[0.05] border border-background/10 rounded-2xl p-6 md:p-8 transition-all duration-700 ease-out ${
+            compInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ transitionDelay: compInView ? "400ms" : "0ms" }}
+        >
+          <h4 className="text-sm font-medium text-background/60 mb-6">Monatlicher Vergleich</h4>
+
+          {/* Hours comparison */}
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between text-sm mb-2">
+                <span className="text-background/60">Ohne Automatisierung</span>
+                <span className="text-background font-medium">{Math.round(hours * 4.33)} h/Monat</span>
+              </div>
+              <div className="h-3 bg-background/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-background/30 rounded-full transition-all duration-1000 ease-out"
+                  style={{ width: compInView ? "100%" : "0%" }}
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between text-sm mb-2">
+                <span className="text-background/60">Mit Automatisierung</span>
+                <span className="text-highlight font-medium">{Math.round(hours * 0.3 * 4.33)} h/Monat</span>
+              </div>
+              <div className="h-3 bg-background/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-highlight rounded-full transition-all duration-1000 ease-out"
+                  style={{
+                    width: compInView ? "30%" : "0%",
+                    transitionDelay: "200ms",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Savings highlight */}
+          <div className="mt-6 pt-4 border-t border-background/10 flex items-center justify-between">
+            <span className="text-sm text-background/60">Einsparung</span>
+            <span className="text-lg font-display font-bold text-highlight">
+              -70% manuelle Arbeit
+            </span>
           </div>
         </div>
 

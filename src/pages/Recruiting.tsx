@@ -93,11 +93,11 @@ const Recruiting = () => {
         <meta property="og:title" content="Recruiting & Mitarbeitergewinnung | Pirro Consulting" />
         <meta property="og:description" content="Social Recruiting, Active Sourcing und automatisierte Bewerbungsprozesse für Unternehmer. Qualifizierte Bewerber in wenigen Wochen." />
         <meta property="og:url" content="https://pirro-consulting.de/recruiting" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
         <meta property="og:image:alt" content="Pirro Consulting – Recruiting-Automatisierung für Unternehmer" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.webp" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Service",

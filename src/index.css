@@ -134,6 +134,19 @@ section:not(:first-of-type) {
   contain-intrinsic-size: auto 600px;
 }
 
+/* Animated gradient shift for featured blog covers */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
 /* GPU-beschleunigte Animationen */
 .will-change-transform {
   will-change: transform;

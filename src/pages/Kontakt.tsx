@@ -100,7 +100,7 @@ export const Kontakt = () => {
           content="Kontaktiere uns für eine kostenlose Potenzialanalyse."
         />
         <meta property="og:url" content="https://pirro-consulting.de/kontakt" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
         <meta property="og:image:alt" content="Pirro Consulting – Kontakt aufnehmen" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">

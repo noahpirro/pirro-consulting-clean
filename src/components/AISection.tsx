@@ -220,6 +220,10 @@ export const AISection = () => {
           0%, 100% { transform: scale(1); opacity: 0.2; }
           50% { transform: scale(1.5); opacity: 0.5; }
         }
+        @keyframes neuralPulse {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.8; }
+        }
       `}</style>
 
       {/* Background nodes */}
@@ -233,6 +237,35 @@ export const AISection = () => {
         <FloatingNode delay={0.8} x="60%" y="85%" />
         <FloatingNode delay={1.2} x="90%" y="45%" />
       </div>
+
+      {/* Neural network connections SVG */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+        {[
+          { x1: "10%", y1: "20%", x2: "50%", y2: "10%" },
+          { x1: "50%", y1: "10%", x2: "85%", y2: "15%" },
+          { x1: "85%", y1: "15%", x2: "75%", y2: "70%" },
+          { x1: "75%", y1: "70%", x2: "60%", y2: "85%" },
+          { x1: "15%", y1: "80%", x2: "30%", y2: "60%" },
+          { x1: "30%", y1: "60%", x2: "50%", y2: "10%" },
+          { x1: "10%", y1: "20%", x2: "15%", y2: "80%" },
+          { x1: "90%", y1: "45%", x2: "75%", y2: "70%" },
+        ].map((line, i) => (
+          <line
+            key={i}
+            x1={line.x1}
+            y1={line.y1}
+            x2={line.x2}
+            y2={line.y2}
+            stroke="currentColor"
+            strokeWidth="0.5"
+            className="text-foreground/[0.06]"
+            strokeDasharray="4 4"
+            style={{
+              animation: `neuralPulse 4s ease-in-out ${i * 0.3}s infinite`,
+            }}
+          />
+        ))}
+      </svg>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Header */}
@@ -253,6 +286,7 @@ export const AISection = () => {
 
         {/* Workflow visualization */}
         <div className="relative mb-20 md:mb-28">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/30 to-transparent rounded-3xl -mx-4 md:-mx-8" />
           {/* Connection lines (desktop) */}
           <div className="hidden md:block absolute top-[60px] left-0 right-0">
             <ConnectionLine from="12.5%" to="75%" delay={0.3} />
@@ -281,7 +315,11 @@ export const AISection = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left: Stats */}
           <AnimatedSection direction="left" delay={0.2}>
-            <div className="bg-secondary/50 border border-border rounded-2xl p-8 md:p-10">
+            <div className="bg-secondary/50 border border-border rounded-2xl p-8 md:p-10 relative overflow-hidden">
+              <div
+                className="absolute -top-20 -right-20 w-40 h-40 bg-foreground/[0.03] rounded-full blur-2xl"
+                style={{ animation: "floatingNodePulse 6s ease-in-out infinite" }}
+              />
               <div className="flex items-center gap-3 mb-8">
                 <BarChart3 className="w-5 h-5 text-muted-foreground" />
                 <span className="text-sm font-medium text-muted-foreground">Messbare Ergebnisse</span>

@@ -1,5 +1,5 @@
 import { TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useInView } from "@/hooks/useInView";
 
 // Import images
@@ -49,6 +49,22 @@ const caseStudies = [
 export const CaseStudies = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [headerRef, headerInView] = useInView<HTMLDivElement>();
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      // Calculate how far through the viewport the section is
+      const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+      setScrollY(Math.max(0, Math.min(1, progress)));
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % caseStudies.length);
@@ -61,7 +77,7 @@ export const CaseStudies = () => {
   const currentStudy = caseStudies[currentIndex];
 
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden" id="case-studies">
+    <section ref={sectionRef} className="py-20 md:py-28 relative overflow-hidden" id="case-studies">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-foreground/80 via-foreground/70 to-foreground/80" />
 
@@ -153,7 +169,8 @@ export const CaseStudies = () => {
                     height={750}
                     loading="lazy"
                     decoding="async"
-                    className="w-full aspect-[4/5] object-cover"
+                    className="w-full aspect-[4/5] object-cover scale-110"
+                    style={{ transform: `scale(1.1) translateY(${(scrollY - 0.5) * -30}px)` }}
                   />
                   {/* Subtle gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

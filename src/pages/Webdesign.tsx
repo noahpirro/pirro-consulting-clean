@@ -93,11 +93,11 @@ const Webdesign = () => {
         <meta property="og:title" content="Webdesign & Entwicklung | Pirro Consulting" />
         <meta property="og:description" content="Professionelles Webdesign f\u00FCr Unternehmer. Conversion-optimierte Websites die Kunden gewinnen." />
         <meta property="og:url" content="https://pirro-consulting.de/webdesign" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
         <meta property="og:image:alt" content="Pirro Consulting – Professionelles Webdesign für Unternehmer" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.webp" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Service",
