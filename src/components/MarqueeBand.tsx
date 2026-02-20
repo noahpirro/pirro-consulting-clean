@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 interface MarqueeBandProps {
   texts: string[];
   /** Scroll speed in seconds (default 20) */
@@ -24,16 +22,18 @@ export const MarqueeBand = ({
         isDark ? "bg-foreground" : "bg-secondary"
       } ${className}`}
     >
+      <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0%); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
+
       <div className="flex whitespace-nowrap">
-        <motion.div
+        <div
           className="flex items-center gap-8 md:gap-12"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            x: {
-              duration: speed,
-              repeat: Infinity,
-              ease: "linear",
-            },
+          style={{
+            animation: `marquee ${speed}s linear infinite`,
           }}
         >
           {repeated.map((text, i) => (
@@ -54,7 +54,7 @@ export const MarqueeBand = ({
               </span>
             </span>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

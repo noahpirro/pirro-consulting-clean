@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Star, Quote, ChevronLeft, ChevronRight, ShoppingCart, Megaphone, GraduationCap, Monitor } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
@@ -61,24 +60,6 @@ const StarRating = ({ rating }: { rating: number }) => (
     ))}
   </div>
 );
-
-const slideVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 300 : -300,
-    opacity: 0,
-    scale: 0.95,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
-  },
-  exit: (direction: number) => ({
-    x: direction > 0 ? -300 : 300,
-    opacity: 0,
-    scale: 0.95,
-  }),
-};
 
 export const Testimonials = () => {
   const [current, setCurrent] = useState(0);
@@ -165,54 +146,46 @@ export const Testimonials = () => {
 
           {/* Card */}
           <div className="overflow-hidden px-2">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.article
-                key={current}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="relative p-8 md:p-12 bg-card rounded-2xl border border-border shadow-sm"
-              >
-                <Quote className="absolute top-6 right-6 w-10 h-10 text-primary/10" />
+            <article
+              key={current}
+              className="relative p-8 md:p-12 bg-card rounded-2xl border border-border shadow-sm animate-fade-in"
+            >
+              <Quote className="absolute top-6 right-6 w-10 h-10 text-primary/10" />
 
-                <StarRating rating={t.rating} />
+              <StarRating rating={t.rating} />
 
-                <blockquote className="mt-6 mb-6 text-foreground text-xl md:text-2xl leading-relaxed font-display">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
+              <blockquote className="mt-6 mb-6 text-foreground text-xl md:text-2xl leading-relaxed font-display">
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
 
-                {/* Result Badge */}
-                <div className="inline-flex items-center px-3 py-1.5 bg-primary/10 rounded-full mb-8 border border-primary/20">
-                  <span className="text-sm font-medium text-primary">
-                    &#10003; {t.result}
+              {/* Result Badge */}
+              <div className="inline-flex items-center px-3 py-1.5 bg-primary/10 rounded-full mb-8 border border-primary/20">
+                <span className="text-sm font-medium text-primary">
+                  &#10003; {t.result}
+                </span>
+              </div>
+
+              {/* Author */}
+              <footer className="flex items-center gap-4">
+                <div className={`relative w-14 h-14 rounded-full bg-gradient-to-br ${t.avatarGradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                  <span className="text-base font-bold text-white">
+                    {t.initials}
                   </span>
                 </div>
-
-                {/* Author */}
-                <footer className="flex items-center gap-4">
-                  <div className={`relative w-14 h-14 rounded-full bg-gradient-to-br ${t.avatarGradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
-                    <span className="text-base font-bold text-white">
-                      {t.initials}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <cite className="not-italic font-semibold text-foreground text-lg block">
-                      {t.name}
-                    </cite>
-                    <p className="text-sm text-muted-foreground">
-                      {t.role}, {t.company}
-                    </p>
-                  </div>
-                  <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full">
-                    <Icon className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-xs text-muted-foreground font-medium">{t.company}</span>
-                  </div>
-                </footer>
-              </motion.article>
-            </AnimatePresence>
+                <div className="flex-1 min-w-0">
+                  <cite className="not-italic font-semibold text-foreground text-lg block">
+                    {t.name}
+                  </cite>
+                  <p className="text-sm text-muted-foreground">
+                    {t.role}, {t.company}
+                  </p>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full">
+                  <Icon className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-xs text-muted-foreground font-medium">{t.company}</span>
+                </div>
+              </footer>
+            </article>
           </div>
 
           {/* Avatar Preview Strip + Dots */}

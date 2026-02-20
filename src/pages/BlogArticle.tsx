@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -5,6 +6,44 @@ import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { articles } from "@/data/articles";
 import { AnimatedSection } from "@/components/AnimatedSection";
+
+const internalLinks: { pattern: RegExp; to: string }[] = [
+  { pattern: /\bCRM-System[e]?\b/, to: "/" },
+  { pattern: /\bCRM\b/, to: "/" },
+  { pattern: /\bAutomatisierung\b/, to: "/" },
+  { pattern: /\bDigitalisierung\b/, to: "/" },
+  { pattern: /\bOnboarding\b/, to: "/" },
+  { pattern: /\bMarketing\b/, to: "/marketing" },
+  { pattern: /\bRecruiting\b/, to: "/recruiting" },
+  { pattern: /\bWebdesign\b/, to: "/webdesign" },
+  { pattern: /\bErstgespräch\b/, to: "/kontakt" },
+  { pattern: /\bPotenzialanalyse\b/, to: "/kontakt" },
+];
+
+function linkifyParagraph(text: string, usedKeywords: Set<string>): ReactNode {
+  for (const { pattern, to } of internalLinks) {
+    const key = pattern.source;
+    if (usedKeywords.has(key)) continue;
+    const match = text.match(pattern);
+    if (!match || match.index === undefined) continue;
+
+    usedKeywords.add(key);
+    const before = text.slice(0, match.index);
+    const matched = match[0];
+    const after = text.slice(match.index + matched.length);
+
+    return (
+      <>
+        {before}
+        <Link to={to} className="text-highlight hover:underline">
+          {matched}
+        </Link>
+        {after}
+      </>
+    );
+  }
+  return text;
+}
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -17,6 +56,19 @@ const BlogArticle = () => {
   const currentIndex = articles.indexOf(article);
   const nextArticle = articles[currentIndex + 1] || null;
   const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null;
+
+  const relatedArticles = articles
+    .filter((a) => a.slug !== article.slug && a.category === article.category)
+    .slice(0, 3);
+  // If not enough from same category, fill with other articles
+  if (relatedArticles.length < 3) {
+    const others = articles.filter(
+      (a) => a.slug !== article.slug && !relatedArticles.includes(a)
+    );
+    relatedArticles.push(...others.slice(0, 3 - relatedArticles.length));
+  }
+
+  const usedKeywords = new Set<string>();
 
   return (
     <main id="main-content" className="min-h-screen bg-background">
@@ -111,7 +163,7 @@ const BlogArticle = () => {
                   key={i}
                   className="text-muted-foreground leading-relaxed mb-6 text-base md:text-lg"
                 >
-                  {paragraph}
+                  {linkifyParagraph(paragraph, usedKeywords)}
                 </p>
               ))}
             </div>
@@ -139,6 +191,46 @@ const BlogArticle = () => {
           </div>
         </div>
       </section>
+
+      {/* Related Articles */}
+      {relatedArticles.length > 0 && (
+        <section className="pb-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <AnimatedSection>
+                <h2 className="text-2xl font-display font-bold mb-8">
+                  Weitere Artikel
+                </h2>
+              </AnimatedSection>
+              <div className="grid md:grid-cols-3 gap-6">
+                {relatedArticles.map((related, i) => (
+                  <AnimatedSection key={related.slug} delay={i * 0.1}>
+                    <Link
+                      to={`/blog/${related.slug}`}
+                      className="group block p-6 border border-border rounded-xl hover:border-foreground/30 transition-colors h-full"
+                    >
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-secondary rounded-full text-xs text-muted-foreground mb-3">
+                        <Tag className="w-3 h-3" />
+                        {related.category}
+                      </span>
+                      <h3 className="font-display font-semibold mb-2 group-hover:text-highlight transition-colors line-clamp-2">
+                        {related.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground line-clamp-3">
+                        {related.excerpt}
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-xs text-muted-foreground mt-3">
+                        <Clock className="w-3 h-3" />
+                        {related.readTime}
+                      </span>
+                    </Link>
+                  </AnimatedSection>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Prev / Next Navigation */}
       <section className="pb-20">

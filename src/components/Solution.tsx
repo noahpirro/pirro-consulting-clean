@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 import { AnimatedSection } from "./AnimatedSection";
 import { GlowCard } from "./GlowCard";
 import { TextReveal } from "./TextReveal";
@@ -24,6 +24,24 @@ const solutions = [
     highlight: "Zukunftssicher aufgestellt",
   },
 ];
+
+const SolutionNumber = ({ number, index }: { number: string; index: number }) => {
+  const [ref, inView] = useInView();
+
+  return (
+    <span
+      ref={ref}
+      className="text-7xl md:text-8xl font-display font-bold text-foreground/[0.05] absolute -top-4 -right-2"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "scale(1)" : "scale(0.5)",
+        transition: `opacity 0.5s ease ${index * 0.15 + 0.3}s, transform 0.5s ease ${index * 0.15 + 0.3}s`,
+      }}
+    >
+      {number}
+    </span>
+  );
+};
 
 export const Solution = () => {
   return (
@@ -52,15 +70,7 @@ export const Solution = () => {
               <GlowCard glowColor="rgba(0,0,0,0.06)" tiltStrength={5}>
                 <div className="relative bg-secondary border border-border rounded-2xl p-8 h-full overflow-hidden">
                   {/* Number */}
-                  <motion.span 
-                    className="text-7xl md:text-8xl font-display font-bold text-foreground/[0.05] absolute -top-4 -right-2"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
-                  >
-                    {solution.number}
-                  </motion.span>
+                  <SolutionNumber number={solution.number} index={index} />
 
                   {/* Content */}
                   <div className="relative z-10">
@@ -70,7 +80,7 @@ export const Solution = () => {
                     <p className="text-muted-foreground leading-relaxed mb-6">
                       {solution.description}
                     </p>
-                    
+
                     {/* Highlight Badge */}
                     <div className="inline-flex items-center gap-2 bg-foreground text-background px-4 py-2 rounded-full text-sm font-medium">
                       <ArrowRight className="w-4 h-4" />

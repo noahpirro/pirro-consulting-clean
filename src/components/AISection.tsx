@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 import { Bot, Zap, BarChart3, Target, Sparkles, ArrowRight } from "lucide-react";
@@ -6,98 +6,102 @@ import { useEffect, useState } from "react";
 
 // Animated node component for the background
 const FloatingNode = ({ delay, x, y }: { delay: number; x: string; y: string }) => (
-  <motion.div
+  <div
     className="absolute w-2 h-2 bg-foreground/20 rounded-full"
-    style={{ left: x, top: y }}
-    animate={{
-      scale: [1, 1.5, 1],
-      opacity: [0.2, 0.5, 0.2],
-    }}
-    transition={{
-      duration: 3,
-      delay,
-      repeat: Infinity,
-      ease: "easeInOut",
+    style={{
+      left: x,
+      top: y,
+      animation: `floatingNodePulse 3s ease-in-out ${delay}s infinite`,
     }}
   />
 );
 
 // Animated connection line
-const ConnectionLine = ({ from, to, delay }: { from: string; to: string; delay: number }) => (
-  <motion.div
-    className="absolute h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"
-    style={{
-      left: from,
-      width: to,
-      top: "50%",
-    }}
-    initial={{ scaleX: 0, opacity: 0 }}
-    whileInView={{ scaleX: 1, opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1, delay, ease: "easeOut" }}
-  />
-);
+const ConnectionLine = ({ from, to, delay }: { from: string; to: string; delay: number }) => {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      className="absolute h-px bg-gradient-to-r from-transparent via-foreground/30 to-transparent"
+      style={{
+        left: from,
+        width: to,
+        top: "50%",
+        transform: inView ? "scaleX(1)" : "scaleX(0)",
+        opacity: inView ? 1 : 0,
+        transition: `transform 1s ease ${delay}s, opacity 1s ease ${delay}s`,
+      }}
+    />
+  );
+};
 
 // Workflow step component
-const WorkflowStep = ({ 
-  icon: Icon, 
-  title, 
-  description, 
-  step, 
-  delay 
-}: { 
-  icon: React.ElementType; 
-  title: string; 
-  description: string; 
+const WorkflowStep = ({
+  icon: Icon,
+  title,
+  description,
+  step,
+  delay,
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
   step: number;
   delay: number;
-}) => (
-  <motion.div
-    className="relative flex flex-col items-center text-center group"
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay }}
-  >
-    {/* Step number */}
-    <motion.span
-      className="absolute -top-4 text-xs font-medium text-muted-foreground"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: delay + 0.2 }}
+}) => {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      className="relative flex flex-col items-center text-center group"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(30px)",
+        transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`,
+      }}
     >
-      0{step}
-    </motion.span>
-    
-    {/* Icon container */}
-    <motion.div
-      className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center mb-4 group-hover:bg-foreground group-hover:border-foreground transition-all duration-300"
-      whileHover={{ scale: 1.05 }}
-    >
-      <Icon className="w-7 h-7 md:w-8 md:h-8 text-foreground group-hover:text-background transition-colors duration-300" />
-    </motion.div>
-    
-    {/* Title */}
-    <h4 className="font-display font-semibold text-sm md:text-base mb-2">{title}</h4>
-    
-    {/* Description */}
-    <p className="text-xs md:text-sm text-muted-foreground max-w-[140px] md:max-w-[160px]">{description}</p>
-  </motion.div>
-);
+      {/* Step number */}
+      <span
+        className="absolute -top-4 text-xs font-medium text-muted-foreground"
+        style={{
+          opacity: inView ? 1 : 0,
+          transition: `opacity 0.5s ease ${delay + 0.2}s`,
+        }}
+      >
+        0{step}
+      </span>
+
+      {/* Icon container */}
+      <div
+        className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-secondary border border-border flex items-center justify-center mb-4 group-hover:bg-foreground group-hover:border-foreground transition-all duration-300 hover:scale-105"
+      >
+        <Icon className="w-7 h-7 md:w-8 md:h-8 text-foreground group-hover:text-background transition-colors duration-300" />
+      </div>
+
+      {/* Title */}
+      <h4 className="font-display font-semibold text-sm md:text-base mb-2">{title}</h4>
+
+      {/* Description */}
+      <p className="text-xs md:text-sm text-muted-foreground max-w-[140px] md:max-w-[160px]">{description}</p>
+    </div>
+  );
+};
 
 // Animated stat card
 const StatCard = ({ value, label, delay }: { value: string; label: string; delay: number }) => {
   const [count, setCount] = useState(0);
   const numericValue = parseInt(value.replace(/\D/g, ''));
-  
+  const [ref, inView] = useInView();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       const duration = 2000;
       const steps = 60;
       const increment = numericValue / steps;
       let current = 0;
-      
+
       const interval = setInterval(() => {
         current += increment;
         if (current >= numericValue) {
@@ -107,28 +111,28 @@ const StatCard = ({ value, label, delay }: { value: string; label: string; delay
           setCount(Math.floor(current));
         }
       }, duration / steps);
-      
+
       return () => clearInterval(interval);
     }, delay * 1000);
-    
+
     return () => clearTimeout(timer);
   }, [numericValue, delay]);
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       className="text-center"
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "scale(1)" : "scale(0.9)",
+        transition: `opacity 0.5s ease ${delay}s, transform 0.5s ease ${delay}s`,
+      }}
     >
-      <motion.span
-        className="block text-3xl md:text-4xl font-display font-bold text-foreground"
-      >
+      <span className="block text-3xl md:text-4xl font-display font-bold text-foreground">
         {count}{value.includes('%') ? '%' : value.includes('+') ? '+' : ''}
-      </motion.span>
+      </span>
       <span className="text-sm text-muted-foreground">{label}</span>
-    </motion.div>
+    </div>
   );
 };
 
@@ -144,22 +148,38 @@ const AnimatedChart = () => {
     { height: 70, delay: 0.7 },
   ];
 
+  const [ref, inView] = useInView();
+
   return (
-    <div className="flex items-end justify-center gap-2 h-24">
+    <div className="flex items-end justify-center gap-2 h-24" ref={ref}>
       {bars.map((bar, i) => (
-        <motion.div
+        <div
           key={i}
           className="w-3 md:w-4 bg-foreground/20 rounded-t"
-          initial={{ height: 0 }}
-          whileInView={{ height: `${bar.height}%` }}
-          viewport={{ once: true }}
-          transition={{ 
-            duration: 0.8, 
-            delay: bar.delay,
-            ease: [0.25, 0.1, 0.25, 1]
+          style={{
+            height: inView ? `${bar.height}%` : "0%",
+            transition: `height 0.8s cubic-bezier(0.25,0.1,0.25,1) ${bar.delay}s`,
           }}
         />
       ))}
+    </div>
+  );
+};
+
+// Arrow indicator component
+const ArrowIndicator = ({ index }: { index: number }) => {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateX(0)" : "translateX(-10px)",
+        transition: `opacity 0.5s ease ${0.8 + index * 0.2}s, transform 0.5s ease ${0.8 + index * 0.2}s`,
+      }}
+    >
+      <ArrowRight className="w-4 h-4 text-muted-foreground" />
     </div>
   );
 };
@@ -194,6 +214,14 @@ export const AISection = () => {
 
   return (
     <section id="ai" className="section-padding relative overflow-hidden">
+      {/* CSS keyframes for FloatingNode */}
+      <style>{`
+        @keyframes floatingNodePulse {
+          0%, 100% { transform: scale(1); opacity: 0.2; }
+          50% { transform: scale(1.5); opacity: 0.5; }
+        }
+      `}</style>
+
       {/* Background nodes */}
       <div className="absolute inset-0 pointer-events-none">
         <FloatingNode delay={0} x="10%" y="20%" />
@@ -218,7 +246,7 @@ export const AISection = () => {
             <span className="block text-muted-foreground"><TextReveal text="für Ihr Unternehmen" delay={0.2} /></span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
-            Unsere KI-Lösungen analysieren, personalisieren und automatisieren – 
+            Unsere KI-Lösungen analysieren, personalisieren und automatisieren –
             damit Sie sich auf das Wesentliche konzentrieren können.
           </p>
         </AnimatedSection>
@@ -227,22 +255,7 @@ export const AISection = () => {
         <div className="relative mb-20 md:mb-28">
           {/* Connection lines (desktop) */}
           <div className="hidden md:block absolute top-[60px] left-0 right-0">
-            <svg className="w-full h-2" preserveAspectRatio="none">
-              <motion.line
-                x1="12.5%"
-                y1="50%"
-                x2="87.5%"
-                y2="50%"
-                stroke="currentColor"
-                strokeWidth="1"
-                strokeDasharray="4 4"
-                className="text-border"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              />
-            </svg>
+            <ConnectionLine from="12.5%" to="75%" delay={0.3} />
           </div>
 
           {/* Workflow steps */}
@@ -259,15 +272,7 @@ export const AISection = () => {
           {/* Arrow indicators (desktop) */}
           <div className="hidden md:flex absolute top-[52px] left-0 right-0 justify-around px-[20%]">
             {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.8 + i * 0.2 }}
-              >
-                <ArrowRight className="w-4 h-4 text-muted-foreground" />
-              </motion.div>
+              <ArrowIndicator key={i} index={i} />
             ))}
           </div>
         </div>
@@ -281,7 +286,7 @@ export const AISection = () => {
                 <BarChart3 className="w-5 h-5 text-muted-foreground" />
                 <span className="text-sm font-medium text-muted-foreground">Messbare Ergebnisse</span>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-8 mb-8">
                 <StatCard value="85%" label="Zeitersparnis" delay={0.3} />
                 <StatCard value="3x" label="schnellere Prozesse" delay={0.4} />
@@ -314,27 +319,37 @@ export const AISection = () => {
                   description: "Maßgeschneiderte Lösungen, die sich an Ihre spezifischen Anforderungen anpassen.",
                 },
               ].map((feature, i) => (
-                <motion.div
-                  key={feature.title}
-                  className="flex gap-4 p-4 rounded-xl hover:bg-secondary/50 transition-colors group cursor-default"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + i * 0.1 }}
-                >
-                  <div className="w-12 h-12 rounded-xl bg-secondary border border-border flex items-center justify-center shrink-0 group-hover:bg-foreground group-hover:border-foreground transition-all duration-300">
-                    <feature.icon className="w-5 h-5 text-foreground group-hover:text-background transition-colors duration-300" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-semibold mb-1">{feature.title}</h4>
-                    <p className="text-sm text-muted-foreground">{feature.description}</p>
-                  </div>
-                </motion.div>
+                <FeatureItem key={feature.title} feature={feature} index={i} />
               ))}
             </div>
           </AnimatedSection>
         </div>
       </div>
     </section>
+  );
+};
+
+// Feature list item component
+const FeatureItem = ({ feature, index }: { feature: { icon: React.ElementType; title: string; description: string }; index: number }) => {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      className="flex gap-4 p-4 rounded-xl hover:bg-secondary/50 transition-colors group cursor-default"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateX(0)" : "translateX(20px)",
+        transition: `opacity 0.5s ease ${0.4 + index * 0.1}s, transform 0.5s ease ${0.4 + index * 0.1}s`,
+      }}
+    >
+      <div className="w-12 h-12 rounded-xl bg-secondary border border-border flex items-center justify-center shrink-0 group-hover:bg-foreground group-hover:border-foreground transition-all duration-300">
+        <feature.icon className="w-5 h-5 text-foreground group-hover:text-background transition-colors duration-300" />
+      </div>
+      <div>
+        <h4 className="font-display font-semibold mb-1">{feature.title}</h4>
+        <p className="text-sm text-muted-foreground">{feature.description}</p>
+      </div>
+    </div>
   );
 };

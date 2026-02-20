@@ -1,5 +1,5 @@
 import { ArrowRight, Calendar, Sparkles, Shield, Clock, Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 import { MagneticButton } from "./MagneticButton";
 import { TextReveal } from "./TextReveal";
 import { Aurora } from "./Aurora";
@@ -7,6 +7,8 @@ import { FloatingParticles } from "./FloatingParticles";
 import { NoiseTexture } from "./NoiseTexture";
 
 export const CTA = () => {
+  const [ref, inView] = useInView();
+
   return (
     <section className="py-28 md:py-36 bg-foreground text-background relative overflow-hidden">
       {/* Background Effects */}
@@ -14,65 +16,66 @@ export const CTA = () => {
       <FloatingParticles count={20} color="rgba(255,255,255,0.1)" />
       <NoiseTexture opacity={0.035} />
 
-      <div className="container mx-auto px-4 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+      <div className="container mx-auto px-4 text-center relative z-10" ref={ref}>
+        <div
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0)" : "translateY(30px)",
+            transition: "opacity 0.6s ease, transform 0.6s ease",
+          }}
         >
           <div className="inline-flex items-center gap-2 bg-highlight/20 border border-highlight/30 px-4 py-2 rounded-full mb-8">
             <Sparkles className="w-4 h-4 text-highlight" />
             <span className="text-sm font-medium text-highlight">Limitierte Plätze verfügbar</span>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.h2
+        <h2
           className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-bold mb-6 leading-tight"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0)" : "translateY(30px)",
+            transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
+          }}
         >
           <TextReveal text="Bereit für weniger Chaos" />
           <br />
           <TextReveal text="und" delay={0.2} />{" "}
           <span className="relative inline-block">
             <span className="text-highlight"><TextReveal text="mehr Wachstum?" delay={0.25} /></span>
-            <motion.span
+            <span
               className="absolute -bottom-2 left-0 right-0 h-1 bg-highlight/40 rounded-full"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8, duration: 0.6 }}
+              style={{
+                transform: inView ? "scaleX(1)" : "scaleX(0)",
+                transition: "transform 0.6s ease 0.8s",
+                transformOrigin: "left",
+              }}
             />
           </span>
-        </motion.h2>
+        </h2>
 
-        <motion.p
+        <p
           className="text-lg md:text-xl text-background/70 max-w-2xl mx-auto mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0)" : "translateY(30px)",
+            transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
+          }}
         >
           Lass uns in einem kostenlosen Gespräch herausfinden, welches
           Automatisierungs-Potenzial in deinem Unternehmen steckt.
-        </motion.p>
+        </p>
 
-        <motion.div
+        <div
           className="flex flex-col items-center gap-6"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0)" : "translateY(30px)",
+            transition: "opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s",
+          }}
         >
           <MagneticButton strength={0.3}>
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
+            <div className="hover:scale-[1.03] active:scale-[0.98] transition-transform">
               <a
                 href="https://calendly.com/pirroconsulting"
                 target="_blank"
@@ -83,7 +86,7 @@ export const CTA = () => {
                 Kostenlose Potenzialanalyse buchen
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
-            </motion.div>
+            </div>
           </MagneticButton>
 
           {/* Secondary Option */}
@@ -95,15 +98,15 @@ export const CTA = () => {
           >
             oder direkt per WhatsApp schreiben →
           </a>
-        </motion.div>
+        </div>
 
         {/* Trust Indicators */}
-        <motion.div
+        <div
           className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          style={{
+            opacity: inView ? 1 : 0,
+            transition: "opacity 0.6s ease 0.5s",
+          }}
         >
           <div className="flex items-center justify-center gap-3 text-background/60">
             <div className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center">
@@ -132,7 +135,7 @@ export const CTA = () => {
               <p className="text-xs text-background/40">Ergebnisse garantiert</p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

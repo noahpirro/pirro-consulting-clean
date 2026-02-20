@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { useInView } from "@/hooks/useInView";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -8,35 +8,36 @@ interface AnimatedSectionProps {
   direction?: "up" | "down" | "left" | "right" | "none";
 }
 
-export const AnimatedSection = ({ 
-  children, 
-  className = "", 
+export const AnimatedSection = ({
+  children,
+  className = "",
   delay = 0,
-  direction = "up" 
+  direction = "up"
 }: AnimatedSectionProps) => {
-  const getInitialPosition = () => {
+  const [ref, inView] = useInView<HTMLDivElement>({ margin: "-100px" });
+
+  const getTransform = () => {
+    if (inView) return "translate(0,0)";
     switch (direction) {
-      case "up": return { y: 60, x: 0 };
-      case "down": return { y: -60, x: 0 };
-      case "left": return { y: 0, x: 60 };
-      case "right": return { y: 0, x: -60 };
-      case "none": return { y: 0, x: 0 };
+      case "up": return "translate(0,60px)";
+      case "down": return "translate(0,-60px)";
+      case "left": return "translate(60px,0)";
+      case "right": return "translate(-60px,0)";
+      case "none": return "translate(0,0)";
     }
   };
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={className}
-      initial={{ opacity: 0, ...getInitialPosition() }}
-      whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ 
-        duration: 0.7, 
-        delay,
-        ease: [0.25, 0.1, 0.25, 1] 
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: getTransform(),
+        transition: `opacity 0.7s cubic-bezier(0.25,0.1,0.25,1) ${delay}s, transform 0.7s cubic-bezier(0.25,0.1,0.25,1) ${delay}s`,
       }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };

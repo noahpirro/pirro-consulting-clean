@@ -1,5 +1,4 @@
 import { ArrowRight, Check, ChevronDown, Bell, Shield } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
 import { SplitText } from "./SplitText";
@@ -28,39 +27,24 @@ const notifications = [
   { title: "Rechnung erstellt", subtitle: "Automatisch versendet" },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut" as const,
-    },
-  },
-};
-
 export const Hero = () => {
   const [wordIndex, setWordIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+  const [scrollStyle, setScrollStyle] = useState<React.CSSProperties>({});
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const progress = Math.min(Math.max(-rect.top / (rect.height * 0.5), 0), 1);
+      setScrollStyle({
+        opacity: 1 - progress,
+        transform: `scale(${1 - progress * 0.05}) translateY(${progress * 100}px)`,
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -86,12 +70,10 @@ export const Hero = () => {
       {/* Floating Notification Cards */}
       <div className="absolute right-8 top-32 hidden lg:block">
         {notifications.map((notif, index) => (
-          <motion.div
+          <div
             key={index}
-            className="bg-background/10 backdrop-blur-sm border border-background/20 rounded-lg p-4 mb-4 w-64"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1 + index * 0.3, duration: 0.5 }}
+            className="bg-background/10 backdrop-blur-sm border border-background/20 rounded-lg p-4 mb-4 w-64 opacity-0 animate-fade-in"
+            style={{ animationDelay: `${1 + index * 0.3}s` }}
           >
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-full bg-background/20 flex items-center justify-center flex-shrink-0">
@@ -102,81 +84,69 @@ export const Hero = () => {
                 <p className="text-xs text-background/60">{notif.subtitle}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
-      <motion.div
+      <div
         className="container mx-auto max-w-4xl text-center relative z-10"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+        style={scrollStyle}
       >
         {/* Badge */}
-        <motion.div
-          className="inline-flex items-center gap-2 bg-background/10 border border-background/20 px-4 py-2 rounded-full mb-8"
-          variants={itemVariants}
+        <div
+          className="inline-flex items-center gap-2 bg-background/10 border border-background/20 px-4 py-2 rounded-full mb-8 opacity-0 animate-fade-in"
+          style={{ animationDelay: "0.3s" }}
         >
           <span className="w-2 h-2 bg-highlight rounded-full animate-pulse" />
           <span className="text-sm text-background/80">Jetzt freie Kapazitäten sichern</span>
-        </motion.div>
+        </div>
 
         {/* Tagline */}
-        <motion.p
-          className="text-sm uppercase tracking-[0.2em] text-background/60 mb-6"
-          variants={itemVariants}
+        <p
+          className="text-sm uppercase tracking-[0.2em] text-background/60 mb-6 opacity-0 animate-fade-in"
+          style={{ animationDelay: "0.45s" }}
         >
           Automatisierung & Digitalisierung für Unternehmer
-        </motion.p>
+        </p>
 
         {/* Headline */}
-        <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight mb-4"
-          variants={itemVariants}
+        <h1
+          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight mb-4 opacity-0 animate-fade-in"
+          style={{ animationDelay: "0.6s" }}
         >
           <SplitText text="Weniger Chaos." type="words" stagger={0.04} delay={0.3} />
           <br />
           <span className="inline-block">
             <SplitText text="Mehr" type="words" stagger={0.04} delay={0.6} />{" "}
             <span className="relative inline-block text-highlight">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={rotatingWords[wordIndex]}
-                  className="inline-block"
-                  initial={{ y: 30, opacity: 0, rotateX: -40 }}
-                  animate={{ y: 0, opacity: 1, rotateX: 0 }}
-                  exit={{ y: -30, opacity: 0, rotateX: 40 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                >
-                  {rotatingWords[wordIndex]}
-                </motion.span>
-              </AnimatePresence>
+              <span key={wordIndex} className="inline-block animate-fade-in">
+                {rotatingWords[wordIndex]}
+              </span>
             </span>
           </span>
-        </motion.h1>
+        </h1>
 
         {/* Guarantee */}
-        <motion.div
-          className="inline-flex items-center gap-2 bg-highlight/20 border border-highlight/30 px-4 py-2 rounded-full mb-6"
-          variants={itemVariants}
+        <div
+          className="inline-flex items-center gap-2 bg-highlight/20 border border-highlight/30 px-4 py-2 rounded-full mb-6 opacity-0 animate-fade-in"
+          style={{ animationDelay: "0.75s" }}
         >
           <Shield className="w-4 h-4 text-highlight" />
           <span className="text-sm font-medium text-highlight">Ergebnisse in 4 Wochen – garantiert</span>
-        </motion.div>
+        </div>
 
         {/* Subheadline */}
-        <motion.p
-          className="text-lg md:text-xl text-background/70 max-w-2xl mx-auto mb-8"
-          variants={itemVariants}
+        <p
+          className="text-lg md:text-xl text-background/70 max-w-2xl mx-auto mb-8 opacity-0 animate-fade-in"
+          style={{ animationDelay: "0.9s" }}
         >
           Wir digitalisieren und automatisieren dein Unternehmen – damit du dich auf das konzentrieren kannst, was wirklich zählt: Kunden gewinnen und skalieren.
-        </motion.p>
+        </p>
 
         {/* Stats Row */}
-        <motion.div
-          className="flex items-center justify-center gap-8 md:gap-12 mb-10"
-          variants={itemVariants}
+        <div
+          className="flex items-center justify-center gap-8 md:gap-12 mb-10 opacity-0 animate-fade-in"
+          style={{ animationDelay: "1.05s" }}
         >
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
@@ -184,39 +154,33 @@ export const Hero = () => {
               <p className="text-xs md:text-sm text-background/50">{stat.label}</p>
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Benefits */}
-        <motion.div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mb-12"
-          variants={itemVariants}
+        <div
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mb-12 opacity-0 animate-fade-in"
+          style={{ animationDelay: "1.2s" }}
         >
           {benefits.map((benefit, index) => (
-            <motion.div 
-              key={index} 
-              className="flex items-center gap-3"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            <div
+              key={index}
+              className="flex items-center gap-3 hover:scale-105 transition-transform"
             >
               <div className="w-6 h-6 rounded-full border border-background/30 flex items-center justify-center">
                 <Check className="w-3 h-3" />
               </div>
               <span className="text-sm font-medium">{benefit.title}</span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTAs */}
-        <motion.div
-          className="flex flex-col items-center gap-4"
-          variants={itemVariants}
+        <div
+          className="flex flex-col items-center gap-4 opacity-0 animate-fade-in"
+          style={{ animationDelay: "1.35s" }}
         >
           <MagneticButton strength={0.25}>
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
+            <div className="hover:scale-[1.03] active:scale-[0.98] transition-transform">
               <a
                 href="https://calendly.com/pirroconsulting"
                 target="_blank"
@@ -226,27 +190,22 @@ export const Hero = () => {
                 Kostenlose Potenzialanalyse sichern
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
-            </motion.div>
+            </div>
           </MagneticButton>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       {/* Scroll Indicator */}
-      <motion.button 
+      <button
         onClick={scrollToNext}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-background/50 hover:text-background transition-colors"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-background/50 hover:text-background transition-colors opacity-0 animate-fade-in"
+        style={{ animationDelay: "1.5s" }}
         aria-label="Nach unten scrollen"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-        >
+        <div className="animate-bounce">
           <ChevronDown className="w-8 h-8" />
-        </motion.div>
-      </motion.button>
+        </div>
+      </button>
 
       {/* Wave Divider */}
       <WaveDivider position="bottom" fill="hsl(var(--background))" />

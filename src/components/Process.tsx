@@ -1,5 +1,5 @@
 import { Search, FileText, Rocket, GraduationCap, Route } from "lucide-react";
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 
@@ -38,6 +38,48 @@ const steps = [
   },
 ];
 
+const ConnectingLine = () => {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent"
+      style={{
+        transform: inView ? "scaleX(1)" : "scaleX(0)",
+        transition: "transform 1s ease 0.5s",
+      }}
+    />
+  );
+};
+
+const StepCircle = ({ step, index }: { step: typeof steps[number]; index: number }) => {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "scale(1) rotate(0deg)" : "scale(0) rotate(-180deg)",
+        transition: `opacity 0.6s ease ${index * 0.15 + 0.3}s, transform 0.6s ease ${index * 0.15 + 0.3}s`,
+      }}
+    >
+      {/* Outer Ring */}
+      <div className="w-28 h-28 rounded-full border-2 border-foreground/10 flex items-center justify-center">
+        {/* Inner Circle */}
+        <div
+          className="w-20 h-20 rounded-full bg-foreground text-background flex flex-col items-center justify-center hover:scale-110 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] transition-all"
+        >
+          <step.icon className="w-6 h-6 mb-1" strokeWidth={1.5} />
+          <span className="text-xs font-bold">{step.number}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const Process = () => {
   return (
     <section id="process" className="section-padding bg-background overflow-hidden">
@@ -56,51 +98,17 @@ export const Process = () => {
         {/* Timeline */}
         <div className="relative max-w-5xl mx-auto">
           {/* Connecting Line */}
-          <motion.div 
-            className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5 }}
-          />
+          <ConnectingLine />
 
           <div className="grid lg:grid-cols-4 gap-8 lg:gap-6">
             {steps.map((step, index) => (
               <AnimatedSection key={index} delay={index * 0.2}>
-                <motion.div 
-                  className="relative text-center lg:text-center"
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.3 }}
+                <div
+                  className="relative text-center lg:text-center hover:-translate-y-2 transition-transform"
                 >
                   {/* Step Circle */}
                   <div className="flex lg:justify-center mb-6">
-                    <motion.div 
-                      className="relative"
-                      initial={{ scale: 0, rotate: -180 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ 
-                        duration: 0.6, 
-                        delay: index * 0.15 + 0.3,
-                        type: "spring",
-                        stiffness: 200
-                      }}
-                    >
-                      {/* Outer Ring */}
-                      <div className="w-28 h-28 rounded-full border-2 border-foreground/10 flex items-center justify-center">
-                        {/* Inner Circle */}
-                        <motion.div 
-                          className="w-20 h-20 rounded-full bg-foreground text-background flex flex-col items-center justify-center"
-                          whileHover={{ 
-                            scale: 1.1,
-                            boxShadow: "0 10px 40px -10px rgba(0,0,0,0.3)"
-                          }}
-                        >
-                          <step.icon className="w-6 h-6 mb-1" strokeWidth={1.5} />
-                          <span className="text-xs font-bold">{step.number}</span>
-                        </motion.div>
-                      </div>
-                    </motion.div>
+                    <StepCircle step={step} index={index} />
                   </div>
 
                   {/* Content */}
@@ -118,7 +126,7 @@ export const Process = () => {
                       {step.description}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.webp";
 
 export const LoadingScreen = () => {
@@ -11,22 +10,16 @@ export const LoadingScreen = () => {
   }, []);
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-foreground"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
-        >
-          <img
-            src={logo}
-            alt="Pirro Consulting"
-            width={200}
-            height={54}
-            className="w-44 md:w-52 brightness-0 invert"
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-foreground transition-opacity duration-250 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+    >
+      <img
+        src={logo}
+        alt="Pirro Consulting"
+        width={200}
+        height={54}
+        className="w-44 md:w-52 brightness-0 invert"
+      />
+    </div>
   );
 };

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 
 // Client logos
 import healthInnovationHub from "@/assets/clients/health-innovation-hub.webp";
@@ -26,20 +26,31 @@ const clients = [
 ];
 
 export const TrustedBy = () => {
+  const [ref, inView] = useInView();
   // Duplicate clients for seamless loop
   const allClients = [...clients, ...clients, ...clients];
 
   return (
     <section className="py-12 bg-background border-b border-border overflow-hidden">
+      <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-800px); }
+        }
+      `}</style>
+
       <div className="container mx-auto px-4 mb-8">
-        <motion.p 
+        <p
+          ref={ref}
           className="text-center text-sm text-muted-foreground"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          style={{
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.5s ease, transform 0.5s ease",
+          }}
         >
           Vertraut von führenden Unternehmen
-        </motion.p>
+        </p>
       </div>
 
       {/* Logo Marquee */}
@@ -47,18 +58,15 @@ export const TrustedBy = () => {
         {/* Gradient Overlays */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
-        
-        <motion.div 
+
+        <div
           className="flex gap-20 items-center"
-          animate={{ x: [0, -800] }}
-          transition={{ 
-            duration: 20, 
-            repeat: Infinity, 
-            ease: "linear" 
+          style={{
+            animation: "marquee 20s linear infinite",
           }}
         >
           {allClients.map((client, index) => (
-            <div 
+            <div
               key={index}
               className="flex-shrink-0 h-12 flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
             >
@@ -73,7 +81,7 @@ export const TrustedBy = () => {
               />
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

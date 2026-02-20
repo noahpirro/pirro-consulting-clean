@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 import { HelpCircle, MessageCircle } from "lucide-react";
@@ -52,6 +52,40 @@ const faqs = [
   },
 ];
 
+const FAQItem = ({ faq, index }: { faq: typeof faqs[number]; index: number }) => {
+  const [ref, inView] = useInView();
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 0.5s ease ${index * 0.08}s, transform 0.5s ease ${index * 0.08}s`,
+      }}
+    >
+      <AccordionItem
+        value={`item-${index}`}
+        className="border border-border rounded-xl px-6 bg-background data-[state=open]:border-foreground/20 data-[state=open]:shadow-lg transition-all duration-300 overflow-hidden"
+      >
+        <AccordionTrigger className="text-left font-display font-bold hover:no-underline py-5 group">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-foreground/5 text-xs font-bold text-muted-foreground flex-shrink-0">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="group-hover:translate-x-1 transition-transform duration-200">
+              {faq.question}
+            </span>
+          </div>
+        </AccordionTrigger>
+        <AccordionContent className="text-muted-foreground pb-6 pl-11 leading-relaxed text-[15px]">
+          {faq.answer}
+        </AccordionContent>
+      </AccordionItem>
+    </div>
+  );
+};
+
 export const FAQ = () => {
   return (
     <section id="faq" className="py-24 bg-secondary/50">
@@ -74,48 +108,22 @@ export const FAQ = () => {
         <AnimatedSection className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08, duration: 0.5 }}
-              >
-                <AccordionItem
-                  value={`item-${index}`}
-                  className="border border-border rounded-xl px-6 bg-background data-[state=open]:border-foreground/20 data-[state=open]:shadow-lg transition-all duration-300 overflow-hidden"
-                >
-                  <AccordionTrigger className="text-left font-display font-bold hover:no-underline py-5 group">
-                    <div className="flex items-center gap-3">
-                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-foreground/5 text-xs font-bold text-muted-foreground flex-shrink-0">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="group-hover:translate-x-1 transition-transform duration-200">
-                        {faq.question}
-                      </span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-6 pl-11 leading-relaxed text-[15px]">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              </motion.div>
+              <FAQItem key={index} faq={faq} index={index} />
             ))}
           </Accordion>
         </AnimatedSection>
 
         {/* Still have questions? */}
         <AnimatedSection className="text-center mt-12" delay={0.3}>
-          <motion.a
+          <a
             href="https://wa.me/4915152522522"
             target="_blank"
             rel="noopener noreferrer nofollow"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            whileHover={{ scale: 1.03 }}
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:scale-[1.03] transition-transform"
           >
             <MessageCircle className="w-4 h-4" />
             Weitere Fragen? Schreib uns direkt per WhatsApp
-          </motion.a>
+          </a>
         </AnimatedSection>
       </div>
     </section>

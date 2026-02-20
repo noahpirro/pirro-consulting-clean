@@ -1,10 +1,9 @@
-import { motion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
 
 interface TextRevealProps {
   text: string;
   className?: string;
   delay?: number;
-  /** If true, highlight words wrapped in * (e.g. "*Wachstum*") */
   highlight?: boolean;
 }
 
@@ -14,42 +13,31 @@ export const TextReveal = ({
   delay = 0,
   highlight = false,
 }: TextRevealProps) => {
+  const [ref, inView] = useInView<HTMLSpanElement>({ margin: "-80px" });
   const words = text.split(" ");
 
   return (
-    <motion.span
-      className={`inline ${className}`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-    >
+    <span ref={ref} className={`inline ${className}`}>
       {words.map((word, i) => {
         const isHighlighted = highlight && word.startsWith("*") && word.endsWith("*");
         const cleanWord = isHighlighted ? word.slice(1, -1) : word;
 
         return (
           <span key={i} className="inline-block overflow-hidden">
-            <motion.span
+            <span
               className={`inline-block ${isHighlighted ? "text-highlight" : ""}`}
-              variants={{
-                hidden: { y: "100%", opacity: 0 },
-                visible: {
-                  y: 0,
-                  opacity: 1,
-                  transition: {
-                    duration: 0.5,
-                    delay: delay + i * 0.04,
-                    ease: [0.25, 0.1, 0.25, 1],
-                  },
-                },
+              style={{
+                transform: inView ? "translateY(0)" : "translateY(100%)",
+                opacity: inView ? 1 : 0,
+                transition: `transform 0.5s cubic-bezier(0.25,0.1,0.25,1) ${delay + i * 0.04}s, opacity 0.5s cubic-bezier(0.25,0.1,0.25,1) ${delay + i * 0.04}s`,
               }}
             >
               {cleanWord}
-            </motion.span>
+            </span>
             {i < words.length - 1 && "\u00A0"}
           </span>
         );
       })}
-    </motion.span>
+    </span>
   );
 };

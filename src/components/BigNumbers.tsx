@@ -1,26 +1,20 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useInView } from "@/hooks/useInView";
 import { AnimatedCounter } from "./AnimatedCounter";
 
 const stats = [
   { value: 1000, suffix: "+", label: "Stunden eingespart", prefix: "" },
   { value: 100, suffix: "+", label: "Automationen gebaut", prefix: "" },
   { value: 98, suffix: "%", label: "Weiterempfehlungsrate", prefix: "" },
-  { value: 4, suffix: " Wo.", label: "bis erste Ergebnisse", prefix: "∅ " },
+  { value: 4, suffix: " Wo.", label: "bis erste Ergebnisse", prefix: "\u2205 " },
 ];
 
 export const BigNumbers = () => {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.9, 1, 1, 0.9]);
+  const [sectionRef, sectionInView] = useInView<HTMLElement>();
+  const [lineRef, lineInView] = useInView<HTMLDivElement>();
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       className="relative py-24 md:py-32 bg-foreground text-background overflow-hidden"
     >
       {/* Subtle grid */}
@@ -34,19 +28,23 @@ export const BigNumbers = () => {
         />
       </div>
 
-      <motion.div
-        className="container mx-auto px-4 relative z-10"
-        style={{ opacity, scale }}
+      <div
+        className={`container mx-auto px-4 relative z-10 transition-all duration-700 ease-out ${
+          sectionInView ? "opacity-100 scale-100" : "opacity-0 scale-[0.9]"
+        }`}
       >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, index) => (
-            <motion.div
+            <div
               key={index}
-              className="text-center"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className={`text-center transition-all duration-600 ease-out ${
+                sectionInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{
+                transitionDelay: sectionInView ? `${index * 150}ms` : "0ms",
+              }}
             >
               <div className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight text-background mb-2">
                 <span className="text-background/50">{stat.prefix}</span>
@@ -59,22 +57,22 @@ export const BigNumbers = () => {
               <p className="text-sm md:text-base text-background/50 font-medium">
                 {stat.label}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Decorative gradient line */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-px"
+      <div
+        ref={lineRef}
+        className={`absolute bottom-0 left-0 right-0 h-px transition-transform duration-[1500ms] ease-out origin-center ${
+          lineInView ? "scale-x-100" : "scale-x-0"
+        }`}
         style={{
           background:
             "linear-gradient(90deg, transparent, hsl(var(--highlight) / 0.4), transparent)",
+          transitionDelay: lineInView ? "500ms" : "0ms",
         }}
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, delay: 0.5 }}
       />
     </section>
   );

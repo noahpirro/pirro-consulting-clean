@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
 const proofItems = [
@@ -52,38 +51,32 @@ export const SocialProofPopup = () => {
   const current = proofItems[currentIndex];
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className="fixed bottom-24 left-6 z-40 max-w-xs"
-          initial={{ opacity: 0, y: 40, x: -20 }}
-          animate={{ opacity: 1, y: 0, x: 0 }}
-          exit={{ opacity: 0, y: 20, x: -20 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-        >
-          <div
-            className="bg-card border border-border rounded-xl shadow-2xl p-4 cursor-pointer hover:shadow-3xl transition-shadow"
-            onClick={() => setVisible(false)}
-          >
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <CheckCircle className="w-5 h-5 text-primary" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm font-medium text-foreground leading-snug">
-                  {current.company}
-                </p>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  {current.action}
-                </p>
-                <p className="text-[10px] text-muted-foreground/60 mt-1">
-                  {timeAgo}
-                </p>
-              </div>
-            </div>
+    <div
+      className={`fixed bottom-24 left-6 z-40 max-w-xs transition-all duration-500 ${visible ? 'opacity-100 translate-y-0 translate-x-0' : 'opacity-0 translate-y-10 -translate-x-5 pointer-events-none'}`}
+      role="status"
+      aria-live="polite"
+    >
+      <button
+        className="bg-card border border-border rounded-xl shadow-2xl p-4 cursor-pointer hover:shadow-3xl transition-shadow text-left w-full"
+        onClick={() => setVisible(false)}
+      >
+        <div className="flex items-start gap-3">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <CheckCircle className="w-5 h-5 text-primary" />
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-foreground leading-snug">
+              {current.company}
+            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              {current.action}
+            </p>
+            <p className="text-[10px] text-muted-foreground/60 mt-1">
+              {timeAgo}
+            </p>
+          </div>
+        </div>
+      </button>
+    </div>
   );
 };
