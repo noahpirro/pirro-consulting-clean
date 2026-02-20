@@ -41,6 +41,8 @@ const Index = () => {
         <meta property="og:url" content="https://pirro-consulting.de" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Pirro Consulting – Automatisierung & Digitalisierung für Unternehmer" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://pirro-consulting.de/og-image.webp" />

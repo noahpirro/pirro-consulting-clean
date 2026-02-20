@@ -49,17 +49,17 @@ const caseStudies = [
 export const CaseStudies = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [headerRef, headerInView] = useInView<HTMLDivElement>();
-  const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!sectionRef.current) return;
+      if (!sectionRef.current || !imageRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      // Calculate how far through the viewport the section is
       const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-      setScrollY(Math.max(0, Math.min(1, progress)));
+      const clamped = Math.max(0, Math.min(1, progress));
+      imageRef.current.style.transform = `scale(1.1) translateY(${(clamped - 0.5) * -30}px)`;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -85,7 +85,7 @@ export const CaseStudies = () => {
         {/* Header */}
         <div
           ref={headerRef}
-          className={`text-center mb-12 transition-all duration-600 ease-out ${
+          className={`text-center mb-12 transition-all duration-500 ease-out ${
             headerInView
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-5"
@@ -167,10 +167,11 @@ export const CaseStudies = () => {
                     alt={currentStudy.company}
                     width={600}
                     height={750}
+                    ref={imageRef}
                     loading="lazy"
                     decoding="async"
-                    className="w-full aspect-[4/5] object-cover scale-110"
-                    style={{ transform: `scale(1.1) translateY(${(scrollY - 0.5) * -30}px)` }}
+                    className="w-full aspect-[4/5] object-cover"
+                    style={{ transform: "scale(1.1) translateY(0px)" }}
                   />
                   {/* Subtle gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

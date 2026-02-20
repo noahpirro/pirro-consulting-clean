@@ -2,16 +2,16 @@ import { useState, useEffect, useCallback } from "react";
 import { CheckCircle } from "lucide-react";
 
 const proofItems = [
-  { company: "Mustermann GmbH", action: "hat einen neuen Mitarbeiter geonboarded" },
-  { company: "Schmidt & Partner", action: "hat 12 Follow-ups automatisch versendet" },
-  { company: "Weber Consulting", action: "hat ihr CRM-System automatisiert" },
-  { company: "Fischer Handwerk", action: "hat 3 Rechnungen automatisch erstellt" },
-  { company: "Braun Digital", action: "hat Lead-Qualifizierung automatisiert" },
-  { company: "König & Söhne", action: "hat Kunden-Onboarding digitalisiert" },
-  { company: "Meyer Marketing", action: "hat Reporting-Dashboard eingerichtet" },
-  { company: "Hoffmann Logistik", action: "hat Auftragseingang automatisiert" },
-  { company: "Becker IT Services", action: "hat KI-Chatbot für Support aktiviert" },
-  { company: "Schulz Immobilien", action: "hat Exposé-Versand automatisiert" },
+  { company: "E-Commerce Agentur", action: "hat einen neuen Mitarbeiter geonboarded" },
+  { company: "Marketing Agentur", action: "hat 12 Follow-ups automatisch versendet" },
+  { company: "Coaching-Unternehmen", action: "hat ihr CRM-System automatisiert" },
+  { company: "Handwerksbetrieb", action: "hat 3 Rechnungen automatisch erstellt" },
+  { company: "Digitalagentur", action: "hat Lead-Qualifizierung automatisiert" },
+  { company: "Beratungsunternehmen", action: "hat Kunden-Onboarding digitalisiert" },
+  { company: "IT-Dienstleister", action: "hat Reporting-Dashboard eingerichtet" },
+  { company: "Logistikunternehmen", action: "hat Auftragseingang automatisiert" },
+  { company: "Tech-Startup", action: "hat KI-Chatbot für Support aktiviert" },
+  { company: "Immobilienbüro", action: "hat Exposé-Versand automatisiert" },
 ];
 
 const timeAgoOptions = [
@@ -23,20 +23,33 @@ const timeAgoOptions = [
   "vor 3 Stunden",
 ];
 
+const DISMISS_KEY = "social-proof-dismissed";
+
 export const SocialProofPopup = () => {
   const [visible, setVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timeAgo, setTimeAgo] = useState(timeAgoOptions[0]);
+  const [dismissed, setDismissed] = useState(() => {
+    return sessionStorage.getItem(DISMISS_KEY) === "true";
+  });
 
   const showNext = useCallback(() => {
+    if (dismissed) return;
     setTimeAgo(timeAgoOptions[Math.floor(Math.random() * timeAgoOptions.length)]);
     setCurrentIndex((prev) => (prev + 1) % proofItems.length);
     setVisible(true);
 
     setTimeout(() => setVisible(false), 4000);
-  }, []);
+  }, [dismissed]);
+
+  const handleDismiss = () => {
+    setVisible(false);
+    setDismissed(true);
+    sessionStorage.setItem(DISMISS_KEY, "true");
+  };
 
   useEffect(() => {
+    if (dismissed) return;
     // Erste Anzeige nach 10 Sekunden
     const initialTimer = setTimeout(showNext, 10000);
     // Danach alle 30 Sekunden
@@ -46,9 +59,11 @@ export const SocialProofPopup = () => {
       clearTimeout(initialTimer);
       clearInterval(interval);
     };
-  }, [showNext]);
+  }, [showNext, dismissed]);
 
   const current = proofItems[currentIndex];
+
+  if (dismissed) return null;
 
   return (
     <div
@@ -58,7 +73,7 @@ export const SocialProofPopup = () => {
     >
       <button
         className="bg-card border border-border rounded-xl shadow-2xl p-4 cursor-pointer hover:shadow-3xl transition-shadow text-left w-full"
-        onClick={() => setVisible(false)}
+        onClick={handleDismiss}
       >
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { EMAIL } from "@/constants";
 const Impressum = () => {
   return (
     <main id="main-content" className="min-h-screen bg-background">
@@ -39,7 +40,7 @@ const Impressum = () => {
               Kontakt
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              E-Mail: info@pirroconsulting.de
+              E-Mail: {EMAIL}
             </p>
 
             {/* Umsatzsteuer-ID */}

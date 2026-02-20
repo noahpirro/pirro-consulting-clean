@@ -102,6 +102,8 @@ export const Kontakt = () => {
         />
         <meta property="og:url" content="https://pirro-consulting.de/kontakt" />
         <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Pirro Consulting – Kontakt aufnehmen" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
@@ -203,7 +205,7 @@ export const Kontakt = () => {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <input type="hidden" name="subject" value="Neue Kontaktanfrage über pirro-consulting.de" />
                     <input type="hidden" name="from_name" value="Pirro Consulting Website" />
-                    <input type="checkbox" name="botcheck" className="hidden" />
+                    <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} aria-hidden="true" />
 
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div>

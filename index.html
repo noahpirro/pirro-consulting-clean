@@ -214,7 +214,7 @@
       "description": "Automatisierung und Digitalisierung für Unternehmer in Kaiserslautern und deutschlandweit.",
       "url": "https://pirro-consulting.de",
       "telephone": "+4915152522522",
-      "email": "noah.pirro@pirroconsulting.de",
+      "email": "info@pirro-consulting.de",
       "priceRange": "€€",
       "address": {
         "@type": "PostalAddress",
@@ -254,12 +254,6 @@
       </div>
     </noscript>
     <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js');
-        });
-      }
-    </script>
+    <script src="/register-sw.js" defer></script>
   </body>
 </html>

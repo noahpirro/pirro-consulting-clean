@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 interface Props {
   children: ReactNode;
+  fallback?: ReactNode;
 }
 
 interface State {
@@ -19,8 +20,14 @@ export class ErrorBoundary extends Component<Props, State> {
     return { hasError: true };
   }
 
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error("[ErrorBoundary]", error, info.componentStack);
+  }
+
   render() {
     if (this.state.hasError) {
+      if (this.props.fallback) return this.props.fallback;
+
       return (
         <section className="min-h-screen flex items-center justify-center bg-foreground text-background px-4">
           <div className="text-center max-w-lg">

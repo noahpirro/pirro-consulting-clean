@@ -37,7 +37,7 @@ export const BigNumbers = () => {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className={`text-center transition-all duration-600 ease-out ${
+              className={`text-center transition-all duration-500 ease-out ${
                 sectionInView
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"

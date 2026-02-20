@@ -71,6 +71,8 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
         <meta property="og:description" content={seo.description} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={seo.ogImageAlt} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />

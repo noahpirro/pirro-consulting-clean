@@ -73,14 +73,17 @@ const BlogArticle = () => {
   const usedKeywords = new Set<string>();
 
   // Extract TOC items from pseudo-heading paragraphs
-  const tocItems: string[] = [];
+  const tocItems: { label: string; id: string }[] = [];
   const tocPattern = /^(\d+\.\s|Fehler \d+:|Phase \d+)/;
   for (const paragraph of article.content) {
     if (tocPattern.test(paragraph)) {
-      // Extract the first phrase up to the first period, colon, or dash
       const match = paragraph.match(/^(.+?)[.:\u2013\u2014-]/);
       const label = match ? match[1].trim() : paragraph.trim();
-      tocItems.push(label);
+      const id = label
+        .toLowerCase()
+        .replace(/[^a-z0-9äöüß\s-]/g, "")
+        .replace(/\s+/g, "-");
+      tocItems.push({ label, id });
     }
   }
 
@@ -101,6 +104,8 @@ const BlogArticle = () => {
         <meta property="og:url" content={`https://pirro-consulting.de/blog/${article.slug}`} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={article.title} />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">
@@ -238,21 +243,40 @@ const BlogArticle = () => {
                 <ol className="space-y-2">
                   {tocItems.map((item, i) => (
                     <li key={i} className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">{item}</span>
+                      <a href={`#${item.id}`} className="font-medium text-foreground hover:text-highlight transition-colors">
+                        {item.label}
+                      </a>
                     </li>
                   ))}
                 </ol>
               </nav>
             )}
             <div className="prose prose-lg max-w-none">
-              {article.content.map((paragraph, i) => (
-                <p
-                  key={i}
-                  className="text-muted-foreground leading-relaxed mb-6 text-base md:text-lg"
-                >
-                  {linkifyParagraph(paragraph, usedKeywords)}
-                </p>
-              ))}
+              {article.content.map((paragraph, i) => {
+                const tocMatch = tocItems.find((t) => paragraph.startsWith(t.label));
+                if (tocMatch) {
+                  return (
+                    <div key={i} id={tocMatch.id}>
+                      <h2 className="text-xl md:text-2xl font-display font-bold text-foreground mt-10 mb-4">
+                        {tocMatch.label}
+                      </h2>
+                      {paragraph.length > tocMatch.label.length && (
+                        <p className="text-muted-foreground leading-relaxed mb-6 text-base md:text-lg">
+                          {linkifyParagraph(paragraph.slice(paragraph.indexOf(tocMatch.label) + tocMatch.label.length).replace(/^[.:\s\u2013\u2014-]+/, ""), usedKeywords)}
+                        </p>
+                      )}
+                    </div>
+                  );
+                }
+                return (
+                  <p
+                    key={i}
+                    className="text-muted-foreground leading-relaxed mb-6 text-base md:text-lg"
+                  >
+                    {linkifyParagraph(paragraph, usedKeywords)}
+                  </p>
+                );
+              })}
             </div>
 
             {/* CTA */}

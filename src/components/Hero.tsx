@@ -31,17 +31,15 @@ const notifications = [
 export const Hero = () => {
   const [wordIndex, setWordIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollStyle, setScrollStyle] = useState<React.CSSProperties>({});
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!sectionRef.current) return;
+      if (!sectionRef.current || !contentRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const progress = Math.min(Math.max(-rect.top / (rect.height * 0.5), 0), 1);
-      setScrollStyle({
-        opacity: 1 - progress,
-        transform: `scale(${1 - progress * 0.05}) translateY(${progress * 100}px)`,
-      });
+      contentRef.current.style.opacity = String(1 - progress);
+      contentRef.current.style.transform = `scale(${1 - progress * 0.05}) translateY(${progress * 100}px)`;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -90,8 +88,8 @@ export const Hero = () => {
       </div>
 
       <div
+        ref={contentRef}
         className="container mx-auto max-w-4xl text-center relative z-10"
-        style={scrollStyle}
       >
         {/* Badge */}
         <div

@@ -152,7 +152,7 @@ function ResultCard({
   return (
     <div
       ref={cardRef}
-      className={`relative bg-background/[0.07] backdrop-blur-sm border border-background/10 rounded-2xl p-6 overflow-hidden group transition-all duration-600 ease-out ${
+      className={`relative bg-background/[0.07] backdrop-blur-sm border border-background/10 rounded-2xl p-6 overflow-hidden group transition-all duration-500 ease-out ${
         cardInView
           ? "opacity-100 translate-y-0 scale-100"
           : "opacity-0 translate-y-10 scale-95"
@@ -369,7 +369,7 @@ export const ROICalculator = () => {
         {/* Bottom CTA */}
         <div
           ref={ctaRef}
-          className={`text-center mt-14 md:mt-20 transition-all duration-600 ease-out ${
+          className={`text-center mt-14 md:mt-20 transition-all duration-500 ease-out ${
             ctaInView
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-8"

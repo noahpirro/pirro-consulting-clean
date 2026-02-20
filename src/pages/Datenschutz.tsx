@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { EMAIL } from "@/constants";
 const Datenschutz = () => {
   return (
     <main id="main-content" className="min-h-screen bg-background">
@@ -38,7 +39,7 @@ const Datenschutz = () => {
               <br />
               67663 Kaiserslautern
               <br />
-              E-Mail: info@pirroconsulting.de
+              E-Mail: {EMAIL}
             </p>
 
             {/* 2. Erhebung und Speicherung personenbezogener Daten */}
@@ -179,7 +180,7 @@ const Datenschutz = () => {
               Daten einzulegen, soweit dafür Gründe vorliegen, die sich aus
               Ihrer besonderen Situation ergeben. Möchten Sie von Ihrem
               Widerspruchsrecht Gebrauch machen, genügt eine E-Mail an
-              info@pirroconsulting.de.
+              {EMAIL}.
             </p>
 
             {/* 7. SSL-Verschlüsselung */}

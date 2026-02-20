@@ -57,6 +57,8 @@ const Blog = () => {
         <meta property="og:description" content="Praxis-Tipps zu Automatisierung, Digitalisierung, CRM und KI für Unternehmer." />
         <meta property="og:url" content="https://pirro-consulting.de/blog" />
         <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Pirro Consulting Blog – Insights zu Automatisierung und Digitalisierung" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -268,7 +270,7 @@ const Blog = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((article, index) => (
-              <AnimatedSection key={article.slug} delay={index * 0.1}>
+              <AnimatedSection key={article.slug} delay={Math.min(index * 0.1, 0.5)}>
                 <Link to={`/blog/${article.slug}`} className="block h-full">
                 <article
                   className="group bg-card border border-border rounded-2xl overflow-hidden h-full cursor-pointer hover:-translate-y-1.5 transition-transform duration-300"
