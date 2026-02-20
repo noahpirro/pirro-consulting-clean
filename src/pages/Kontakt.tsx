@@ -13,10 +13,12 @@ import {
   Clock,
   ArrowRight,
   Loader2,
+  CheckCircle2,
 } from "lucide-react";
 
 export const Kontakt = () => {
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
 
   const validateName = (value: string) => {
@@ -67,9 +69,7 @@ export const Kontakt = () => {
       const json = await res.json();
 
       if (json.success) {
-        toast.success("Nachricht gesendet!", {
-          description: "Wir melden uns innerhalb von 24 Stunden bei dir.",
-        });
+        setSubmitted(true);
         form.reset();
       } else {
         toast.error("Fehler beim Senden", {
@@ -100,6 +100,8 @@ export const Kontakt = () => {
           content="Kontaktiere uns für eine kostenlose Potenzialanalyse."
         />
         <meta property="og:url" content="https://pirro-consulting.de/kontakt" />
+        <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image:alt" content="Pirro Consulting – Kontakt aufnehmen" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {JSON.stringify({
@@ -161,171 +163,204 @@ export const Kontakt = () => {
           <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Form */}
             <div className="lg:col-span-3">
-              <AnimatedSection>
-                <h2 className="text-2xl font-display font-bold mb-8">
-                  Schreib uns eine Nachricht
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <input type="hidden" name="subject" value="Neue Kontaktanfrage über pirro-consulting.de" />
-                  <input type="hidden" name="from_name" value="Pirro Consulting Website" />
-                  <input type="checkbox" name="botcheck" className="hidden" />
+              {submitted ? (
+                <AnimatedSection>
+                  <div className="text-center py-12">
+                    <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
+                      <CheckCircle2 className="w-8 h-8 text-green-600" />
+                    </div>
+                    <h2 className="text-2xl font-display font-bold mb-3">
+                      Nachricht erfolgreich gesendet!
+                    </h2>
+                    <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+                      Vielen Dank für deine Anfrage. Wir melden uns innerhalb von 24 Stunden bei dir.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <a
+                        href="https://calendly.com/pirroconsulting"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center h-12 px-6 bg-foreground text-background hover:bg-foreground/90 rounded-lg font-medium group"
+                      >
+                        Direkt Termin buchen
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </a>
+                      <button
+                        onClick={() => setSubmitted(false)}
+                        className="inline-flex items-center h-12 px-6 border border-border rounded-lg font-medium hover:bg-secondary transition-colors"
+                      >
+                        Weitere Nachricht senden
+                      </button>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ) : (
+                <AnimatedSection>
+                  <h2 className="text-2xl font-display font-bold mb-8">
+                    Schreib uns eine Nachricht
+                  </h2>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <input type="hidden" name="subject" value="Neue Kontaktanfrage über pirro-consulting.de" />
+                    <input type="hidden" name="from_name" value="Pirro Consulting Website" />
+                    <input type="checkbox" name="botcheck" className="hidden" />
 
-                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium mb-2"
+                        >
+                          Name *
+                        </label>
+                        <input
+                          id="name"
+                          name="name"
+                          type="text"
+                          required
+                          minLength={2}
+                          maxLength={100}
+                          autoComplete="name"
+                          placeholder="Max Mustermann"
+                          aria-invalid={!!errors.name}
+                          aria-describedby={errors.name ? "name-error" : undefined}
+                          onBlur={(e) => handleBlur("name", e.target.value)}
+                          onChange={() => handleChange("name")}
+                          className={`w-full h-12 px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all ${errors.name ? "border-destructive" : "border-border"}`}
+                        />
+                        {errors.name && (
+                          <p id="name-error" className="text-sm text-destructive mt-1">{errors.name}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium mb-2"
+                        >
+                          E-Mail *
+                        </label>
+                        <input
+                          id="email"
+                          name="email"
+                          type="email"
+                          required
+                          autoComplete="email"
+                          inputMode="email"
+                          placeholder="max@beispiel.de"
+                          aria-invalid={!!errors.email}
+                          aria-describedby={errors.email ? "email-error" : undefined}
+                          onBlur={(e) => handleBlur("email", e.target.value)}
+                          onChange={() => handleChange("email")}
+                          className={`w-full h-12 px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all ${errors.email ? "border-destructive" : "border-border"}`}
+                        />
+                        {errors.email && (
+                          <p id="email-error" className="text-sm text-destructive mt-1">{errors.email}</p>
+                        )}
+                      </div>
+                    </div>
+
                     <div>
                       <label
-                        htmlFor="name"
+                        htmlFor="company"
                         className="block text-sm font-medium mb-2"
                       >
-                        Name *
+                        Unternehmen
                       </label>
                       <input
-                        id="name"
-                        name="name"
+                        id="company"
+                        name="company"
                         type="text"
-                        required
-                        minLength={2}
-                        maxLength={100}
-                        autoComplete="name"
-                        placeholder="Max Mustermann"
-                        aria-invalid={!!errors.name}
-                        aria-describedby={errors.name ? "name-error" : undefined}
-                        onBlur={(e) => handleBlur("name", e.target.value)}
-                        onChange={() => handleChange("name")}
-                        className={`w-full h-12 px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all ${errors.name ? "border-destructive" : "border-border"}`}
+                        maxLength={150}
+                        autoComplete="organization"
+                        placeholder="Mustermann GmbH"
+                        className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
                       />
-                      {errors.name && (
-                        <p id="name-error" className="text-sm text-destructive mt-1">{errors.name}</p>
-                      )}
                     </div>
+
                     <div>
                       <label
-                        htmlFor="email"
+                        htmlFor="interest"
                         className="block text-sm font-medium mb-2"
                       >
-                        E-Mail *
+                        Worum geht es?
                       </label>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
+                      <select
+                        id="interest"
+                        name="interest"
+                        aria-label="Worum geht es?"
+                        className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all appearance-none"
+                      >
+                        <option value="">Bitte auswählen</option>
+                        <option value="potenzialanalyse">
+                          Kostenlose Potenzialanalyse
+                        </option>
+                        <option value="automatisierung">
+                          Automatisierung & CRM
+                        </option>
+                        <option value="ki">KI-Lösungen</option>
+                        <option value="recruiting">Recruiting</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="webdesign">Webdesign</option>
+                        <option value="sonstiges">Sonstiges</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="message"
+                        className="block text-sm font-medium mb-2"
+                      >
+                        Nachricht *
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
                         required
-                        autoComplete="email"
-                        inputMode="email"
-                        placeholder="max@beispiel.de"
-                        aria-invalid={!!errors.email}
-                        aria-describedby={errors.email ? "email-error" : undefined}
-                        onBlur={(e) => handleBlur("email", e.target.value)}
-                        onChange={() => handleChange("email")}
-                        className={`w-full h-12 px-4 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all ${errors.email ? "border-destructive" : "border-border"}`}
+                        rows={5}
+                        minLength={10}
+                        maxLength={2000}
+                        placeholder="Erzähl uns kurz, wobei wir dir helfen können..."
+                        aria-invalid={!!errors.message}
+                        aria-describedby={errors.message ? "message-error" : undefined}
+                        onBlur={(e) => handleBlur("message", e.target.value)}
+                        onChange={() => handleChange("message")}
+                        className={`w-full px-4 py-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all resize-none ${errors.message ? "border-destructive" : "border-border"}`}
                       />
-                      {errors.email && (
-                        <p id="email-error" className="text-sm text-destructive mt-1">{errors.email}</p>
+                      {errors.message && (
+                        <p id="message-error" className="text-sm text-destructive mt-1">{errors.message}</p>
                       )}
                     </div>
-                  </div>
 
-                  <div>
-                    <label
-                      htmlFor="company"
-                      className="block text-sm font-medium mb-2"
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="inline-flex items-center h-14 px-8 text-base font-medium bg-foreground text-background hover:bg-foreground/90 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none"
                     >
-                      Unternehmen
-                    </label>
-                    <input
-                      id="company"
-                      name="company"
-                      type="text"
-                      maxLength={150}
-                      autoComplete="organization"
-                      placeholder="Mustermann GmbH"
-                      className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all"
-                    />
-                  </div>
+                      {loading ? (
+                        <>
+                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                          Wird gesendet...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          Nachricht senden
+                        </>
+                      )}
+                    </button>
 
-                  <div>
-                    <label
-                      htmlFor="interest"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Worum geht es?
-                    </label>
-                    <select
-                      id="interest"
-                      name="interest"
-                      aria-label="Worum geht es?"
-                      className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all appearance-none"
-                    >
-                      <option value="">Bitte auswählen</option>
-                      <option value="potenzialanalyse">
-                        Kostenlose Potenzialanalyse
-                      </option>
-                      <option value="automatisierung">
-                        Automatisierung & CRM
-                      </option>
-                      <option value="ki">KI-Lösungen</option>
-                      <option value="recruiting">Recruiting</option>
-                      <option value="marketing">Marketing</option>
-                      <option value="webdesign">Webdesign</option>
-                      <option value="sonstiges">Sonstiges</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Nachricht *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={5}
-                      minLength={10}
-                      maxLength={2000}
-                      placeholder="Erzähl uns kurz, wobei wir dir helfen können..."
-                      aria-invalid={!!errors.message}
-                      aria-describedby={errors.message ? "message-error" : undefined}
-                      onBlur={(e) => handleBlur("message", e.target.value)}
-                      onChange={() => handleChange("message")}
-                      className={`w-full px-4 py-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all resize-none ${errors.message ? "border-destructive" : "border-border"}`}
-                    />
-                    {errors.message && (
-                      <p id="message-error" className="text-sm text-destructive mt-1">{errors.message}</p>
-                    )}
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="inline-flex items-center h-14 px-8 text-base font-medium bg-foreground text-background hover:bg-foreground/90 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                        Wird gesendet...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 mr-2" />
-                        Nachricht senden
-                      </>
-                    )}
-                  </button>
-
-                  <p className="text-xs text-muted-foreground">
-                    Mit dem Absenden stimmst du unserer{" "}
-                    <a
-                      href="/datenschutz"
-                      className="underline hover:text-foreground transition-colors"
-                    >
-                      Datenschutzerklärung
-                    </a>{" "}
-                    zu.
-                  </p>
-                </form>
-              </AnimatedSection>
+                    <p className="text-xs text-muted-foreground">
+                      Mit dem Absenden stimmst du unserer{" "}
+                      <a
+                        href="/datenschutz"
+                        className="underline hover:text-foreground transition-colors"
+                      >
+                        Datenschutzerklärung
+                      </a>{" "}
+                      zu.
+                    </p>
+                  </form>
+                </AnimatedSection>
+              )}
             </div>
 
             {/* Sidebar */}

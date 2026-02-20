@@ -39,6 +39,7 @@ const Blog = () => {
         <meta property="og:description" content="Praxis-Tipps zu Automatisierung, Digitalisierung, CRM und KI für Unternehmer." />
         <meta property="og:url" content="https://pirro-consulting.de/blog" />
         <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image:alt" content="Pirro Consulting Blog – Insights zu Automatisierung und Digitalisierung" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />

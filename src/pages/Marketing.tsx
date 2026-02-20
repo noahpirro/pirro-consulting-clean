@@ -94,6 +94,7 @@ const Marketing = () => {
         <meta property="og:description" content="Marketing-Prozesse automatisieren: Lead-Generierung, Content-Erstellung und Kampagnen-Management auf Autopilot." />
         <meta property="og:url" content="https://pirro-consulting.de/marketing" />
         <meta property="og:image" content="https://pirro-consulting.de/og-image.png" />
+        <meta property="og:image:alt" content="Pirro Consulting – Marketing-Automatisierung für Unternehmer" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://pirro-consulting.de/og-image.png" />

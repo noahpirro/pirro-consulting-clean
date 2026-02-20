@@ -9,14 +9,22 @@ export interface Article {
   content: string[];
 }
 
-export const articles: Article[] = [
+/** Calculate reading time from content paragraphs (~200 words/min) */
+function calcReadTime(content: string[]): string {
+  const words = content.join(" ").split(/\s+/).length;
+  const minutes = Math.max(1, Math.round(words / 200));
+  return `${minutes} Min.`;
+}
+
+type RawArticle = Omit<Article, "readTime">;
+
+const rawArticles: RawArticle[] = [
   {
     slug: "automatisierung-einstieg",
     title: "5 Prozesse, die jedes Unternehmen sofort automatisieren sollte",
     excerpt:
       "Du verlierst jede Woche Stunden mit repetitiven Aufgaben. Hier sind die 5 Bereiche, die sich am schnellsten automatisieren lassen – mit sofortigem ROI.",
     category: "Automatisierung",
-    readTime: "5 Min.",
     date: "12. Feb 2026",
     featured: true,
     content: [
@@ -36,7 +44,6 @@ export const articles: Article[] = [
     excerpt:
       "Ein CRM ist nur so gut wie seine Nutzung. Die häufigsten Fehler und wie du sie vermeidest, um deine Pipeline wirklich zu managen.",
     category: "CRM",
-    readTime: "7 Min.",
     date: "5. Feb 2026",
     featured: false,
     content: [
@@ -56,7 +63,6 @@ export const articles: Article[] = [
     excerpt:
       "Was KI heute wirklich für kleine und mittlere Unternehmen leisten kann – und wo die Grenzen liegen. Ein ehrlicher Überblick.",
     category: "KI",
-    readTime: "6 Min.",
     date: "28. Jan 2026",
     featured: false,
     content: [
@@ -75,7 +81,6 @@ export const articles: Article[] = [
     excerpt:
       "Vom ersten Kontakt bis zum zufriedenen Kunden – so baust du einen Onboarding-Prozess, der skaliert und begeistert.",
     category: "Prozesse",
-    readTime: "8 Min.",
     date: "20. Jan 2026",
     featured: false,
     content: [
@@ -95,7 +100,6 @@ export const articles: Article[] = [
     excerpt:
       "Make vs. Zapier vs. n8n – welches Tool passt zu deinem Unternehmen? Unser ehrlicher Vergleich mit Preis-Leistungs-Bewertung.",
     category: "Tools",
-    readTime: "10 Min.",
     date: "10. Jan 2026",
     featured: false,
     content: [
@@ -114,7 +118,6 @@ export const articles: Article[] = [
     excerpt:
       "Die meisten Digitalisierungsprojekte scheitern nicht an der Technik, sondern an der Strategie. Lerne aus den Fehlern anderer.",
     category: "Strategie",
-    readTime: "6 Min.",
     date: "3. Jan 2026",
     featured: false,
     content: [
@@ -130,5 +133,10 @@ export const articles: Article[] = [
     ],
   },
 ];
+
+export const articles: Article[] = rawArticles.map((a) => ({
+  ...a,
+  readTime: calcReadTime(a.content),
+}));
 
 export const categories = ["Alle", "Automatisierung", "CRM", "KI", "Prozesse", "Tools", "Strategie"];
