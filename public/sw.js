@@ -28,7 +28,7 @@ self.addEventListener('fetch', (event) => {
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request).catch(() =>
-        caches.match(OFFLINE_URL)
+        caches.match(OFFLINE_URL).then((response) => response || new Response('Offline', { status: 503, statusText: 'Service Unavailable' }))
       )
     );
   }

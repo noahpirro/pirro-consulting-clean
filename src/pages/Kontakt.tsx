@@ -289,8 +289,8 @@ export const Kontakt = () => {
                       <select
                         id="interest"
                         name="interest"
-                        aria-label="Worum geht es?"
-                        className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all appearance-none"
+                        disabled={loading}
+                        className="w-full h-12 px-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <option value="">Bitte auswählen</option>
                         <option value="potenzialanalyse">
