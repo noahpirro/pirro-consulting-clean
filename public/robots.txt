@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pirro-consulting.de/sitemap.xml
+Sitemap: https://pirroconsulting.de/sitemap.xml

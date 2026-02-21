@@ -1,6 +1,6 @@
 /** Zentrale Konstanten – Single Source of Truth für alle wiederkehrenden Werte */
 
-export const SITE_URL = "https://pirro-consulting.de";
+export const SITE_URL = "https://pirroconsulting.de";
 export const SITE_NAME = "Pirro Consulting";
 
 export const CALENDLY_URL = "https://calendly.com/pirroconsulting/erstgespraech";
@@ -8,7 +8,7 @@ export const CALENDLY_URL = "https://calendly.com/pirroconsulting/erstgespraech"
 export const PHONE = "+4915152522522";
 export const PHONE_DISPLAY = "+49 151 5252 2522";
 
-export const EMAIL = "info@pirro-consulting.de";
+export const EMAIL = "info@pirroconsulting.de";
 
 export const WHATSAPP_URL = "https://wa.me/4915152522522";
 export const WHATSAPP_CTA_URL =

@@ -29,7 +29,7 @@ export const TrustBadges = () => {
             <div className="space-y-6">
               {/* Trustpilot Card */}
               <a
-                href="https://www.trustpilot.com/review/pirro-consulting.de"
+                href="https://www.trustpilot.com/review/pirroconsulting.de"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="flex items-center gap-5 p-5 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border border-emerald-200 hover:-translate-y-1 hover:shadow-lg transition-all group"

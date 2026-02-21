@@ -87,7 +87,7 @@ const BlogArticle = () => {
     }
   }
 
-  const pageUrl = `https://pirro-consulting.de/blog/${article.slug}`;
+  const pageUrl = `https://pirroconsulting.de/blog/${article.slug}`;
 
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(pageUrl)}`;
   const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
@@ -98,12 +98,12 @@ const BlogArticle = () => {
       <Helmet>
         <title>{article.title} | Pirro Consulting Blog</title>
         <meta name="description" content={article.excerpt} />
-        <link rel="canonical" href={`https://pirro-consulting.de/blog/${article.slug}`} />
+        <link rel="canonical" href={`https://pirroconsulting.de/blog/${article.slug}`} />
         <meta property="og:title" content={`${article.title} | Pirro Consulting`} />
         <meta property="og:description" content={article.excerpt} />
-        <meta property="og:url" content={`https://pirro-consulting.de/blog/${article.slug}`} />
+        <meta property="og:url" content={`https://pirroconsulting.de/blog/${article.slug}`} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:image" content="https://pirroconsulting.de/og-image.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={article.title} />
@@ -114,20 +114,20 @@ const BlogArticle = () => {
             "@type": "BlogPosting",
             headline: article.title,
             description: article.excerpt,
-            url: `https://pirro-consulting.de/blog/${article.slug}`,
+            url: `https://pirroconsulting.de/blog/${article.slug}`,
             datePublished: article.dateISO,
             dateModified: article.dateISO,
             author: { "@type": "Person", name: "Noah Pirro" },
             publisher: {
               "@type": "Organization",
               name: "Pirro Consulting",
-              url: "https://pirro-consulting.de",
+              url: "https://pirroconsulting.de",
             },
-            mainEntityOfPage: `https://pirro-consulting.de/blog/${article.slug}`,
+            mainEntityOfPage: `https://pirroconsulting.de/blog/${article.slug}`,
             wordCount: article.content.join(" ").split(/\s+/).length,
             articleSection: article.category,
             articleBody: article.content.join("\n\n"),
-            image: "https://pirro-consulting.de/og-image.webp",
+            image: "https://pirroconsulting.de/og-image.webp",
             inLanguage: "de-DE",
           })}
         </script>
@@ -136,9 +136,9 @@ const BlogArticle = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://pirro-consulting.de" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://pirro-consulting.de/blog" },
-              { "@type": "ListItem", position: 3, name: article.title, item: `https://pirro-consulting.de/blog/${article.slug}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://pirroconsulting.de" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://pirroconsulting.de/blog" },
+              { "@type": "ListItem", position: 3, name: article.title, item: `https://pirroconsulting.de/blog/${article.slug}` },
             ],
           })}
         </script>

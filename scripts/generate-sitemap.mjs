@@ -5,7 +5,7 @@
  */
 import { readFileSync, writeFileSync } from "fs";
 
-const DOMAIN = "https://pirro-consulting.de";
+const DOMAIN = "https://pirroconsulting.de";
 const today = new Date().toISOString().split("T")[0];
 
 // Extract article slugs from the TypeScript source file

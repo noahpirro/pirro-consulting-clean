@@ -59,7 +59,7 @@ interface ServicePageConfig {
 
 export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => {
   const { seo, hero, stats, services, advantages, values, experience, cta, otherServices } = config;
-  const canonicalUrl = `https://pirro-consulting.de/${seo.slug}`;
+  const canonicalUrl = `https://pirroconsulting.de/${seo.slug}`;
 
   return (
     <main id="main-content" className="min-h-screen bg-background">
@@ -70,13 +70,13 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
         <meta property="og:title" content={seo.title} />
         <meta property="og:description" content={seo.description} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:image" content="https://pirroconsulting.de/og-image.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={seo.ogImageAlt} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta name="twitter:image" content="https://pirroconsulting.de/og-image.webp" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -86,7 +86,7 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
             provider: {
               "@type": "Organization",
               name: "Pirro Consulting",
-              url: "https://pirro-consulting.de",
+              url: "https://pirroconsulting.de",
             },
             serviceType: seo.serviceType,
             areaServed: { "@type": "Country", name: "Deutschland" },
@@ -97,7 +97,7 @@ export const ServicePageLayout = ({ config }: { config: ServicePageConfig }) => 
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://pirro-consulting.de" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://pirroconsulting.de" },
               { "@type": "ListItem", position: 2, name: seo.breadcrumbName, item: canonicalUrl },
             ],
           })}

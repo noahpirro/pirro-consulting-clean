@@ -8,7 +8,7 @@ const Datenschutz = () => {
       <Helmet>
         <title>Datenschutzerklärung | Pirro Consulting</title>
         <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href="https://pirro-consulting.de/datenschutz" />
+        <link rel="canonical" href="https://pirroconsulting.de/datenschutz" />
       </Helmet>
       <Navbar />
 

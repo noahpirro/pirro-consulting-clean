@@ -8,7 +8,7 @@ const Impressum = () => {
       <Helmet>
         <title>Impressum | Pirro Consulting</title>
         <meta name="robots" content="noindex, follow" />
-        <link rel="canonical" href="https://pirro-consulting.de/impressum" />
+        <link rel="canonical" href="https://pirroconsulting.de/impressum" />
       </Helmet>
       <Navbar />
 

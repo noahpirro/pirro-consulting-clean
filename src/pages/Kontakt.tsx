@@ -94,14 +94,14 @@ export const Kontakt = () => {
           name="description"
           content="Kontaktiere Pirro Consulting für eine kostenlose Potenzialanalyse. Automatisierung & Digitalisierung für dein Unternehmen."
         />
-        <link rel="canonical" href="https://pirro-consulting.de/kontakt" />
+        <link rel="canonical" href="https://pirroconsulting.de/kontakt" />
         <meta property="og:title" content="Kontakt | Pirro Consulting" />
         <meta
           property="og:description"
           content="Kontaktiere uns für eine kostenlose Potenzialanalyse."
         />
-        <meta property="og:url" content="https://pirro-consulting.de/kontakt" />
-        <meta property="og:image" content="https://pirro-consulting.de/og-image.webp" />
+        <meta property="og:url" content="https://pirroconsulting.de/kontakt" />
+        <meta property="og:image" content="https://pirroconsulting.de/og-image.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Pirro Consulting – Kontakt aufnehmen" />
@@ -115,13 +115,13 @@ export const Kontakt = () => {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://pirro-consulting.de",
+                item: "https://pirroconsulting.de",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Kontakt",
-                item: "https://pirro-consulting.de/kontakt",
+                item: "https://pirroconsulting.de/kontakt",
               },
             ],
           })}
@@ -203,7 +203,7 @@ export const Kontakt = () => {
                     Schreib uns eine Nachricht
                   </h2>
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <input type="hidden" name="subject" value="Neue Kontaktanfrage über pirro-consulting.de" />
+                    <input type="hidden" name="subject" value="Neue Kontaktanfrage über pirroconsulting.de" />
                     <input type="hidden" name="from_name" value="Pirro Consulting Website" />
                     <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} aria-hidden="true" />
 
