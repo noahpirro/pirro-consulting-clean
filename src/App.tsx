@@ -12,9 +12,11 @@ import { AnimatedRoutes } from "./components/AnimatedRoutes";
 import { ExitIntentPopup } from "./components/ExitIntentPopup";
 import { StickyMobileCTA } from "./components/StickyMobileCTA";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { PasswordGate } from "./components/PasswordGate";
 
 const App = () => (
   <ErrorBoundary>
+  <PasswordGate>
   <HelmetProvider>
       <TooltipProvider>
         <LoadingScreen />
@@ -31,6 +33,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
   </HelmetProvider>
+  </PasswordGate>
   </ErrorBoundary>
 );
 
